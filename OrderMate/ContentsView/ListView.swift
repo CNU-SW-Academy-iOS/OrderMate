@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct ListView: View {
-    @StateObject private var manager = RoomDataManager.shared
+    //@StateObject private var manager = RoomDataManager.shared
     var currentRoom: Room
     
     var body: some View {
