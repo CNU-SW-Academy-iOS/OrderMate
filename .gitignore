@@ -95,8 +95,6 @@ iOSInjectionProject/
 
 ### Xcode ###
 *.plist
-OrderMate/
-*.plist
 ## Xcode 8 and earlier
 
 ### Xcode Patch ###
