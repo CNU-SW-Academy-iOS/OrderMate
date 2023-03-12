@@ -16,7 +16,3 @@ struct Room: Hashable, Identifiable, Codable {
     var maxUser: Int
     var userList: [String] = []
 }
-
-struct User: Hashable, Codable {
-    var name: String
-}

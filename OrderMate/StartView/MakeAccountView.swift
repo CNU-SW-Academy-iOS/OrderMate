@@ -77,7 +77,7 @@ struct MakeAccountView: View {
             
         }
         Button {
-            LoginState = loginModel.makeAccountPost(myUserName, myPassWord, myName, myNickName, isMale, mySchool, myMajor)
+            LoginState = loginModel.postUser(username: myUserName, password: myPassWord, name: myName, nickname: myNickName, gender: "MALE", school: mySchool, major: myMajor)
         } label: {
             Text("회원 가입")
                 .font(.title)
