@@ -17,3 +17,14 @@ struct UserModel : Codable {
     let school : String?
     let major : String?
 }
+
+struct PostUser: Codable {
+    let username : String
+    let password : String
+    let name : String
+    let nickName : String
+    let gender : String
+    let school : String
+    let major : String
+
+}
