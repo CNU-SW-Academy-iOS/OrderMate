@@ -47,45 +47,6 @@ struct AccountModel {
         return postSuccess
     }
     
-    func loginGet(_ userName: String, _ userPassWord: String) -> Bool {
-        let user = LoginUser(username: userName, password: userPassWord)
-        var success: Bool = false
-        
-        guard let uploadData = try? JSONEncoder().encode(user)
-        else { return false }
-        
-        let url = URL(string: "http://localhost:8080/login")
-        
-        var request = URLRequest(url: url!)
-        request.httpMethod = "POST"
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        let task = URLSession.shared.uploadTask(with: request, from: uploadData) { data, response, error in
-            
-            let successRange = 200..<300
-            guard error == nil, let statusCode = (response as? HTTPURLResponse)?.statusCode, successRange.contains(statusCode) else {
-                print("Error occur: \(String(describing: error))")
-                return
-            }
-            
-            let loginSuccess = 200
-            if loginSuccess == (response as? HTTPURLResponse)?.statusCode {
-                print("User login 성공")
-                print(response)
-                success = true
-                
-            } else {
-                print("User login 실패")
-                print(response)
-            }
-        }
-        
-        task.resume()
-        
-        return success
-            
-        
-
-    }
     
     func postUser(username: String, password: String, name: String, nickname: String, gender: String, school: String, major: String) -> Bool {
         let user = PostUser(username: username, password: password, name: name, nickName: nickname, gender: "MALE", school: school, major: major)
@@ -126,7 +87,8 @@ struct AccountModel {
     func loginGetStatus(_ userName: String, _ userPassWord: String, completion: @escaping (Bool) -> Void) {
         let user = LoginUser(username: userName, password: userPassWord)
         
-        guard let uploadData = try? JSONEncoder().encode(user) else {
+        guard let uploadData = try? JSONEncoder().encode(user)
+        else {
             completion(false)
             return
         }
@@ -139,9 +101,9 @@ struct AccountModel {
         
         let task = URLSession.shared.uploadTask(with: request, from: uploadData) { data, response, error in
             let successRange = 200..<300
-            guard error == nil,
-                  let statusCode = (response as? HTTPURLResponse)?.statusCode,
+            guard error == nil, let statusCode = (response as? HTTPURLResponse)?.statusCode,
                   successRange.contains(statusCode) else {
+                print((response as? HTTPURLResponse)?.statusCode)
                 print("Error occur: \(String(describing: error))")
                 completion(false)
                 return

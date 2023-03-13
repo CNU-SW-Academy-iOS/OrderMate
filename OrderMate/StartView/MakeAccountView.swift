@@ -19,14 +19,12 @@ struct MakeAccountView: View {
     @State var myMajor: String = ""
     @State var isSecureMode: Bool = true
     var body: some View {
-        
         VStack {
             VStack(alignment: .leading){
                 Text("아이디").foregroundColor(Color("green 2"))
                 TextField("아이디를 입력해주세요", text: $myUserName)
                     .textFieldStyle(.roundedBorder)
             }.padding()
-            
             VStack(alignment: .leading){
                 Text("비밀번호").foregroundColor(Color("green 2"))
                 HStack {
