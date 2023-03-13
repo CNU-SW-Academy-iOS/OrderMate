@@ -157,7 +157,6 @@ struct AccountModel {
                 completion(false)
             }
         }
-        
         task.resume()
     }
     

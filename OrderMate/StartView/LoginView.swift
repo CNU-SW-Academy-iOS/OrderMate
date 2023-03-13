@@ -39,6 +39,20 @@ struct LoginView: View {
                         Text("      ")
                     }
                 }
+                
+                Button {
+                    LoginState = loginModel.loginGet(myIdString, myPasswordString)
+                    
+                    
+                } label: {
+                    Text("login Get")
+                        .font(.title2)
+                        .frame(width: 330, height: 80)
+                        .foregroundColor(.black)
+                        .background(Color("green 0"))
+                        .cornerRadius(30)
+                }
+                
                 Button {
                     loginModel.loginGetStatus(myIdString, myPasswordString) { success in
                         if success {
@@ -48,7 +62,7 @@ struct LoginView: View {
                         }
                     }
                 } label: {
-                    Text("login")
+                    Text("login status")
                         .font(.title2)
                         .frame(width: 330, height: 80)
                         .foregroundColor(.black)
