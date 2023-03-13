@@ -46,9 +46,10 @@ struct AccountModel {
         print("success = \(postSuccess)")
         return postSuccess
     }
+    
     func loginGet(_ userName: String, _ userPassWord: String) -> Bool {
         let user = LoginUser(username: userName, password: userPassWord)
-        var success = false
+        var success: Bool = false
         
         guard let uploadData = try? JSONEncoder().encode(user)
         else { return false }
@@ -56,7 +57,7 @@ struct AccountModel {
         let url = URL(string: "http://localhost:8080/login")
         
         var request = URLRequest(url: url!)
-        request.httpMethod = "GET"
+        request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         let task = URLSession.shared.uploadTask(with: request, from: uploadData) { data, response, error in
             
@@ -71,6 +72,7 @@ struct AccountModel {
                 print("User login 성공")
                 print(response)
                 success = true
+                let a = 1
             } else {
                 print("User login 실패")
                 print(response)
@@ -78,7 +80,10 @@ struct AccountModel {
         }
         
         task.resume()
+        
         return success
+            
+        
 
     }
     
@@ -113,7 +118,7 @@ struct AccountModel {
             }
         }
         task.resume()
-        return success
+        return true
     }
     
 }

@@ -40,7 +40,6 @@ struct LoginView: View {
                     }
                 }
                 Button {
-                    
                     LoginState = loginModel.loginGet(myIdString, myPasswordString)
                 } label: {
                     Text("login")
