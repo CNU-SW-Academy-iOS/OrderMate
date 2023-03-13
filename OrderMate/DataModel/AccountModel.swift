@@ -123,7 +123,7 @@ struct AccountModel {
     
     
     
-    func loginGetstatus(_ userName: String, _ userPassWord: String, completion: @escaping (Bool) -> Void) {
+    func loginGetStatus(_ userName: String, _ userPassWord: String, completion: @escaping (Bool) -> Void) {
         let user = LoginUser(username: userName, password: userPassWord)
         
         guard let uploadData = try? JSONEncoder().encode(user) else {

@@ -40,7 +40,7 @@ struct LoginView: View {
                     }
                 }
                 Button {
-                    loginModel.loginGetstatus(myIdString, myPasswordString) { success in
+                    loginModel.loginGetStatus(myIdString, myPasswordString) { success in
                         if success {
                             LoginState = true
                         } else {
