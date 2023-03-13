@@ -48,22 +48,26 @@ struct AccountModel {
     }
     
     
-    func postUser(username: String, password: String, name: String, nickname: String, gender: String, school: String, major: String) -> Bool {
+    
+    func postNewUserInfo(username: String, password: String, name: String, nickname: String, gender: String, school: String, major: String, completion: @escaping (Bool) -> Void) {
         let user = PostUser(username: username, password: password, name: name, nickName: nickname, gender: "MALE", school: school, major: major)
+        
         guard let uploadData = try? JSONEncoder().encode(user)
-        else { return false }
-        var success = false
+        else {
+            completion(false)
+            return
+        }
+        
         let url = URL(string: urlString)
         
         var request = URLRequest(url: url!)
         request.httpMethod = "POST"
-        
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
         let task = URLSession.shared.uploadTask(with: request, from: uploadData) { data, response, error in
-            
             let successRange = 200..<300
             guard error == nil, let statusCode = (response as? HTTPURLResponse)?.statusCode, successRange.contains(statusCode) else {
+                print((response as? HTTPURLResponse)?.statusCode)
                 print("Error occur: \(String(describing: error))")
                 return
             }
@@ -71,16 +75,17 @@ struct AccountModel {
             let postSuccess = 201
             if postSuccess == (response as? HTTPURLResponse)?.statusCode {
                 print("User 정보 post 성공")
-                print(response)
-                success = true
+                print(response as Any)
+                completion(true)
             } else {
                 print("User 정보 post 실패")
-                print(response)
+                print(response as Any)
+                completion(false)
             }
         }
         task.resume()
-        return true
     }
+    
     
     
     
