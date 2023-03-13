@@ -40,7 +40,13 @@ struct LoginView: View {
                     }
                 }
                 Button {
-                    LoginState = loginModel.loginGet(myIdString, myPasswordString)
+                    loginModel.loginGetstatus(myIdString, myPasswordString) { success in
+                        if success {
+                            LoginState = true
+                        } else {
+                            print("error")
+                        }
+                    }
                 } label: {
                     Text("login")
                         .font(.title2)
