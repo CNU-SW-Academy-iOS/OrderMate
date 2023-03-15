@@ -46,43 +46,87 @@ struct AccountModel {
         print("success = \(postSuccess)")
         return postSuccess
     }
-    func loginGet(_ userName: String, _ userPassWord: String) -> Bool {
-        var success = false
-        
-        
-        return success
-        
-    }
     
-    func postUser(username: String, password: String, name: String, nickname: String, gender: String, school: String, major: String) -> Bool {
+    
+    
+    func postNewUserInfo(username: String, password: String, name: String, nickname: String, gender: String, school: String, major: String, completion: @escaping (Bool) -> Void) {
         let user = PostUser(username: username, password: password, name: name, nickName: nickname, gender: "MALE", school: school, major: major)
+        
         guard let uploadData = try? JSONEncoder().encode(user)
-        else { return false }
+        else {
+            completion(false)
+            return
+        }
         
         let url = URL(string: urlString)
         
         var request = URLRequest(url: url!)
         request.httpMethod = "POST"
-        
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
         let task = URLSession.shared.uploadTask(with: request, from: uploadData) { data, response, error in
-            
             let successRange = 200..<300
             guard error == nil, let statusCode = (response as? HTTPURLResponse)?.statusCode, successRange.contains(statusCode) else {
-                    print("Error occur: \(String(describing: error))")
+                print((response as? HTTPURLResponse)?.statusCode)
+                print("Error occur: \(String(describing: error))")
                 return
             }
             
             let postSuccess = 201
             if postSuccess == (response as? HTTPURLResponse)?.statusCode {
                 print("User 정보 post 성공")
-                print(response)
+                print(response as Any)
+                completion(true)
+            } else {
+                print("User 정보 post 실패")
+                print(response as Any)
+                completion(false)
             }
         }
         task.resume()
-        return true
     }
+    
+    
+    
+    
+    func loginGetStatus(_ userName: String, _ userPassWord: String, completion: @escaping (Bool) -> Void) {
+        let user = LoginUser(username: userName, password: userPassWord)
+        
+        guard let uploadData = try? JSONEncoder().encode(user)
+        else {
+            completion(false)
+            return
+        }
+        
+        let url = URL(string: "http://localhost:8080/login")!
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        let task = URLSession.shared.uploadTask(with: request, from: uploadData) { data, response, error in
+            let successRange = 200..<300
+            guard error == nil, let statusCode = (response as? HTTPURLResponse)?.statusCode,
+                  successRange.contains(statusCode) else {
+                print((response as? HTTPURLResponse)?.statusCode)
+                print("Error occur: \(String(describing: error))")
+                completion(false)
+                return
+            }
+            
+            if statusCode == 200 {
+                print("User login 성공")
+                print(response as Any)
+                completion(true)
+            } else {
+                print("User login 실패")
+                print(response as Any)
+                completion(false)
+            }
+        }
+        task.resume()
+    }
+    
     
 }
 

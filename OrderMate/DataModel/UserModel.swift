@@ -28,3 +28,9 @@ struct PostUser: Codable {
     let major : String
 
 }
+
+struct LoginUser: Codable {
+    let username : String
+    let password : String
+
+}
