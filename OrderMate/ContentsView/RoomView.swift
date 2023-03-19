@@ -10,7 +10,7 @@ import SwiftUI
 struct RoomView: View {
     //@StateObject private var manager = RoomDataManager.shared
     @Binding var LoginState: Bool
-    
+    @State var RoomList = RoomListModel()
     var body: some View {
         NavigationStack {
             VStack {
@@ -18,7 +18,16 @@ struct RoomView: View {
                     LoginState = false
                 } label: {
                     Text("logout button")
+                }.padding()
+                Button {
+                    RoomList.GetAllRoomList()
+//                    let Result = RoomList.GetAllRoomList()
+//                    print(Result)
+                } label: {
+                    Text("새로고침")
                 }
+                
+                
                 ScrollViewReader { scrollView in
 //                    List {
 //                        ForEach(manager.roomList) { list in
