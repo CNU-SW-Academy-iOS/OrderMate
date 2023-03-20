@@ -70,14 +70,10 @@ struct RoomInfo: Decodable {
 //    let ownerName : String?
 //}
 
-struct RoomInfoTest: Codable {
+struct RoomInfoTest: Codable, Hashable {
     let postId : Int?
     let title : String?
     let content : String?
-    
-//    enum CodingKeys: String, CodingKey {
-//        case postId, title, title
-//      }
 }
 
 //    postId,
@@ -115,12 +111,8 @@ struct RoomInfoTest: Codable {
 //"ownerName": "유겸2 이름"
 
 
-struct RoomListModelTest {
+struct RoomList {
     func GetAllRoomList(completionHandler: @escaping (Bool, Any) -> Void) {
-//        var List: RoomInfo = RoomInfo(postId: "", title: "", createdAt: "",
-//                                      postStatus: "", maxPeopleNum: "", currentPeopleNum: "", isAnonymous: false,
-//                                      content: "", withOrderLink: "", pickupSpace: "", spaceType: "",
-//                                      accountNum: "", estimatedOrderTime: "", ownerId: "", ownerName: "")
         print("모든 리스트 정보 가져오기")
         if let url = URL(string: "http://localhost:8080/post") {
             var request = URLRequest(url: url)
@@ -146,43 +138,16 @@ struct RoomListModelTest {
                     let output = try JSONDecoder().decode([RoomInfoTest].self, from: data)
                     print(output)
                     print("JSON Data Parsing")
+                    
+                    
                     completionHandler(true, output)
                 } catch {
                     print(error)
                 }
             }
             task.resume()
-            
-            
-            
         }
-
-        
     }
+    
+    //func JsonRoomList
 }
-
-
-//struct DataModel: Codable {
-//    let id: Int
-//    let name: String
-//    let description: String
-//}
-//
-//guard let url = URL(string: "https://example.com/data") else { return }
-//let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
-//    guard error == nil else {
-//        print(error!)
-//        return
-//    }
-//    guard let responseData = data else {
-//        print("No data received")
-//        return
-//    }
-//    let decoder = JSONDecoder()
-//    guard let dataModels = try? decoder.decode([DataModel].self, from: responseData) else {
-//        print("Failed to decode JSON")
-//        return
-//    }
-//    // dataModels를 사용하여 데이터를 처리합니다.
-//}
-//task.resume()
