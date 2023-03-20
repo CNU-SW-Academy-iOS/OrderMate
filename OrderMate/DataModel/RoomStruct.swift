@@ -16,23 +16,19 @@ struct Room: Hashable, Identifiable, Codable {
     var maxUser: Int
     var userList: [String] = []
 }
-//struct RoomInfo: Codable {
-//    let postId : String
-//    let title : String
-//    let createdAt : String
-//    let postStatus : String
-//    let maxPeopleNum : String
-//    let currentPeopleNum : String
-//    let isAnonymous : Bool
-//    let content : String
-//    let withOrderLink : String
-//    let pickupSpace : String
-//    let spaceType : String
-//    let accountNum : String
-//    let estimatedOrderTime : String
-//    let ownerId : String
-//    let ownerName : String
-//}
+
+struct CreatRoom: Codable {
+    var title: String
+    var maxPeopleNum: String
+    var isAnonymous: Int?
+    var spaceType: String?
+    var content: String
+    var withOrderLink: String?
+    var pickupSpace: String?
+    var accountNum: String?
+    var estimatedOrdTime: String?
+   
+}
 
 struct RoomInfo: Decodable {
     let postId : Int?
@@ -52,63 +48,11 @@ struct RoomInfo: Decodable {
     let ownerName : String?
 }
 
-//struct RoomInfo: Codable {
-//    let postId : String?
-//    let title : String?
-//    let createdAt : Date?
-//    let postStatus : String?
-//    let maxPeopleNum : Int?
-//    let currentPeopleNum : Int?
-//    let isAnonymous : Bool?
-//    let content : String?
-//    let withOrderLink : String?
-//    let pickupSpace : String?
-//    let spaceType : String?
-//    let accountNum : String?
-//    let estimatedOrderTime : Date?
-//    let ownerId : Int?
-//    let ownerName : String?
-//}
-
-struct RoomInfoTest: Codable, Hashable {
+struct RoomInfoPreview: Codable, Hashable {
     let postId : Int?
     let title : String?
     let content : String?
 }
-
-//    postId,
-//    title,
-//    LocalDateTime createdAt,
-//    PostStatus postStatus,  // 이게머임
-//    Integer maxPeopleNum,
-//    Integer currentPeopleNum,
-//    Boolean isAnonymous,
-//    String content,
-//    String withOrderLink,
-//    String pickupSpace,
-//    SpaceType spaceType, // 이게머임
-//    String accountNum,
-//    LocalDateTime,
-//    estimatedOrderTime,
-//    Long ownerId,
-//    String ownerName
-    
-    
-//"postId": 1,
-//"title": "123",
-//"createdAt": null,
-//"postStatus": null,
-//"maxPeopleNum": 12,
-//"currentPeopleNum": 1,
-//"isAnonymous": false,
-//"content": "12",
-//"withOrderLink": "12",
-//"pickupSpace": "12",
-//"spaceType": "DORMITORY",
-//"accountNum": "12",
-//"estimatedOrderTime": "2018-02-05T12:59:11.332",
-//"ownerId": 1,
-//"ownerName": "유겸2 이름"
 
 
 struct RoomList {
@@ -135,7 +79,7 @@ struct RoomList {
                 }
                 
                 do {
-                    let output = try JSONDecoder().decode([RoomInfoTest].self, from: data)
+                    let output = try JSONDecoder().decode([RoomInfoPreview].self, from: data)
                     print(output)
                     print("JSON Data Parsing")
                     
@@ -149,5 +93,44 @@ struct RoomList {
         }
     }
     
-    //func JsonRoomList
+    func UploadData(title:String, maxPeopleNum:String, isAnonymous:Int,
+                    spaceType:String, content:String, withOrderLink:String,
+                    pickupSpace:String, accountNum:String, estimatedOrdTime:String
+                    ,completion: @escaping (Bool) -> Void) {
+        let post = CreatRoom(title: title, maxPeopleNum: maxPeopleNum, isAnonymous: isAnonymous,
+                             spaceType: spaceType, content: content, withOrderLink: withOrderLink,
+                             pickupSpace: pickupSpace, accountNum: accountNum, estimatedOrdTime: estimatedOrdTime)
+    
+        guard let uploadData = try? JSONEncoder().encode(post)
+        else {
+            completion(false)
+            return
+        }
+        
+        let url = URL(string: "http://localhost:8080/post/upload")
+        
+        var request = URLRequest(url: url!)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        let session = URLSession.shared
+        let task = session.uploadTask(with: request, from: uploadData) { data, response, error in
+
+            let successRange = 200..<300
+            guard error == nil, let statusCode = (response as? HTTPURLResponse)?.statusCode, successRange.contains(statusCode) else {
+                print((response as? HTTPURLResponse)?.statusCode)
+                print("Error occur: \(String(describing: error))")
+                return
+            }
+            
+            
+            let postSuccess = 201
+            if postSuccess == (response as? HTTPURLResponse)?.statusCode {
+                print("새 글 post 성공")
+                print(response as Any)
+                completion(true)
+            }
+        }
+        task.resume()
+    }
 }

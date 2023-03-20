@@ -64,7 +64,8 @@ struct AccountModel {
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
-        let task = URLSession.shared.uploadTask(with: request, from: uploadData) { data, response, error in
+        let session = URLSession.shared
+        let task = session.uploadTask(with: request, from: uploadData) { data, response, error in
             let successRange = 200..<300
             guard error == nil, let statusCode = (response as? HTTPURLResponse)?.statusCode, successRange.contains(statusCode) else {
                 print((response as? HTTPURLResponse)?.statusCode)

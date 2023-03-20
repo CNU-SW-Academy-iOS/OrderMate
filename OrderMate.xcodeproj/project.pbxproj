@@ -107,8 +107,8 @@
 			children = (
 				ED40967229BCAF5300B030A9 /* UserModel.swift */,
 				E40FB24529B6296100A1A4C2 /* Setting.swift */,
-				BA3F37EE29B5C989009BF7FE /* RoomStruct.swift */,
 				ED40966F29BCAF2C00B030A9 /* AccountModel.swift */,
+				BA3F37EE29B5C989009BF7FE /* RoomStruct.swift */,
 			);
 			path = DataModel;
 			sourceTree = "<group>";
