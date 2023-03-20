@@ -10,7 +10,9 @@ import SwiftUI
 struct RoomView: View {
     //@StateObject private var manager = RoomDataManager.shared
     @Binding var LoginState: Bool
-    @State var RoomList = RoomListModel()
+    @State var RoomList = RoomListModelTest()
+    @State var title = ""
+    //@State var currentRoom: Room
     var body: some View {
         NavigationStack {
             VStack {
@@ -20,24 +22,17 @@ struct RoomView: View {
                     Text("logout button")
                 }.padding()
                 Button {
-                    RoomList.GetAllRoomList()
-//                    let Result = RoomList.GetAllRoomList()
-//                    print(Result)
+                    RoomList.GetAllRoomList { success, data in
+                        print(data)
+                    }
                 } label: {
                     Text("새로고침")
                 }
+                Text(title)
                 
                 
                 ScrollViewReader { scrollView in
-//                    List {
-//                        ForEach(manager.roomList) { list in
-//                            NavigationLink {
-//                                ContentView(currentRoom: list)
-//                            } label: {
-//                                ListView(currentRoom: list)
-//                            }
-//                        }
-//                    }
+
                 }
             }
         }
@@ -48,6 +43,11 @@ struct RoomView: View {
 struct RoomView_Previews: PreviewProvider {
     @State static var LoginState = false
     static var previews: some View {
+        let room = Room(id: UUID().uuidString, title: "아아아아 배고프아아다아아", location: "충남대학교 어딘가", date: Date(), maxUser: 3)
+        
+//        ContentView(currentRoom: room)
+        
+        //RoomView(LoginState: $LoginState, currentRoom: room)
         RoomView(LoginState: $LoginState)
     }
 }

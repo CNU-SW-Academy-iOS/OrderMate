@@ -14,6 +14,7 @@ struct MainView: View {
             StartPageView(LoginState: $LoginState)
         } else {
             RoomView(LoginState: $LoginState)
+            //RoomView(LoginState: <#T##Binding<Bool>#>, currentRoom: <#T##Room#>)
         }
         
     }
