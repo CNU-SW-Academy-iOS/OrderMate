@@ -14,6 +14,11 @@
 		BAF470A629B21C0C00F242EF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF470A529B21C0C00F242EF /* ContentView.swift */; };
 		BAF470A829B21C0D00F242EF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BAF470A729B21C0D00F242EF /* Assets.xcassets */; };
 		BAF470AB29B21C0D00F242EF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BAF470AA29B21C0D00F242EF /* Preview Assets.xcassets */; };
+		BAFCF30A29C1A6AB006CF5E8 /* BoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAFCF30929C1A6AB006CF5E8 /* BoardView.swift */; };
+		BAFCF30D29C1AB80006CF5E8 /* BoardStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAFCF30C29C1AB80006CF5E8 /* BoardStruct.swift */; };
+		BAFCF31029C30E96006CF5E8 /* APIStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAFCF30F29C30E96006CF5E8 /* APIStruct.swift */; };
+		BAFCF31229C310EF006CF5E8 /* BoardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAFCF31129C310EF006CF5E8 /* BoardModel.swift */; };
+		BAFCF33029C875D1006CF5E8 /* BoardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAFCF32F29C875D1006CF5E8 /* BoardViewModel.swift */; };
 		E40FB24029B625E400A1A4C2 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E40FB23F29B625E400A1A4C2 /* MainView.swift */; };
 		E40FB24229B625F200A1A4C2 /* StartPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E40FB24129B625F200A1A4C2 /* StartPageView.swift */; };
 		E40FB24429B6260200A1A4C2 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E40FB24329B6260200A1A4C2 /* LoginView.swift */; };
@@ -33,6 +38,11 @@
 		BAF470A529B21C0C00F242EF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		BAF470A729B21C0D00F242EF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BAF470AA29B21C0D00F242EF /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		BAFCF30929C1A6AB006CF5E8 /* BoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardView.swift; sourceTree = "<group>"; };
+		BAFCF30C29C1AB80006CF5E8 /* BoardStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardStruct.swift; sourceTree = "<group>"; };
+		BAFCF30F29C30E96006CF5E8 /* APIStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIStruct.swift; sourceTree = "<group>"; };
+		BAFCF31129C310EF006CF5E8 /* BoardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardModel.swift; sourceTree = "<group>"; };
+		BAFCF32F29C875D1006CF5E8 /* BoardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardViewModel.swift; sourceTree = "<group>"; };
 		E40FB23F29B625E400A1A4C2 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		E40FB24129B625F200A1A4C2 /* StartPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartPageView.swift; sourceTree = "<group>"; };
 		E40FB24329B6260200A1A4C2 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -75,6 +85,8 @@
 				BA0094CF29BDCCF50071E45C /* Info.plist */,
 				BAF470A329B21C0C00F242EF /* OrderMateApp.swift */,
 				E40FB23F29B625E400A1A4C2 /* MainView.swift */,
+				BAFCF30E29C309B9006CF5E8 /* API */,
+				BAFCF30B29C1AAB2006CF5E8 /* Board */,
 				ED40966E29BCAEC400B030A9 /* StartView */,
 				ED40966D29BCAEBB00B030A9 /* DataModel */,
 				ED40966C29BCAEB200B030A9 /* ContentsView */,
@@ -90,6 +102,25 @@
 				BAF470AA29B21C0D00F242EF /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		BAFCF30B29C1AAB2006CF5E8 /* Board */ = {
+			isa = PBXGroup;
+			children = (
+				BAFCF30929C1A6AB006CF5E8 /* BoardView.swift */,
+				BAFCF30C29C1AB80006CF5E8 /* BoardStruct.swift */,
+				BAFCF31129C310EF006CF5E8 /* BoardModel.swift */,
+				BAFCF32F29C875D1006CF5E8 /* BoardViewModel.swift */,
+			);
+			path = Board;
+			sourceTree = "<group>";
+		};
+		BAFCF30E29C309B9006CF5E8 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				BAFCF30F29C30E96006CF5E8 /* APIStruct.swift */,
+			);
+			path = API;
 			sourceTree = "<group>";
 		};
 		ED40966C29BCAEB200B030A9 /* ContentsView */ = {
@@ -197,8 +228,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BAFCF31029C30E96006CF5E8 /* APIStruct.swift in Sources */,
 				F37C7D0029B98489004B011C /* MakeAccountView.swift in Sources */,
 				E40FB24629B6296100A1A4C2 /* Setting.swift in Sources */,
+				BAFCF30A29C1A6AB006CF5E8 /* BoardView.swift in Sources */,
+				BAFCF31229C310EF006CF5E8 /* BoardModel.swift in Sources */,
 				BAF470A629B21C0C00F242EF /* ContentView.swift in Sources */,
 				E40FB24029B625E400A1A4C2 /* MainView.swift in Sources */,
 				BA3F37EF29B5C989009BF7FE /* RoomStruct.swift in Sources */,
@@ -208,7 +242,9 @@
 				ED40967029BCAF2C00B030A9 /* AccountModel.swift in Sources */,
 				E40FB24229B625F200A1A4C2 /* StartPageView.swift in Sources */,
 				BA3F37F329B5D120009BF7FE /* RoomView.swift in Sources */,
+				BAFCF33029C875D1006CF5E8 /* BoardViewModel.swift in Sources */,
 				BAF470A429B21C0C00F242EF /* OrderMateApp.swift in Sources */,
+				BAFCF30D29C1AB80006CF5E8 /* BoardStruct.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -337,7 +373,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"OrderMate/Preview Content\"";
-				DEVELOPMENT_TEAM = 33DNUM53Q8;
+				DEVELOPMENT_TEAM = ZX8V36P46K;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = OrderMate/Info.plist;
@@ -367,7 +403,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"OrderMate/Preview Content\"";
-				DEVELOPMENT_TEAM = 33DNUM53Q8;
+				DEVELOPMENT_TEAM = ZX8V36P46K;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = OrderMate/Info.plist;
