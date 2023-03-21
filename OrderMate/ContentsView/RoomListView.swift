@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct RoomView: View {
+struct RoomListView: View {
     @Binding var LoginState: Bool
     @State var roomList = RoomList()
     @State var title = ""
@@ -37,9 +37,10 @@ struct RoomView: View {
                     //Text(listJsonArray[0].title!)
                     List {
                         ForEach(listJsonArray, id: \.self) { data in
-                            Button {
-                                
+                            NavigationLink {
+                                BoardView(postId: data.postId!)
                             } label: {
+                                Text(String(data.postId!))
                                 Text(data.title!)
                                 Text(data.content!)
                             }
@@ -56,8 +57,16 @@ struct RoomView: View {
                 Spacer()
                 HStack{
                     Spacer()
+                    NavigationLink {
+                        CreateBoardView()
+                    } label: {
+                        Image(systemName: "plus")
+                            .font(.title.bold())
+                    }.padding()
+
+                    
                     Button {
-                        roomList.UploadData(title: "버튼테스트", maxPeopleNum: "12", isAnonymous: 0,
+                        roomList.UploadData(title: "버튼테스트3", maxPeopleNum: "12", isAnonymous: 0,
                                             spaceType: "DORMITORY", content: "버튼테스트", withOrderLink: "버튼테스트",
                                             pickupSpace: "버튼테스트", accountNum: "버튼테스트",
                                             estimatedOrdTime: "2023-03-20T12:59:11.332") { success in
@@ -77,9 +86,9 @@ struct RoomView: View {
 }
 
 
-struct RoomView_Previews: PreviewProvider {
+struct RoomListView_Previews: PreviewProvider {
     @State static var LoginState = false
     static var previews: some View {
-        RoomView(LoginState: $LoginState)
+        RoomListView(LoginState: $LoginState)
     }
 }

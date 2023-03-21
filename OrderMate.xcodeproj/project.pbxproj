@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		BA3F37EF29B5C989009BF7FE /* RoomStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3F37EE29B5C989009BF7FE /* RoomStruct.swift */; };
-		BA3F37F329B5D120009BF7FE /* RoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3F37F229B5D120009BF7FE /* RoomView.swift */; };
+		BA3F37F329B5D120009BF7FE /* RoomListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3F37F229B5D120009BF7FE /* RoomListView.swift */; };
 		BA3F37F529B5D197009BF7FE /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3F37F429B5D197009BF7FE /* ListView.swift */; };
 		BAF470A429B21C0C00F242EF /* OrderMateApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF470A329B21C0C00F242EF /* OrderMateApp.swift */; };
 		BAF470A629B21C0C00F242EF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF470A529B21C0C00F242EF /* ContentView.swift */; };
@@ -23,6 +23,7 @@
 		E40FB24229B625F200A1A4C2 /* StartPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E40FB24129B625F200A1A4C2 /* StartPageView.swift */; };
 		E40FB24429B6260200A1A4C2 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E40FB24329B6260200A1A4C2 /* LoginView.swift */; };
 		E40FB24629B6296100A1A4C2 /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = E40FB24529B6296100A1A4C2 /* Setting.swift */; };
+		E464802629C95352004616D2 /* CreateBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E464802529C95352004616D2 /* CreateBoardView.swift */; };
 		ED40967029BCAF2C00B030A9 /* AccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED40966F29BCAF2C00B030A9 /* AccountModel.swift */; };
 		ED40967329BCAF5300B030A9 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED40967229BCAF5300B030A9 /* UserModel.swift */; };
 		F37C7D0029B98489004B011C /* MakeAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37C7CFF29B98489004B011C /* MakeAccountView.swift */; };
@@ -31,7 +32,7 @@
 /* Begin PBXFileReference section */
 		BA0094CF29BDCCF50071E45C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		BA3F37EE29B5C989009BF7FE /* RoomStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomStruct.swift; sourceTree = "<group>"; };
-		BA3F37F229B5D120009BF7FE /* RoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomView.swift; sourceTree = "<group>"; };
+		BA3F37F229B5D120009BF7FE /* RoomListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomListView.swift; sourceTree = "<group>"; };
 		BA3F37F429B5D197009BF7FE /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
 		BAF470A029B21C0C00F242EF /* OrderMate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OrderMate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BAF470A329B21C0C00F242EF /* OrderMateApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderMateApp.swift; sourceTree = "<group>"; };
@@ -47,6 +48,7 @@
 		E40FB24129B625F200A1A4C2 /* StartPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartPageView.swift; sourceTree = "<group>"; };
 		E40FB24329B6260200A1A4C2 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		E40FB24529B6296100A1A4C2 /* Setting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setting.swift; sourceTree = "<group>"; };
+		E464802529C95352004616D2 /* CreateBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateBoardView.swift; sourceTree = "<group>"; };
 		ED40966F29BCAF2C00B030A9 /* AccountModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountModel.swift; sourceTree = "<group>"; };
 		ED40967229BCAF5300B030A9 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		F37C7CFF29B98489004B011C /* MakeAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeAccountView.swift; sourceTree = "<group>"; };
@@ -88,8 +90,8 @@
 				BAFCF30E29C309B9006CF5E8 /* API */,
 				BAFCF30B29C1AAB2006CF5E8 /* Board */,
 				ED40966E29BCAEC400B030A9 /* StartView */,
-				ED40966D29BCAEBB00B030A9 /* DataModel */,
 				ED40966C29BCAEB200B030A9 /* ContentsView */,
+				ED40966D29BCAEBB00B030A9 /* DataModel */,
 				BAF470A729B21C0D00F242EF /* Assets.xcassets */,
 				BAF470A929B21C0D00F242EF /* Preview Content */,
 			);
@@ -111,6 +113,7 @@
 				BAFCF30C29C1AB80006CF5E8 /* BoardStruct.swift */,
 				BAFCF31129C310EF006CF5E8 /* BoardModel.swift */,
 				BAFCF32F29C875D1006CF5E8 /* BoardViewModel.swift */,
+				E464802529C95352004616D2 /* CreateBoardView.swift */,
 			);
 			path = Board;
 			sourceTree = "<group>";
@@ -127,7 +130,7 @@
 			isa = PBXGroup;
 			children = (
 				BAF470A529B21C0C00F242EF /* ContentView.swift */,
-				BA3F37F229B5D120009BF7FE /* RoomView.swift */,
+				BA3F37F229B5D120009BF7FE /* RoomListView.swift */,
 				BA3F37F429B5D197009BF7FE /* ListView.swift */,
 			);
 			path = ContentsView;
@@ -230,6 +233,7 @@
 			files = (
 				BAFCF31029C30E96006CF5E8 /* APIStruct.swift in Sources */,
 				F37C7D0029B98489004B011C /* MakeAccountView.swift in Sources */,
+				E464802629C95352004616D2 /* CreateBoardView.swift in Sources */,
 				E40FB24629B6296100A1A4C2 /* Setting.swift in Sources */,
 				BAFCF30A29C1A6AB006CF5E8 /* BoardView.swift in Sources */,
 				BAFCF31229C310EF006CF5E8 /* BoardModel.swift in Sources */,
@@ -241,7 +245,7 @@
 				BA3F37F529B5D197009BF7FE /* ListView.swift in Sources */,
 				ED40967029BCAF2C00B030A9 /* AccountModel.swift in Sources */,
 				E40FB24229B625F200A1A4C2 /* StartPageView.swift in Sources */,
-				BA3F37F329B5D120009BF7FE /* RoomView.swift in Sources */,
+				BA3F37F329B5D120009BF7FE /* RoomListView.swift in Sources */,
 				BAFCF33029C875D1006CF5E8 /* BoardViewModel.swift in Sources */,
 				BAF470A429B21C0C00F242EF /* OrderMateApp.swift in Sources */,
 				BAFCF30D29C1AB80006CF5E8 /* BoardStruct.swift in Sources */,

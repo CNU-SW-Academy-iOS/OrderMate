@@ -13,7 +13,7 @@ struct MainView: View {
         if LoginState == false {
             StartPageView(LoginState: $LoginState)
         } else {
-            RoomView(LoginState: $LoginState)
+            RoomListView(LoginState: $LoginState)
             //RoomView(LoginState: <#T##Binding<Bool>#>, currentRoom: <#T##Room#>)
         }
         
