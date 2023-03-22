@@ -8,27 +8,27 @@
 import SwiftUI
 
 struct RoomListView: View {
-    @Binding var LoginState: Bool
+    @Binding var loginState: Bool
     @State var roomList = RoomList()
     @State var title = ""
     @State var listJsonArray: [RoomInfoPreview] = [RoomInfoPreview(postId: 99,
-                                                             title: "개설된 방이 없습니다",
-                                                             content: "")]
+                                                                   title: "개설된 방이 없습니다",
+                                                                   content: "")]
     var body: some View {
-        ZStack{
+        ZStack {
             NavigationStack {
                 VStack {
                     HStack {
                         Spacer()
                         Button {
-                            LoginState = false
+                            loginState = false
                         } label: {
                             Text("logout button")
                                 .bold()
                         }.padding()
                     }
                     Button {
-                        roomList.GetAllRoomList { success, data in
+                        roomList.getAllRoomList { success, data in
                             listJsonArray = data as! [RoomInfoPreview]
                         }
                     } label: {
@@ -49,13 +49,13 @@ struct RoomListView: View {
                 }
                 
             }.refreshable {
-                roomList.GetAllRoomList { success, data in
+                roomList.getAllRoomList { success, data in
                     listJsonArray = data as! [RoomInfoPreview]
                 }
             }
-            VStack{
+            VStack {
                 Spacer()
-                HStack{
+                HStack {
                     Spacer()
                     NavigationLink {
                         CreateBoardView()
@@ -63,10 +63,9 @@ struct RoomListView: View {
                         Image(systemName: "plus")
                             .font(.title.bold())
                     }.padding()
-
                     
                     Button {
-                        roomList.UploadData(title: "버튼테스트3", maxPeopleNum: "12", isAnonymous: 0,
+                        roomList.uploadData(title: "버튼테스트3", maxPeopleNum: "12", isAnonymous: 0,
                                             spaceType: "DORMITORY", content: "버튼테스트", withOrderLink: "버튼테스트",
                                             pickupSpace: "버튼테스트", accountNum: "버튼테스트",
                                             estimatedOrdTime: "2023-03-20T12:59:11.332") { success in
@@ -80,15 +79,14 @@ struct RoomListView: View {
                     }.padding()
                 }.padding()
             }
-
+            
         }
     }
 }
 
-
 struct RoomListView_Previews: PreviewProvider {
     @State static var LoginState = false
     static var previews: some View {
-        RoomListView(LoginState: $LoginState)
+        RoomListView(loginState: $LoginState)
     }
 }

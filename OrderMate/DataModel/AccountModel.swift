@@ -38,7 +38,7 @@ struct AccountModel {
         request.httpMethod = "POST"
         
         let task = URLSession.shared.dataTask(with: request) {data, response, error in
-            guard let e = error else {return}
+            guard let error = error else {return}
             postSuccess = true
             
         }

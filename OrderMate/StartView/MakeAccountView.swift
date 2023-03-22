@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MakeAccountView: View {
-    @Binding var LoginState: Bool
+    @Binding var loginState: Bool
     @State var loginModel = AccountModel()
     @State var myUserName: String = ""
     @State var myPassWord: String = ""
@@ -83,7 +83,7 @@ struct MakeAccountView: View {
                         //회원가입이 정상적으로 이루어질 경우 자동 로그인
                         loginModel.loginGetStatus(myUserName, myPassWord) { loginSuccess in
                             if loginSuccess {
-                                LoginState = true
+                                loginState = true
                             } else {
                                 print("가입 후 자동 로그인 error")
                             }
@@ -103,8 +103,8 @@ struct MakeAccountView: View {
 }
 
 struct MakeAccountView_Previews: PreviewProvider {
-    @State static var LoginState = false
+    @State static var loginState = false
     static var previews: some View {
-        MakeAccountView(LoginState: $LoginState)
+        MakeAccountView(loginState: $loginState)
     }
 }
