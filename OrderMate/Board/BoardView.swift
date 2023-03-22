@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct BoardView: View {
+    var postId: Int
     @State private var isComplete: Bool = false
     @StateObject var manager: BoardViewModel = BoardViewModel.shared
     @State var ownerName: String = "주인장 이름"
@@ -95,7 +96,7 @@ struct BoardView: View {
                 .padding()
             }
             .onAppear {
-                manager.getBoard { isComplete in
+                manager.getBoard(postId: postId) { isComplete in
                     if isComplete {
                         if let board = manager.board {
                             DispatchQueue.main.async {
@@ -147,7 +148,8 @@ struct BoardView: View {
 }
 
 struct BoardView_Previews: PreviewProvider {
+    var postId = 1
     static var previews: some View {
-        BoardView()
+        BoardView(postId: 1)
     }
 }

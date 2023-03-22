@@ -13,12 +13,13 @@ class BoardViewModel: ObservableObject {
     @Published var board: Board?
     
     private init() {
-        getBoard { isComplete in
+        //리뷰 필요
+        getBoard(postId: 1) { isComplete in
         }
     }
     
-    func getBoard(completion: @escaping (Bool) -> Void) {
-        let url = URL(string: "http://localhost:8080" + api.post + "/56")
+    func getBoard(postId: Int, completion: @escaping (Bool) -> Void) {
+        let url = URL(string: "http://localhost:8080" + api.post + "/" + String(postId))
         
         var request = URLRequest(url: url!)
         request.httpMethod = "GET"
