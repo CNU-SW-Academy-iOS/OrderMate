@@ -2,7 +2,7 @@ import Foundation
 import SwiftUI
 
 struct BoardModel: View {
-    @State var board: BoardModel2? = nil
+    @State var board: BoardStructModel? = nil
     @State var boardTitle: String = "기본 값"
     var body: some View {
         VStack {
@@ -39,7 +39,7 @@ struct BoardModel: View {
             let decoder = JSONDecoder()
             
             do {
-                let response = try decoder.decode(BoardModel2.self, from: data)
+                let response = try decoder.decode(BoardStructModel.self, from: data)
                 DispatchQueue.main.async {
                     self.board = response
                     completion(true)

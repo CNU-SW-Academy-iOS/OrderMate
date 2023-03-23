@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct BoardModel2: Codable {
+struct BoardStructModel: Codable {
     var ownerName: String? = nil
     var title: String
     var createdAt: Date? = nil

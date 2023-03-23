@@ -102,8 +102,13 @@ struct RoomList {
         }
     }
     
-    func uploadData(board: BoardModel(ownerName: ownername, title: title, createdAt: createdAt, postStatus: postStatus, maxPeopleNum: maxPeopleNum, currentPeopleNum: currentPeopleNum, isAnonymous: isAnonymous, content: content, withOrderLink: withOrderLink, pickupSpace: pickupSpace, spaceType:spaceType, accountNum: accountNum, commentList: commentList), completion: @escaping (Bool) -> Void) {
-        let post = CreatRoom(Board)
+    func uploadData(title: String, maxPeopleNum: String, isAnonymous: Int,
+                    spaceType: String, content: String, withOrderLink: String,
+                    pickupSpace: String, accountNum: String, estimatedOrdTime: String,
+                    completion: @escaping (Bool) -> Void) {
+        let post = CreatRoom(title: title, maxPeopleNum: maxPeopleNum, isAnonymous: isAnonymous,
+                             spaceType: spaceType, content: content, withOrderLink: withOrderLink,
+                             pickupSpace: pickupSpace, accountNum: accountNum, estimatedOrdTime: estimatedOrdTime)
     
         guard let uploadData = try? JSONEncoder().encode(post)
         else {

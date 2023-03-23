@@ -9,7 +9,7 @@ import Foundation
 
 class BoardViewModel: ObservableObject {
     static var shared = BoardViewModel()
-    @Published var board: BoardModel2?
+    @Published var board: BoardStructModel?
     
     private init() {
         // 리뷰 필요
