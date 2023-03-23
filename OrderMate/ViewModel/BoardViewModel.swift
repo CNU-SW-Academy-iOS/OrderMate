@@ -8,9 +8,8 @@
 import Foundation
 
 class BoardViewModel: ObservableObject {
-    var api = APIStruct()
     static var shared = BoardViewModel()
-    @Published var board: Board?
+    @Published var board: BoardModel2?
     
     private init() {
         // 리뷰 필요
@@ -19,7 +18,7 @@ class BoardViewModel: ObservableObject {
     }
     
     func getBoard(postId: Int, completion: @escaping (Bool) -> Void) {
-        let url = URL(string: "http://localhost:8080" + api.post + "/" + String(postId))
+        let url = URL(string: urlString + APIModel.post.rawValue + "/" + String(postId))
         
         var request = URLRequest(url: url!)
         request.httpMethod = "GET"

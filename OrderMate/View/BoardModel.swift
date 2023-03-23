@@ -2,8 +2,7 @@ import Foundation
 import SwiftUI
 
 struct BoardModel: View {
-    @State var board: Board? = nil
-    var api = APIStruct()
+    @State var board: BoardModel2? = nil
     @State var boardTitle: String = "기본 값"
     var body: some View {
         VStack {
@@ -19,7 +18,7 @@ struct BoardModel: View {
         }
     }
     func getBoard(completion: @escaping (Bool) -> Void) {
-        let url = URL(string: "http://localhost:8080" + api.post + "/1")
+        let url = URL(string: urlString + APIModel.post.rawValue + "/1")
         
         var request = URLRequest(url: url!)
         request.httpMethod = "GET"
@@ -40,7 +39,7 @@ struct BoardModel: View {
             let decoder = JSONDecoder()
             
             do {
-                let response = try decoder.decode(Board.self, from: data)
+                let response = try decoder.decode(BoardModel2.self, from: data)
                 DispatchQueue.main.async {
                     self.board = response
                     completion(true)

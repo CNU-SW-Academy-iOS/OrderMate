@@ -8,24 +8,26 @@
 import SwiftUI
 
 struct LoginView: View {
-    @Binding var loginState: Bool
-    @State var myIdString: String = ""
-    @State var myPasswordString: String = ""
+        @Binding var loginState: Bool
+//    @State var myIdString: String = ""
+//    @State var myPasswordString: String = ""
     @State var isSecureMode: Bool = true
-    @State var loginModel = AccountModel()
+    @State var loginModel = LoginViewModel()
+    @State var user = UserModel(username: "", password: "")
     var body: some View {
         VStack {
             Spacer()
             Text("Table Mate").font(.title).bold()
-            VStack {
-                TextField("ID space", text: $myIdString)
+            VStack{
+                TextField("ID space", text: $user.username)
                     .textFieldStyle(.roundedBorder).padding()
-                ZStack {
+                ZStack{
                     if isSecureMode {
-                        SecureField("password", text: $myPasswordString)
+                        SecureField("password", text: $user.password)
                             .textFieldStyle(.roundedBorder).padding()
-                    } else {
-                        TextField("password", text: $myPasswordString)
+                    }
+                    else{
+                        TextField("password", text: $user.password)
                             .textFieldStyle(.roundedBorder).padding()
                     }
                     HStack {
@@ -40,7 +42,7 @@ struct LoginView: View {
                 }
             
                 Button {
-                    loginModel.loginGetStatus(myIdString, myPasswordString) { success in
+                    loginModel.loginGetStatus(user: user) { success in
                         if success {
                             loginState = true
                         } else {
@@ -62,10 +64,12 @@ struct LoginView: View {
     }
 }
 
+
+
 struct LoginView_Previews: PreviewProvider {
-    @State static var LoginState = false
+    @State static var loginState = false
     
     static var previews: some View {
-        LoginView(loginState: $LoginState, myIdString: "", myPasswordString: "", isSecureMode: false)
+        LoginView(loginState: $loginState, isSecureMode: false)
     }
 }

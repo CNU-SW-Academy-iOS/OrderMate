@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Board: Codable {
+struct BoardModel2: Codable {
     var ownerName: String? = nil
     var title: String
     var createdAt: Date? = nil
@@ -23,5 +23,5 @@ struct Board: Codable {
 //    var estimatedOrderTime: Date? = nil
 //    var participationList: [String: String]? = nil
     var commentList: [String]? = nil
-    
+
 }
