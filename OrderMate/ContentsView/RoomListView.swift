@@ -34,7 +34,6 @@ struct RoomListView: View {
                     } label: {
                         Text("방 목록 새로고침")
                     }
-                    //Text(listJsonArray[0].title!)
                     List {
                         ForEach(listJsonArray, id: \.self) { data in
                             NavigationLink {

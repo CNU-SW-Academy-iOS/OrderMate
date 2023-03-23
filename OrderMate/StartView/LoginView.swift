@@ -17,15 +17,14 @@ struct LoginView: View {
         VStack {
             Spacer()
             Text("Table Mate").font(.title).bold()
-            VStack{
+            VStack {
                 TextField("ID space", text: $myIdString)
                     .textFieldStyle(.roundedBorder).padding()
-                ZStack{
+                ZStack {
                     if isSecureMode {
                         SecureField("password", text: $myPasswordString)
                             .textFieldStyle(.roundedBorder).padding()
-                    }
-                    else{
+                    } else {
                         TextField("password", text: $myPasswordString)
                             .textFieldStyle(.roundedBorder).padding()
                     }
@@ -62,8 +61,6 @@ struct LoginView: View {
         .padding()
     }
 }
-
-
 
 struct LoginView_Previews: PreviewProvider {
     @State static var LoginState = false

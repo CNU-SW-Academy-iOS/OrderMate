@@ -2,7 +2,7 @@ import Foundation
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
-class RoomDataManager:ObservableObject {
+class RoomDataManager: ObservableObject {
     static var shared = RoomDataManager()
     private init() {
         getLists()
@@ -43,8 +43,7 @@ class RoomDataManager:ObservableObject {
     func getListTitle() {
         if let key = UserDefaults.standard.string(forKey: RoomDataManager.DB_LIST_KEY) {
             listTitle = key
-        }
-        else {
+        } else {
             listTitle = "에러가 발생했습니다."
         }
         

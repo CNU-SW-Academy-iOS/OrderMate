@@ -39,7 +39,7 @@ struct ContentView: View {
                 .padding()
                 
                 HStack {
-                    ForEach(0..<5){ _ in
+                    ForEach(0..<5) { _ in
                         Image(systemName: "person.fill")
                             .resizable()
                             .aspectRatio(contentMode: .fit
@@ -49,8 +49,6 @@ struct ContentView: View {
                     }
                 }
                 Spacer()
-                
-                    
                     NavigationLink {
                         Text("참여하기 뷰")
                     } label: {
@@ -70,7 +68,6 @@ struct ContentView: View {
         }
     }
 }
-
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {

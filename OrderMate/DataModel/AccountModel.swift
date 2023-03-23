@@ -7,13 +7,12 @@
 
 import Foundation
 
-
-
-
 struct AccountModel {
     let urlString = "http://localhost:8080/join"
     
-    func makeAccountPost(_ myUserName: String, _ myPassWord: String, _ myName: String, _ myNickName: String, _ isMale: Bool, _ mySchool: String, _ myMajor: String) -> Bool {
+    func makeAccountPost(_ myUserName: String, _ myPassWord: String,
+                         _ myName: String, _ myNickName: String, _ isMale: Bool,
+                         _ mySchool: String, _ myMajor: String) -> Bool {
         var postSuccess = true
         
         var urlComponents = URLComponents(string: urlString)
@@ -47,10 +46,12 @@ struct AccountModel {
         return postSuccess
     }
     
-    
-    
-    func postNewUserInfo(username: String, password: String, name: String, nickname: String, gender: String, school: String, major: String, completion: @escaping (Bool) -> Void) {
-        let user = PostUser(username: username, password: password, name: name, nickName: nickname, gender: "MALE", school: school, major: major)
+    func postNewUserInfo(username: String, password: String, name: String,
+                         nickname: String, gender: String, school: String,
+                         major: String, completion: @escaping (Bool) -> Void) {
+        let user = PostUser(username: username, password: password,
+                            name: name, nickName: nickname, gender: "MALE",
+                            school: school, major: major)
         
         guard let uploadData = try? JSONEncoder().encode(user)
         else {
@@ -67,7 +68,8 @@ struct AccountModel {
         let session = URLSession.shared
         let task = session.uploadTask(with: request, from: uploadData) { data, response, error in
             let successRange = 200..<300
-            guard error == nil, let statusCode = (response as? HTTPURLResponse)?.statusCode, successRange.contains(statusCode) else {
+            guard error == nil, let statusCode = (response as? HTTPURLResponse)?.statusCode,
+                  successRange.contains(statusCode) else {
                 print((response as? HTTPURLResponse)?.statusCode)
                 print("Error occur: \(String(describing: error))")
                 return
@@ -86,9 +88,6 @@ struct AccountModel {
         }
         task.resume()
     }
-    
-    
-    
     
     func loginGetStatus(_ userName: String, _ userPassWord: String, completion: @escaping (Bool) -> Void) {
         let user = LoginUser(username: userName, password: userPassWord)
@@ -127,9 +126,4 @@ struct AccountModel {
         }
         task.resume()
     }
-    
-    
-    
-    
 }
-

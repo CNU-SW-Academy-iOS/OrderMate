@@ -7,31 +7,28 @@
 
 import Foundation
 
-
-struct UserModel : Codable {
-    let username : String
-    let password : String
-    let name : String?
-    let nickName : String?
-    let gender : String?
-    let school : String?
-    let major : String?
+struct UserModel: Codable {
+    let username: String
+    let password: String
+    let name: String?
+    let nickName: String?
+    let gender: String?
+    let school: String?
+    let major: String?
 }
 
 struct PostUser: Codable {
-    let username : String
-    let password : String
-    let name : String
-    let nickName : String
-    let gender : String
-    let school : String
-    let major : String
+    let username: String
+    let password: String
+    let name: String
+    let nickName: String
+    let gender: String
+    let school: String
+    let major: String
 
 }
 
 struct LoginUser: Codable {
-    let username : String
-    let password : String
-
+    let username: String
+    let password: String
 }
-

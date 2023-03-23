@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 struct Room: Hashable, Identifiable, Codable {
     var id: String
     var title: String
@@ -66,7 +65,6 @@ struct RoomInfoPreview: Codable, Hashable {
     let content: String?
 }
 
-
 struct RoomList {
     func getAllRoomList(completionHandler: @escaping (Bool, Any) -> Void) {
         print("모든 리스트 정보 가져오기")
@@ -104,10 +102,10 @@ struct RoomList {
         }
     }
     
-    func uploadData(title:String, maxPeopleNum:String, isAnonymous:Int,
-                    spaceType:String, content:String, withOrderLink:String,
-                    pickupSpace:String, accountNum:String, estimatedOrdTime:String
-                    ,completion: @escaping (Bool) -> Void) {
+    func uploadData(title: String, maxPeopleNum: String, isAnonymous: Int,
+                    spaceType: String, content: String, withOrderLink: String,
+                    pickupSpace: String, accountNum: String, estimatedOrdTime: String,
+                    completion: @escaping (Bool) -> Void) {
         let post = CreatRoom(title: title, maxPeopleNum: maxPeopleNum, isAnonymous: isAnonymous,
                              spaceType: spaceType, content: content, withOrderLink: withOrderLink,
                              pickupSpace: pickupSpace, accountNum: accountNum, estimatedOrdTime: estimatedOrdTime)
@@ -128,7 +126,8 @@ struct RoomList {
         let task = session.uploadTask(with: request, from: uploadData) { data, response, error in
 
             let successRange = 200..<300
-            guard error == nil, let statusCode = (response as? HTTPURLResponse)?.statusCode, successRange.contains(statusCode) else {
+            guard error == nil, let statusCode = (response as? HTTPURLResponse)?.statusCode,
+                  successRange.contains(statusCode) else {
                 print((response as? HTTPURLResponse)?.statusCode)
                 print("Error occur: \(String(describing: error))")
                 return

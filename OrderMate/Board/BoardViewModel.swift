@@ -13,7 +13,7 @@ class BoardViewModel: ObservableObject {
     @Published var board: Board?
     
     private init() {
-        //리뷰 필요
+        // 리뷰 필요
         getBoard(postId: 1) { isComplete in
         }
     }
@@ -26,7 +26,8 @@ class BoardViewModel: ObservableObject {
         
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             let successRange = 200..<300
-            guard error == nil, let statusCode = (response as? HTTPURLResponse)?.statusCode, successRange.contains(statusCode) else {
+            guard error == nil, let statusCode = (response as? HTTPURLResponse)?.statusCode,
+                  successRange.contains(statusCode) else {
                 print()
                 print("Error occur: \(String(describing: error)) error code: \((response as? HTTPURLResponse)?.statusCode)")
                 completion(false)

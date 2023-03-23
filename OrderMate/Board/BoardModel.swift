@@ -70,4 +70,3 @@ struct BoardModel_Previews: PreviewProvider {
         BoardModel()
     }
 }
-

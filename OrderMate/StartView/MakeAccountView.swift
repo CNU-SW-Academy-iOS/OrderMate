@@ -20,15 +20,13 @@ struct MakeAccountView: View {
     @State var isSecureMode: Bool = true
     var body: some View {
         ScrollView {
-            
-            
             VStack {
-                VStack(alignment: .leading){
+                VStack(alignment: .leading) {
                     Text("아이디").foregroundColor(Color("green 2"))
                     TextField("아이디를 입력해주세요", text: $myUserName)
                         .textFieldStyle(.roundedBorder)
                 }.padding()
-                VStack(alignment: .leading){
+                VStack(alignment: .leading) {
                     Text("비밀번호").foregroundColor(Color("green 2"))
                     HStack {
                         if isSecureMode {
@@ -46,31 +44,31 @@ struct MakeAccountView: View {
                     }
                 }.padding()
                 
-                VStack(alignment: .leading){
+                VStack(alignment: .leading) {
                     Text("이름").foregroundColor(Color("green 2"))
                     TextField("이름을 입력해주세요", text: $myName)
                         .textFieldStyle(.roundedBorder)
                 }.padding()
                 
-                VStack(alignment: .leading){
+                VStack(alignment: .leading) {
                     Text("닉네임").foregroundColor(Color("green 2"))
                     TextField("닉네임을 입력해주세요", text: $myNickName)
                         .textFieldStyle(.roundedBorder)
                 }.padding()
                 
-                VStack(alignment: .leading){
+                VStack(alignment: .leading) {
                     Toggle(isOn: $isMale) {
                         Text("성별").foregroundColor(Color("green 2"))
                     }
                 }.padding()
                 
-                VStack(alignment: .leading){
+                VStack(alignment: .leading) {
                     Text("학교").foregroundColor(Color("green 2"))
                     TextField("학교를 입력해주세요", text: $mySchool)
                         .textFieldStyle(.roundedBorder)
                 }.padding()
                 
-                VStack(alignment: .leading){
+                VStack(alignment: .leading) {
                     Text("학과").foregroundColor(Color("green 2"))
                     TextField("학과를 입력해주세요", text: $myMajor)
                         .textFieldStyle(.roundedBorder)
@@ -78,9 +76,11 @@ struct MakeAccountView: View {
                 
             }
             Button {
-                loginModel.postNewUserInfo(username: myUserName, password: myPassWord, name: myName, nickname: myNickName, gender: "MALE", school: mySchool, major: myMajor) { success in
+                loginModel.postNewUserInfo(username: myUserName, password: myPassWord,
+                                           name: myName, nickname: myNickName, gender: "MALE",
+                                           school: mySchool, major: myMajor) { success in
                     if success {
-                        //회원가입이 정상적으로 이루어질 경우 자동 로그인
+                        // 회원가입이 정상적으로 이루어질 경우 자동 로그인
                         loginModel.loginGetStatus(myUserName, myPassWord) { loginSuccess in
                             if loginSuccess {
                                 loginState = true
@@ -97,8 +97,6 @@ struct MakeAccountView: View {
                     .font(.title)
             }
         }
-        
-        
     }
 }
 
