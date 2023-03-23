@@ -70,7 +70,7 @@ struct BoardView: View {
                 .padding()
                 
                 Spacer()
-                StatePeople
+                statePeople
 //                HStack {
 //                    ForEach(0..<5){ _ in
 //                        Image(systemName: "person.fill")
@@ -135,7 +135,7 @@ struct BoardView: View {
         return totalPeople
     }
     
-    var StatePeople: some View {
+    var statePeople: some View {
         HStack(spacing: -3) {
             ForEach(getPeopleList(), id: \.self) { imageName in
                 Image(systemName: imageName)

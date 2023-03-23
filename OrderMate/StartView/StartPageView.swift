@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct StartPageView: View {
-    @Binding var LoginState: Bool
+    @Binding var loginState: Bool
     var body: some View {
         NavigationStack{
             VStack {
@@ -21,7 +21,7 @@ struct StartPageView: View {
                     .bold()
                 Spacer()
                 NavigationLink {
-                    LoginView(LoginState: $LoginState)
+                    LoginView(loginState: $loginState)
                 } label: {
                     Text("로그인")
                         .fontWeight(.bold)
@@ -32,7 +32,7 @@ struct StartPageView: View {
                         .cornerRadius(20)
                 }
                 NavigationLink {
-                    MakeAccountView(LoginState: $LoginState)
+                    MakeAccountView(loginState: $loginState)
                 } label: {
                     Text("회원가입")
                         .fontWeight(.bold)
@@ -55,6 +55,6 @@ struct StartPageView: View {
 struct StartPageView_Previews: PreviewProvider {
     @State static var LoginState = false
     static var previews: some View {
-        StartPageView(LoginState: $LoginState)
+        StartPageView(loginState: $LoginState)
     }
 }

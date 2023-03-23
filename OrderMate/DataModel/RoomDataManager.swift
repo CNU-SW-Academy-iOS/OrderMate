@@ -2,7 +2,7 @@ import Foundation
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
-class RoomDataManager: ObservableObject {
+class RoomDataManager:ObservableObject {
     static var shared = RoomDataManager()
     private init() {
         getLists()

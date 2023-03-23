@@ -30,33 +30,45 @@ struct CreatRoom: Codable {
    
 }
 
+struct UploadData {
+    var title: String
+    var maxPeopleNum: String
+    var isAnonymous: Int
+    var spaceType: String
+    var content: String
+    var withOrderLink: String
+    var pickupSpace: String
+    var accountNum: String
+    var estimatedOrdTime: String
+}
+
 struct RoomInfo: Decodable {
-    let postId : Int?
-    let title : String?
-    let createdAt : Date?
-    let postStatus : String?
-    let maxPeopleNum : Int?
-    let currentPeopleNum : Int?
-    let isAnonymous : Bool?
-    let content : String?
-    let withOrderLink : String?
-    let pickupSpace : String?
-    let spaceType : String?
-    let accountNum : String?
-    let estimatedOrderTime : Date?
-    let ownerId : Int?
-    let ownerName : String?
+    let postId: Int?
+    let title: String?
+    let createdAt: Date?
+    let postStatus: String?
+    let maxPeopleNum: Int?
+    let currentPeopleNum: Int?
+    let isAnonymous: Bool?
+    let content: String?
+    let withOrderLink: String?
+    let pickupSpace: String?
+    let spaceType: String?
+    let accountNum: String?
+    let estimatedOrderTime: Date?
+    let ownerId: Int?
+    let ownerName: String?
 }
 
 struct RoomInfoPreview: Codable, Hashable {
-    let postId : Int?
-    let title : String?
-    let content : String?
+    let postId: Int?
+    let title: String?
+    let content: String?
 }
 
 
 struct RoomList {
-    func GetAllRoomList(completionHandler: @escaping (Bool, Any) -> Void) {
+    func getAllRoomList(completionHandler: @escaping (Bool, Any) -> Void) {
         print("모든 리스트 정보 가져오기")
         if let url = URL(string: "http://localhost:8080/post") {
             var request = URLRequest(url: url)
@@ -83,7 +95,6 @@ struct RoomList {
                     print(output)
                     print("JSON Data Parsing")
                     
-                    
                     completionHandler(true, output)
                 } catch {
                     print(error)
@@ -93,7 +104,7 @@ struct RoomList {
         }
     }
     
-    func UploadData(title:String, maxPeopleNum:String, isAnonymous:Int,
+    func uploadData(title:String, maxPeopleNum:String, isAnonymous:Int,
                     spaceType:String, content:String, withOrderLink:String,
                     pickupSpace:String, accountNum:String, estimatedOrdTime:String
                     ,completion: @escaping (Bool) -> Void) {
@@ -122,7 +133,6 @@ struct RoomList {
                 print("Error occur: \(String(describing: error))")
                 return
             }
-            
             
             let postSuccess = 201
             if postSuccess == (response as? HTTPURLResponse)?.statusCode {

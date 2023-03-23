@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct LoginView: View {
-    @Binding var LoginState: Bool
+    @Binding var loginState: Bool
     @State var myIdString: String = ""
     @State var myPasswordString: String = ""
     @State var isSecureMode: Bool = true
@@ -43,7 +43,7 @@ struct LoginView: View {
                 Button {
                     loginModel.loginGetStatus(myIdString, myPasswordString) { success in
                         if success {
-                            LoginState = true
+                            loginState = true
                         } else {
                             print("error")
                         }
@@ -69,6 +69,6 @@ struct LoginView_Previews: PreviewProvider {
     @State static var LoginState = false
     
     static var previews: some View {
-        LoginView(LoginState: $LoginState, myIdString: "", myPasswordString: "", isSecureMode: false)
+        LoginView(loginState: $LoginState, myIdString: "", myPasswordString: "", isSecureMode: false)
     }
 }

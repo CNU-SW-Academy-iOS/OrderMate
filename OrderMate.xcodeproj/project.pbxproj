@@ -10,6 +10,7 @@
 		BA3F37EF29B5C989009BF7FE /* RoomStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3F37EE29B5C989009BF7FE /* RoomStruct.swift */; };
 		BA3F37F329B5D120009BF7FE /* RoomListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3F37F229B5D120009BF7FE /* RoomListView.swift */; };
 		BA3F37F529B5D197009BF7FE /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3F37F429B5D197009BF7FE /* ListView.swift */; };
+		BABBA82929CAA63300C61F54 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = BABBA82829CAA63300C61F54 /* .swiftlint.yml */; };
 		BAF470A429B21C0C00F242EF /* OrderMateApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF470A329B21C0C00F242EF /* OrderMateApp.swift */; };
 		BAF470A629B21C0C00F242EF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF470A529B21C0C00F242EF /* ContentView.swift */; };
 		BAF470A829B21C0D00F242EF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BAF470A729B21C0D00F242EF /* Assets.xcassets */; };
@@ -34,6 +35,7 @@
 		BA3F37EE29B5C989009BF7FE /* RoomStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomStruct.swift; sourceTree = "<group>"; };
 		BA3F37F229B5D120009BF7FE /* RoomListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomListView.swift; sourceTree = "<group>"; };
 		BA3F37F429B5D197009BF7FE /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
+		BABBA82829CAA63300C61F54 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		BAF470A029B21C0C00F242EF /* OrderMate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OrderMate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BAF470A329B21C0C00F242EF /* OrderMateApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderMateApp.swift; sourceTree = "<group>"; };
 		BAF470A529B21C0C00F242EF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -68,6 +70,7 @@
 		BAF4709729B21C0C00F242EF = {
 			isa = PBXGroup;
 			children = (
+				BABBA82829CAA63300C61F54 /* .swiftlint.yml */,
 				BAF470A229B21C0C00F242EF /* OrderMate */,
 				BAF470A129B21C0C00F242EF /* Products */,
 			);
@@ -164,6 +167,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BAF470AE29B21C0D00F242EF /* Build configuration list for PBXNativeTarget "OrderMate" */;
 			buildPhases = (
+				BABBA82A29CAA8B400C61F54 /* SwiftLint Script */,
 				BAF4709C29B21C0C00F242EF /* Sources */,
 				BAF4709D29B21C0C00F242EF /* Frameworks */,
 				BAF4709E29B21C0C00F242EF /* Resources */,
@@ -219,12 +223,35 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BABBA82929CAA63300C61F54 /* .swiftlint.yml in Resources */,
 				BAF470AB29B21C0D00F242EF /* Preview Assets.xcassets in Resources */,
 				BAF470A829B21C0D00F242EF /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		BABBA82A29CAA8B400C61F54 /* SwiftLint Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "SwiftLint Script";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nexport PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		BAF4709C29B21C0C00F242EF /* Sources */ = {

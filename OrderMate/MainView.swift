@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct MainView: View {
-    @State private var LoginState = false
+    @State private var loginState = false
     var body: some View {
-        if LoginState == false {
-            StartPageView(LoginState: $LoginState)
+        if loginState == false {
+            StartPageView(loginState: $loginState)
         } else {
-            RoomListView(LoginState: $LoginState)
+            RoomListView(loginState: $loginState)
             //RoomView(LoginState: <#T##Binding<Bool>#>, currentRoom: <#T##Room#>)
         }
         
