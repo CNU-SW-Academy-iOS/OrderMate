@@ -64,12 +64,20 @@ struct RoomListView: View {
                     }.padding()
                     
                     Button {
-                        roomList.uploadData(title: "버튼테스트3", maxPeopleNum: "12", isAnonymous: 0,
-                                            spaceType: "DORMITORY", content: "버튼테스트", withOrderLink: "버튼테스트",
-                                            pickupSpace: "버튼테스트", accountNum: "버튼테스트",
-                                            estimatedOrdTime: "2023-03-20T12:59:11.332") { success in
+                        roomList.uploadData(post: BoardStructModel(title: "버튼테스트3",
+                                                                   maxPeopleNum: 12,
+                                                                   isAnonymous: false,
+                                                                   spaceType: "DORMITORY",
+                                                                   content: "버튼테스트",
+                                                                   withOrderLink: "버튼테스트",
+                                                                   pickupSpace: "버튼테스트",
+                                                                   accountNum: "버튼테스트",
+                                                                   estimatedOrdTime: Date())) { success in
                             if success {
                                 print("방생성완료")
+                            }
+                            else{
+                                print("방생성실패")
                             }
                         }
                     } label: {
@@ -78,7 +86,7 @@ struct RoomListView: View {
                     }.padding()
                 }.padding()
             }
-            
+        
         }
     }
 }

@@ -40,7 +40,7 @@ class BoardViewModel: ObservableObject {
             let decoder = JSONDecoder()
             
             do {
-                let response = try decoder.decode(Board.self, from: data)
+                let response = try decoder.decode(BoardStructModel.self, from: data)
                 DispatchQueue.main.async {
                     self.board = response
                     completion(true)

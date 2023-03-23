@@ -102,14 +102,7 @@ struct RoomList {
         }
     }
     
-    func uploadData(title: String, maxPeopleNum: String, isAnonymous: Int,
-                    spaceType: String, content: String, withOrderLink: String,
-                    pickupSpace: String, accountNum: String, estimatedOrdTime: String,
-                    completion: @escaping (Bool) -> Void) {
-        let post = CreatRoom(title: title, maxPeopleNum: maxPeopleNum, isAnonymous: isAnonymous,
-                             spaceType: spaceType, content: content, withOrderLink: withOrderLink,
-                             pickupSpace: pickupSpace, accountNum: accountNum, estimatedOrdTime: estimatedOrdTime)
-    
+    func uploadData(post: BoardStructModel, completion: @escaping (Bool) -> Void) {
         guard let uploadData = try? JSONEncoder().encode(post)
         else {
             completion(false)
@@ -138,6 +131,10 @@ struct RoomList {
                 print("새 글 post 성공")
                 print(response as Any)
                 completion(true)
+            } else {
+                print("새 글 post 실패")
+                print(response as Any)
+                completion(false)
             }
         }
         task.resume()

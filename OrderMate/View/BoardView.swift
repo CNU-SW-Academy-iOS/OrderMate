@@ -115,7 +115,7 @@ struct BoardView: View {
                                     self.withOrderLink = withOrderLink
                                 }
                                 self.maxPeopleNum = board.maxPeopleNum
-                                self.currentPeopleNum = board.currentPeopleNum
+                                self.currentPeopleNum = board.currentPeopleNum!
                                 self.isAnonymous = board.isAnonymous
                                 self.content = board.content
                                 self.pickupSpace = board.pickupSpace
