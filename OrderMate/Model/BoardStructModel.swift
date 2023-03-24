@@ -20,8 +20,11 @@ struct BoardStructModel: Codable {
     var pickupSpace: String
     var spaceType: String
     var accountNum: String
-    var estimatedOrderTime: Date? = nil
-//    var participationList: [String: String]? = nil
+//    var estimatedOrderTime: Date? = nil
+//    var participationList: [String:String]? = nil
+    
+    var estimatedOrderTime: String?
+    var participationList: [[String:String]]?
     var commentList: [String]? = nil
 
     init(title: String,
@@ -32,7 +35,7 @@ struct BoardStructModel: Codable {
          withOrderLink: String,
          pickupSpace: String,
          accountNum: String,
-         estimatedOrdTime: Date)
+         estimatedOrdTime: String)
     {
     self.title = title
     self.maxPeopleNum = maxPeopleNum

@@ -72,7 +72,7 @@ struct RoomListView: View {
                                                                    withOrderLink: "버튼테스트",
                                                                    pickupSpace: "버튼테스트",
                                                                    accountNum: "버튼테스트",
-                                                                   estimatedOrdTime: Date())) { success in
+                                                                   estimatedOrdTime: "2018-02-05T12:59:11.332")) { success in
                             if success {
                                 print("방생성완료")
                             }
