@@ -4,12 +4,6 @@ class BoardViewModel: ObservableObject {
     static var shared = BoardViewModel()
     @Published var board: BoardStructModel?
     
-    init() {
-        // 리뷰 필요
-        getBoard(postId: 1) { isComplete in
-        }
-    }
-    
     func getBoard(postId: Int, completion: @escaping (Bool) -> Void) {
         let url = URL(string: urlString + APIModel.post.rawValue + "/" + String(postId))
         
@@ -21,7 +15,8 @@ class BoardViewModel: ObservableObject {
             guard error == nil, let statusCode = (response as? HTTPURLResponse)?.statusCode,
                   successRange.contains(statusCode) else {
                 print()
-                print("Error occur: \(String(describing: error)) error code: \((response as? HTTPURLResponse)?.statusCode)")
+                print("Error occur: \(String(describing: error))")
+                print("error code: \(String(describing: (response as? HTTPURLResponse)?.statusCode))")
                 completion(false)
                 return
             }

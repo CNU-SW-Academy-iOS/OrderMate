@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Room: Hashable, Identifiable, Codable {
+struct Board: Hashable, Identifiable, Codable {
     var id: String
     var title: String
     var location: String
@@ -16,7 +16,7 @@ struct Room: Hashable, Identifiable, Codable {
     var userList: [String] = []
 }
 
-struct CreatRoom: Codable {
+struct CreatBoard: Codable {
     var title: String
     var maxPeopleNum: String
     var isAnonymous: Int?
