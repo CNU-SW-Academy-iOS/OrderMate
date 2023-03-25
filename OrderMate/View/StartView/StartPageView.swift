@@ -10,7 +10,7 @@ import SwiftUI
 struct StartPageView: View {
     @Binding var loginState: Bool
     var body: some View {
-        NavigationStack{
+        NavigationStack {
             VStack {
                 Spacer()
                 Text("Order Mate")

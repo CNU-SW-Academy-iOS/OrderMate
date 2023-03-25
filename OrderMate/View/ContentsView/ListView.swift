@@ -1,7 +1,7 @@
 import SwiftUI
-
+// 사용하지 않는 구조체 같음
 struct ListView: View {
-    var currentRoom: Room
+    var currentRoom: Board
     
     var body: some View {
         
@@ -23,7 +23,7 @@ struct ListView: View {
 
 struct ListView_Previews: PreviewProvider {
     static var previews: some View {
-        let room = Room(id: UUID().uuidString, title: "아아아아 배고프아아다아아", location: "충남대학교 어딘가", date: Date(), maxUser: 3)
+        let room = Board(id: UUID().uuidString, title: "아아아아 배고프아아다아아", location: "충남대학교 어딘가", date: Date(), maxUser: 3)
         ListView(currentRoom: room)
     }
 }

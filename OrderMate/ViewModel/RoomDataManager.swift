@@ -2,7 +2,7 @@ import Foundation
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
-class RoomDataManager:ObservableObject {
+class RoomDataManager: ObservableObject {
     static var shared = RoomDataManager()
     private init() {
         getLists()
@@ -15,10 +15,10 @@ class RoomDataManager:ObservableObject {
     
     let db = Firestore.firestore()
     
-    static let DB_LIST_KEY = "list"
+    static let DBLISTKEY = "list"
     
     func getLists() {
-        db.collection(RoomDataManager.DB_LIST_KEY).addSnapshotListener { querySnapshot, error in
+        db.collection(RoomDataManager.DBLISTKEY).addSnapshotListener { querySnapshot, error in
             
             guard let documents = querySnapshot?.documents else {
                 print("Error fetching documents \(String(describing: error))")
@@ -41,10 +41,9 @@ class RoomDataManager:ObservableObject {
     }
     
     func getListTitle() {
-        if let key = UserDefaults.standard.string(forKey: RoomDataManager.DB_LIST_KEY) {
+        if let key = UserDefaults.standard.string(forKey: RoomDataManager.DBLISTKEY) {
             listTitle = key
-        }
-        else {
+        } else {
             listTitle = "에러가 발생했습니다."
         }
         

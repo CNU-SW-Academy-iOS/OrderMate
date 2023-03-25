@@ -7,34 +7,29 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		BA3F37EF29B5C989009BF7FE /* RoomStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3F37EE29B5C989009BF7FE /* RoomStruct.swift */; };
-		BA3F37F329B5D120009BF7FE /* RoomListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3F37F229B5D120009BF7FE /* RoomListView.swift */; };
-		BA3F37F529B5D197009BF7FE /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3F37F429B5D197009BF7FE /* ListView.swift */; };
+		BA3F37EF29B5C989009BF7FE /* BoardStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3F37EE29B5C989009BF7FE /* BoardStruct.swift */; };
+		BA3F37F329B5D120009BF7FE /* BoardListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3F37F229B5D120009BF7FE /* BoardListView.swift */; };
 		BABBA82929CAA63300C61F54 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = BABBA82829CAA63300C61F54 /* .swiftlint.yml */; };
 		BAF470A429B21C0C00F242EF /* OrderMateApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF470A329B21C0C00F242EF /* OrderMateApp.swift */; };
 		BAF470A629B21C0C00F242EF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF470A529B21C0C00F242EF /* ContentView.swift */; };
 		BAF470A829B21C0D00F242EF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BAF470A729B21C0D00F242EF /* Assets.xcassets */; };
 		BAF470AB29B21C0D00F242EF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BAF470AA29B21C0D00F242EF /* Preview Assets.xcassets */; };
 		BAFCF30A29C1A6AB006CF5E8 /* BoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAFCF30929C1A6AB006CF5E8 /* BoardView.swift */; };
-		BAFCF30D29C1AB80006CF5E8 /* BoardStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAFCF30C29C1AB80006CF5E8 /* BoardStruct.swift */; };
-		BAFCF31029C30E96006CF5E8 /* APIStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAFCF30F29C30E96006CF5E8 /* APIStruct.swift */; };
-		BAFCF31229C310EF006CF5E8 /* BoardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAFCF31129C310EF006CF5E8 /* BoardModel.swift */; };
+		BAFCF30D29C1AB80006CF5E8 /* BoardStructModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAFCF30C29C1AB80006CF5E8 /* BoardStructModel.swift */; };
 		BAFCF33029C875D1006CF5E8 /* BoardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAFCF32F29C875D1006CF5E8 /* BoardViewModel.swift */; };
 		E40FB24029B625E400A1A4C2 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E40FB23F29B625E400A1A4C2 /* MainView.swift */; };
 		E40FB24229B625F200A1A4C2 /* StartPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E40FB24129B625F200A1A4C2 /* StartPageView.swift */; };
 		E40FB24429B6260200A1A4C2 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E40FB24329B6260200A1A4C2 /* LoginView.swift */; };
-		E40FB24629B6296100A1A4C2 /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = E40FB24529B6296100A1A4C2 /* Setting.swift */; };
 		E464802629C95352004616D2 /* CreateBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E464802529C95352004616D2 /* CreateBoardView.swift */; };
-		ED40967029BCAF2C00B030A9 /* AccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED40966F29BCAF2C00B030A9 /* AccountModel.swift */; };
 		ED40967329BCAF5300B030A9 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED40967229BCAF5300B030A9 /* UserModel.swift */; };
+		EDD4F7AD29CC87A600E578AF /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD4F7AC29CC87A600E578AF /* LoginViewModel.swift */; };
+		EDD4F7AF29CC87C700E578AF /* APIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD4F7AE29CC87C700E578AF /* APIModel.swift */; };
 		F37C7D0029B98489004B011C /* MakeAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37C7CFF29B98489004B011C /* MakeAccountView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		BA0094CF29BDCCF50071E45C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		BA3F37EE29B5C989009BF7FE /* RoomStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomStruct.swift; sourceTree = "<group>"; };
-		BA3F37F229B5D120009BF7FE /* RoomListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomListView.swift; sourceTree = "<group>"; };
-		BA3F37F429B5D197009BF7FE /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
+		BA3F37EE29B5C989009BF7FE /* BoardStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardStruct.swift; sourceTree = "<group>"; };
+		BA3F37F229B5D120009BF7FE /* BoardListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardListView.swift; sourceTree = "<group>"; };
 		BABBA82829CAA63300C61F54 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		BAF470A029B21C0C00F242EF /* OrderMate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OrderMate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BAF470A329B21C0C00F242EF /* OrderMateApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderMateApp.swift; sourceTree = "<group>"; };
@@ -42,17 +37,16 @@
 		BAF470A729B21C0D00F242EF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BAF470AA29B21C0D00F242EF /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		BAFCF30929C1A6AB006CF5E8 /* BoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardView.swift; sourceTree = "<group>"; };
-		BAFCF30C29C1AB80006CF5E8 /* BoardStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardStruct.swift; sourceTree = "<group>"; };
-		BAFCF30F29C30E96006CF5E8 /* APIStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIStruct.swift; sourceTree = "<group>"; };
-		BAFCF31129C310EF006CF5E8 /* BoardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardModel.swift; sourceTree = "<group>"; };
+		BAFCF30C29C1AB80006CF5E8 /* BoardStructModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardStructModel.swift; sourceTree = "<group>"; };
 		BAFCF32F29C875D1006CF5E8 /* BoardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardViewModel.swift; sourceTree = "<group>"; };
 		E40FB23F29B625E400A1A4C2 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		E40FB24129B625F200A1A4C2 /* StartPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartPageView.swift; sourceTree = "<group>"; };
 		E40FB24329B6260200A1A4C2 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
-		E40FB24529B6296100A1A4C2 /* Setting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setting.swift; sourceTree = "<group>"; };
 		E464802529C95352004616D2 /* CreateBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateBoardView.swift; sourceTree = "<group>"; };
-		ED40966F29BCAF2C00B030A9 /* AccountModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountModel.swift; sourceTree = "<group>"; };
+		ED31D11A29CCB75700DF4DD0 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ED40967229BCAF5300B030A9 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		EDD4F7AC29CC87A600E578AF /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		EDD4F7AE29CC87C700E578AF /* APIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIModel.swift; sourceTree = "<group>"; };
 		F37C7CFF29B98489004B011C /* MakeAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeAccountView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -87,14 +81,11 @@
 		BAF470A229B21C0C00F242EF /* OrderMate */ = {
 			isa = PBXGroup;
 			children = (
-				BA0094CF29BDCCF50071E45C /* Info.plist */,
+				ED31D11A29CCB75700DF4DD0 /* Info.plist */,
 				BAF470A329B21C0C00F242EF /* OrderMateApp.swift */,
-				E40FB23F29B625E400A1A4C2 /* MainView.swift */,
-				BAFCF30E29C309B9006CF5E8 /* API */,
-				BAFCF30B29C1AAB2006CF5E8 /* Board */,
-				ED40966E29BCAEC400B030A9 /* StartView */,
-				ED40966C29BCAEB200B030A9 /* ContentsView */,
-				ED40966D29BCAEBB00B030A9 /* DataModel */,
+				EDD4F7A929CC86D000E578AF /* Model */,
+				EDD4F7AA29CC86D900E578AF /* View */,
+				EDD4F7AB29CC86DD00E578AF /* ViewModel */,
 				BAF470A729B21C0D00F242EF /* Assets.xcassets */,
 				BAF470A929B21C0D00F242EF /* Preview Content */,
 			);
@@ -109,45 +100,22 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		BAFCF30B29C1AAB2006CF5E8 /* Board */ = {
+		ED0398F829CCBFBC00DA50F5 /* BoardView */ = {
 			isa = PBXGroup;
 			children = (
-				BAFCF30929C1A6AB006CF5E8 /* BoardView.swift */,
-				BAFCF30C29C1AB80006CF5E8 /* BoardStruct.swift */,
-				BAFCF31129C310EF006CF5E8 /* BoardModel.swift */,
-				BAFCF32F29C875D1006CF5E8 /* BoardViewModel.swift */,
 				E464802529C95352004616D2 /* CreateBoardView.swift */,
+				BAFCF30929C1A6AB006CF5E8 /* BoardView.swift */,
 			);
-			path = Board;
-			sourceTree = "<group>";
-		};
-		BAFCF30E29C309B9006CF5E8 /* API */ = {
-			isa = PBXGroup;
-			children = (
-				BAFCF30F29C30E96006CF5E8 /* APIStruct.swift */,
-			);
-			path = API;
+			path = BoardView;
 			sourceTree = "<group>";
 		};
 		ED40966C29BCAEB200B030A9 /* ContentsView */ = {
 			isa = PBXGroup;
 			children = (
 				BAF470A529B21C0C00F242EF /* ContentView.swift */,
-				BA3F37F229B5D120009BF7FE /* RoomListView.swift */,
-				BA3F37F429B5D197009BF7FE /* ListView.swift */,
+				BA3F37F229B5D120009BF7FE /* BoardListView.swift */,
 			);
 			path = ContentsView;
-			sourceTree = "<group>";
-		};
-		ED40966D29BCAEBB00B030A9 /* DataModel */ = {
-			isa = PBXGroup;
-			children = (
-				ED40967229BCAF5300B030A9 /* UserModel.swift */,
-				E40FB24529B6296100A1A4C2 /* Setting.swift */,
-				ED40966F29BCAF2C00B030A9 /* AccountModel.swift */,
-				BA3F37EE29B5C989009BF7FE /* RoomStruct.swift */,
-			);
-			path = DataModel;
 			sourceTree = "<group>";
 		};
 		ED40966E29BCAEC400B030A9 /* StartView */ = {
@@ -158,6 +126,37 @@
 				E40FB24129B625F200A1A4C2 /* StartPageView.swift */,
 			);
 			path = StartView;
+			sourceTree = "<group>";
+		};
+		EDD4F7A929CC86D000E578AF /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				BAFCF30C29C1AB80006CF5E8 /* BoardStructModel.swift */,
+				ED40967229BCAF5300B030A9 /* UserModel.swift */,
+				EDD4F7AE29CC87C700E578AF /* APIModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		EDD4F7AA29CC86D900E578AF /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E40FB23F29B625E400A1A4C2 /* MainView.swift */,
+				ED0398F829CCBFBC00DA50F5 /* BoardView */,
+				ED40966C29BCAEB200B030A9 /* ContentsView */,
+				ED40966E29BCAEC400B030A9 /* StartView */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		EDD4F7AB29CC86DD00E578AF /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				EDD4F7AC29CC87A600E578AF /* LoginViewModel.swift */,
+				BAFCF32F29C875D1006CF5E8 /* BoardViewModel.swift */,
+				BA3F37EE29B5C989009BF7FE /* BoardStruct.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -258,24 +257,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BAFCF31029C30E96006CF5E8 /* APIStruct.swift in Sources */,
 				F37C7D0029B98489004B011C /* MakeAccountView.swift in Sources */,
 				E464802629C95352004616D2 /* CreateBoardView.swift in Sources */,
-				E40FB24629B6296100A1A4C2 /* Setting.swift in Sources */,
+				EDD4F7AF29CC87C700E578AF /* APIModel.swift in Sources */,
 				BAFCF30A29C1A6AB006CF5E8 /* BoardView.swift in Sources */,
-				BAFCF31229C310EF006CF5E8 /* BoardModel.swift in Sources */,
 				BAF470A629B21C0C00F242EF /* ContentView.swift in Sources */,
 				E40FB24029B625E400A1A4C2 /* MainView.swift in Sources */,
-				BA3F37EF29B5C989009BF7FE /* RoomStruct.swift in Sources */,
+				BA3F37EF29B5C989009BF7FE /* BoardStruct.swift in Sources */,
 				ED40967329BCAF5300B030A9 /* UserModel.swift in Sources */,
 				E40FB24429B6260200A1A4C2 /* LoginView.swift in Sources */,
-				BA3F37F529B5D197009BF7FE /* ListView.swift in Sources */,
-				ED40967029BCAF2C00B030A9 /* AccountModel.swift in Sources */,
 				E40FB24229B625F200A1A4C2 /* StartPageView.swift in Sources */,
-				BA3F37F329B5D120009BF7FE /* RoomListView.swift in Sources */,
+				BA3F37F329B5D120009BF7FE /* BoardListView.swift in Sources */,
 				BAFCF33029C875D1006CF5E8 /* BoardViewModel.swift in Sources */,
 				BAF470A429B21C0C00F242EF /* OrderMateApp.swift in Sources */,
-				BAFCF30D29C1AB80006CF5E8 /* BoardStruct.swift in Sources */,
+				EDD4F7AD29CC87A600E578AF /* LoginViewModel.swift in Sources */,
+				BAFCF30D29C1AB80006CF5E8 /* BoardStructModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -404,7 +400,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"OrderMate/Preview Content\"";
-				DEVELOPMENT_TEAM = ZX8V36P46K;
+				DEVELOPMENT_TEAM = 33DNUM53Q8;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = OrderMate/Info.plist;
@@ -434,7 +430,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"OrderMate/Preview Content\"";
-				DEVELOPMENT_TEAM = ZX8V36P46K;
+				DEVELOPMENT_TEAM = 33DNUM53Q8;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = OrderMate/Info.plist;

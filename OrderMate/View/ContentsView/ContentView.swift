@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    var currentRoom: Room
+    var currentRoom: Board
     var body: some View {
         NavigationStack {
             VStack {
@@ -39,7 +39,7 @@ struct ContentView: View {
                 .padding()
                 
                 HStack {
-                    ForEach(0..<5){ _ in
+                    ForEach(0..<5) { _ in
                         Image(systemName: "person.fill")
                             .resizable()
                             .aspectRatio(contentMode: .fit
@@ -49,8 +49,6 @@ struct ContentView: View {
                     }
                 }
                 Spacer()
-                
-                    
                     NavigationLink {
                         Text("참여하기 뷰")
                     } label: {
@@ -71,10 +69,9 @@ struct ContentView: View {
     }
 }
 
-
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        let room = Room(id: UUID().uuidString, title: "아아아아 배고프아아다아아", location: "충남대학교 어딘가", date: Date(), maxUser: 3)
+        let room = Board(id: UUID().uuidString, title: "아아아아 배고프아아다아아", location: "충남대학교 어딘가", date: Date(), maxUser: 3)
         ContentView(currentRoom: room)
     }
 }
