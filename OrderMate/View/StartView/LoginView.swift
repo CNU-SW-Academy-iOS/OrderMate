@@ -50,12 +50,11 @@ struct LoginView: View {
                         }
                     }
                 } label: {
-                    Text("login status")
+                    Text("login")
                         .font(.title2)
-                        .frame(width: 330, height: 80)
-                        .foregroundColor(.black)
-                        .background(Color("green 0"))
-                        .cornerRadius(30)
+                        .frame(width: 330, height: 60)
+                        .foregroundColor(.white)
+                        .background(Color("green 2"))
                 }
             }
             Spacer()

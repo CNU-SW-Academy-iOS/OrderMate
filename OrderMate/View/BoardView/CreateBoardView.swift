@@ -1,10 +1,3 @@
-//
-//  CreateBoard.swift
-//  OrderMate
-//
-//  Created by yook on 2023/03/21.
-//
-
 import SwiftUI
 
 // 게시글 작성 화면
