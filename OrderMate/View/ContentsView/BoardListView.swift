@@ -14,6 +14,7 @@ struct RoomListView: View {
     @State var listJsonArray: [RoomInfoPreview] = [RoomInfoPreview(postId: 99,
                                                                    title: "개설된 방이 없습니다",
                                                                    content: "")]
+    @State private var showingAlert = false //로그아웃 alert bool
     var body: some View {
         ZStack {
             NavigationStack {
@@ -21,10 +22,19 @@ struct RoomListView: View {
                     HStack {
                         Spacer()
                         Button {
-                            loginState = false
+                            showingAlert = true
                         } label: {
-                            Text("logout button")
-                                .bold()
+                            Image(systemName: "door.left.hand.open")
+                                .font(.system(size: 20))
+                                .padding()
+                                .foregroundColor(Color.red)
+                        }.alert("로그아웃 하시겠습니까?", isPresented: $showingAlert) {
+                            Button("로그아웃", role: .destructive) {
+                                loginState = false
+                            }
+                            Button("취소", role: .cancel) {
+                                showingAlert = false
+                            }
                         }.padding()
                     }
                     Button {
@@ -86,7 +96,15 @@ struct RoomListView: View {
                     }.padding()
                 }.padding()
             }
-        
+            
+        }
+        .onAppear {
+            // BoardListview 진입시 1초뒤 자동 새로고침
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+                roomList.getAllRoomList { success, data in
+                    listJsonArray = data as! [RoomInfoPreview]
+                }
+            })
         }
     }
 }

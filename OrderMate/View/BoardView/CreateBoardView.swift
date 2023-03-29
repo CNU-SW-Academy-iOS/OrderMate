@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// 게시글 작성 화면
 struct CreateBoardView: View {
     @StateObject var manager: BoardViewModel = BoardViewModel.shared
     @State var ownerName: String = "주인장 이름"
@@ -21,6 +22,9 @@ struct CreateBoardView: View {
     @State var withOrderLink: String = "배민 함꼐하기 주소"
     @State var spaceType: String = "기숙사 / 충대 내부"
     @State var accountNum: String = "계좌 번호"
+    
+    
+    
     var body: some View {
         Text("방 만들기 텍스트필드 화면")
     }

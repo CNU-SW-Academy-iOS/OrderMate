@@ -1,5 +1,7 @@
 import SwiftUI
 
+
+ //사용안함
 struct ContentView: View {
     var currentRoom: Board
     var body: some View {
