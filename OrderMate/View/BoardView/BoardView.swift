@@ -70,7 +70,7 @@ struct BoardView: View {
                 .padding()
                 
                 Spacer()
-                statePeople
+                statePeopleView
 //                HStack {
 //                    ForEach(0..<5){ _ in
 //                        Image(systemName: "person.fill")
@@ -135,15 +135,18 @@ struct BoardView: View {
         return totalPeople
     }
     
-    var statePeople: some View {
-        HStack(spacing: -3) {
-            ForEach(getPeopleList(), id: \.self) { imageName in
-                Image(systemName: imageName)
-                    .imageScale(.large)
-                    .foregroundColor(Color("green 0"))
-                    Spacer(minLength: 2)
+    var statePeopleView: some View {
+        ScrollView(.horizontal) {
+            HStack(spacing: -3) {
+                ForEach(getPeopleList(), id: \.self) { imageName in
+                    Image(systemName: imageName)
+                        .imageScale(.large)
+                        .foregroundColor(Color("green 0"))
+                        Spacer(minLength: 2)
+                }
             }
-        }
+        }.padding()
+        
     }
 }
 
