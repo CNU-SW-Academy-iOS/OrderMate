@@ -1,3 +1,10 @@
+//
+//  RoomView.swift
+//  OrderMate
+//
+//  Created by 문영균 on 2023/03/06.
+//
+
 import SwiftUI
 
 struct RoomListView: View {
@@ -7,7 +14,7 @@ struct RoomListView: View {
     @State var listJsonArray: [RoomInfoPreview] = [RoomInfoPreview(postId: 99,
                                                                    title: "개설된 방이 없습니다",
                                                                    content: "")]
-    @State private var showingAlert = false // 로그아웃 alert bool
+    @State private var showingAlert = false //로그아웃 alert bool
     var body: some View {
         ZStack {
             NavigationStack {
@@ -67,20 +74,19 @@ struct RoomListView: View {
                     }.padding()
                     
                     Button {
-                        roomList.uploadData(post: BoardStructModel(ownerName: "버튼테스트3",
-                                                                   title: "버튼테스트", createdAt: Date(),
-                                                                   postStatus: false,
-                                                                   maxPeopleNum: 5,
-                                                                   currentPeopleNum: 3,
+                        roomList.uploadData(post: BoardStructModel(title: "버튼테스트3",
+                                                                   maxPeopleNum: 12,
                                                                    isAnonymous: false,
+                                                                   spaceType: "DORMITORY",
                                                                    content: "버튼테스트",
                                                                    withOrderLink: "버튼테스트",
                                                                    pickupSpace: "버튼테스트",
-                                                                  spaceType: "DORMITORY",
-                                                                  accountNum: "버튼테스트")) { success in
+                                                                   accountNum: "버튼테스트",
+                                                                   estimatedOrdTime: "2018-02-05T12:59:11.332")) { success in
                             if success {
                                 print("방생성완료")
-                            } else {
+                            }
+                            else{
                                 print("방생성실패")
                             }
                         }
