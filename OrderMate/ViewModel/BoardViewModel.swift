@@ -1,8 +1,22 @@
 import Foundation
 
 class BoardViewModel: ObservableObject {
-    static var shared = BoardViewModel()
+    static let shared = BoardViewModel()
     @Published var board: BoardStructModel?
+    
+    // 날짜 형태 변경
+    func changeDateFormat(_ date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        return dateFormatter.string(from: date)
+    }
+    // 뷰에서 발생하는 함수들은 ViewModel에 작성해주세요
+    func getPeopleList(_ board: BoardStructModel) -> Array<String> {
+        var totalPeople: [String] = []
+        totalPeople = Array(repeating: "person.fill", count: board.currentPeopleNum)
+        totalPeople += Array(repeating: "person", count: board.maxPeopleNum - board.currentPeopleNum)
+        return totalPeople
+    }
     
     func getBoard(postId: Int, completion: @escaping (Bool) -> Void) {
         let url = URL(string: urlString + APIModel.post.rawValue + "/" + String(postId))

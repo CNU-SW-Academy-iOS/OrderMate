@@ -9,16 +9,16 @@ import SwiftUI
 
 struct BoardView: View {
     var postId: Int
-    @State private var isComplete: Bool = false
+    @State private var isCompleted: Bool = false
     @StateObject var manager: BoardViewModel = BoardViewModel.shared
     @State var ownerName: String = "주인장 이름"
-    @State var title: String = "타이틀"
+    @State var title: String = "교촌 치킨 같이 배달 시키실 분 구합니다"
     @State var createdAt: Date = Date()
-    @State var postStatus: Bool? = nil
+    @State var postStatus: Bool?
     @State var maxPeopleNum: Int = 5
     @State var currentPeopleNum: Int = 2
     @State var isAnonymous: Bool = false
-    @State var content: String = "제목"
+    @State var content: String = "함께 교촌 치킨 시켜 먹어요\n기숙사 7동에서 시킵니다\n배달비가 너무 비싸서 배달비 n빵해요\n😄\n남녀노소 상관 없어요"
     @State var pickupSpace: String = "픽업 장소"
     @State var withOrderLink: String = "배민 함꼐하기 주소"
     @State var spaceType: String = "기숙사 / 충대 내부"
@@ -27,42 +27,49 @@ struct BoardView: View {
     var body: some View {
         NavigationStack {
             VStack {
+                // 게시글 작성 날짜 추가
+                HStack {
+                    Spacer()
+                    Text("\(manager.changeDateFormat(createdAt))")
+                        .font(.subheadline)
+                        .foregroundColor(.gray)
+                }.padding()
+                
                 VStack {
                     Text("\(title)")
-                        .font(.system(size: 27))
+                        .font(.system(size: 20))
+                        .bold()
                         .frame(maxWidth: .infinity, minHeight: 30)
-                        .padding()
                         .foregroundColor(.black)
-                        .background(Color("green 0"))
-                        .cornerRadius(10)
                 }
                 .padding()
+                VStack {
+                    //다른 정보들도 넣을 수 있도록 칸 변경 2x2 모양이 가장 깔끔할 것 같음
+                    HStack {
+                        Text("\(pickupSpace)").customBoardInfo()
+                        Text("\(spaceType)").customBoardInfo()
+                    }
+                }
+                .padding(.horizontal)
                 
                 VStack {
-                    Text("\(pickupSpace)")
-                        .font(.system(size: 20))
-                        .font(.title)
-                        .frame(maxWidth: .infinity, minHeight: 30)
-                        .padding()
-                        .foregroundColor(.black)
-                        .background(Color("green 0"))
-                        .cornerRadius(10)
-                }
-                .padding()
-                
+                    HStack {
+                        Text("\(isAnonymous ? "비공개글" : "공개글")").customBoardInfo()
+                        Text("\(ownerName)").customBoardInfo()
+                    }
+                }.padding(.horizontal)
                 VStack {
                     Text("\(content)")
-                        .font(.system(size: 24))
+                        .font(.system(size: 15))
                         .font(.title)
                         .frame(maxWidth: .infinity, minHeight: 30)
                         .padding()
                         .foregroundColor(.black)
-                        .background(Color("green 0"))
-                        .cornerRadius(10)
+                        .border(Color("green 2"), width: 3)
                 }
                 .padding()
                 
-                Toggle(isOn: $isComplete) {
+                Toggle(isOn: $isCompleted) {
                     Text("인원 마감")
                         .font(.title2)
                         .fontWeight(.semibold)
@@ -71,30 +78,22 @@ struct BoardView: View {
                 
                 Spacer()
                 statePeopleView
-//                HStack {
-//                    ForEach(0..<5){ _ in
-//                        Image(systemName: "person.fill")
-//                            .resizable()
-//                            .aspectRatio(contentMode: .fit
-//                            )
-//                            .frame(width: 25)
-//                            .padding()
-//                    }
-//                }
                 NavigationLink {
-                    Text("참여하기 뷰")
+                    CompletedBoardView()
                 } label: {
-                    Text("참여하기")
+                    Text(isCompleted ? "인원 마감" : "참여하기")
                         .font(.system(size: 24))
                         .frame(maxWidth: .infinity, minHeight: 30)
                         .padding()
-                        .foregroundColor(.black)
+                        .foregroundColor(.white)
                         .fontWeight(.semibold)
-                        .background(Color("green 0"))
-                        .cornerRadius(10)
+                        .background(isCompleted ? Color.orange : Color("green 2"))
                 }
-                .padding()
+                //인원 마감될 경우 NavigationLink 작동 안하도록
+                .disabled(isCompleted)
+                 .padding()
             }
+            //리뷰 필요
             .onAppear {
                 manager.getBoard(postId: postId) { isComplete in
                     if isComplete {
@@ -115,7 +114,7 @@ struct BoardView: View {
                                     self.withOrderLink = withOrderLink
                                 }
                                 self.maxPeopleNum = board.maxPeopleNum
-                                self.currentPeopleNum = board.currentPeopleNum!
+                                self.currentPeopleNum = board.currentPeopleNum
                                 self.isAnonymous = board.isAnonymous
                                 self.content = board.content
                                 self.pickupSpace = board.pickupSpace
@@ -128,25 +127,38 @@ struct BoardView: View {
             }
         }
     }
-    func getPeopleList() -> Array<String> {
-        var totalPeople: [String]
-        totalPeople = Array(repeating: "person.fill", count: currentPeopleNum)
-        totalPeople += Array(repeating: "person", count: maxPeopleNum - currentPeopleNum)
-        return totalPeople
-    }
     
     var statePeopleView: some View {
         ScrollView(.horizontal) {
-            HStack(spacing: -3) {
-                ForEach(getPeopleList(), id: \.self) { imageName in
+            HStack {
+                ForEach(manager.getPeopleList(BoardStructModel(title: title,
+                                                               maxPeopleNum: maxPeopleNum, currentPeopleNum: currentPeopleNum,
+                                                               isAnonymous: isAnonymous,
+                                                               content: content,
+                                                               pickupSpace: pickupSpace,
+                                                              
+                                                               spaceType: spaceType,
+                                                               accountNum: accountNum)), id: \.self) { imageName in
                     Image(systemName: imageName)
                         .imageScale(.large)
-                        .foregroundColor(Color("green 0"))
-                        Spacer(minLength: 2)
+                        .foregroundColor(Color("green 2"))
+                        .padding()
                 }
             }
         }.padding()
-        
+    }
+}
+
+// 반복되는 Text 수식 코드를 줄여줌
+extension Text {
+    func customBoardInfo() -> some View {
+        self
+            .font(.system(size: 15))
+            .font(.title)
+            .frame(maxWidth: .infinity, minHeight: 20)
+            .padding()
+            .foregroundColor(.white)
+            .background(Color("green 2"))
     }
 }
 

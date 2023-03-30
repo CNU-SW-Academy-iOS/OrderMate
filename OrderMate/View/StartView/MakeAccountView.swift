@@ -90,12 +90,11 @@ struct MakeAccountView: View {
                         loginModel.loginGetStatus(user: user) {loginSucceess in
                             if loginSucceess {
                                 loginState = true
-                            }else {
+                            } else {
                                 print("가입 후 자동 로그인 error")
                             }
                         }
-                    }
-                    else{
+                    } else{
                         isPresented = true
                     }
                 }
@@ -106,7 +105,6 @@ struct MakeAccountView: View {
                     .padding()
                     .foregroundColor(.white)
                     .background(Color("AccentColor"))
-                    .cornerRadius(14)
                    
                 
                     .font(.title)
@@ -114,8 +112,6 @@ struct MakeAccountView: View {
                 Alert(title: Text("Title"), message: Text("이미 존재하는 아이디입니다."), dismissButton: .default(Text("Dismiss")))
             }
         }.padding()
-        
-        
     }
 }
 
