@@ -2,6 +2,7 @@ import SwiftUI
 
 struct RoomListView: View {
     @Binding var loginState: Bool
+    @State var loginModel = LoginViewModel()
     @State var roomList = RoomList()
     @State var title = ""
     @State var listJsonArray: [RoomInfoPreview] = [RoomInfoPreview(postId: 99,
@@ -23,7 +24,12 @@ struct RoomListView: View {
                                 .foregroundColor(Color.red)
                         }.alert("로그아웃 하시겠습니까?", isPresented: $showingAlert) {
                             Button("로그아웃", role: .destructive) {
-                                loginState = false
+                                loginModel.logOut { status in
+                                    if status {
+                                        loginState = false
+                                    }
+                                }
+                                
                             }
                             Button("취소", role: .cancel) {
                                 showingAlert = false

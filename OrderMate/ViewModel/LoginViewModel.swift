@@ -76,4 +76,36 @@ class LoginViewModel: ObservableObject {
         }
         task.resume()
     }
+    
+    // 로그 아웃, request param 없음, responseParam 없음
+    func logOut(completion: @escaping (Bool) -> Void) {
+        let url = URL(string: urlString + APIModel.logout.rawValue)
+        var request = URLRequest(url: url!)
+        request.httpMethod = "GET"
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            
+            
+            let successRange = 200..<300
+            let status = (response as? HTTPURLResponse)?.statusCode ?? 0
+            guard error == nil else{
+                print("Error occur: \(String(describing: error))")
+                return
+            }
+            if !successRange.contains(status) {
+                print("status code: ",status)
+            }
+
+            if status == 200 {
+                print("User logout 성공")
+                print(response as Any)
+                completion(true)
+            } else {
+                print("User logout 실패")
+                print(response as Any)
+                completion(false)
+            }
+        }
+        task.resume()
+        
+    }
 }
