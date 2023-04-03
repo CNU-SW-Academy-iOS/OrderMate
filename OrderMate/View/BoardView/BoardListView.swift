@@ -6,7 +6,19 @@ struct RoomListView: View {
     @State var title = ""
     @State var listJsonArray: [RoomInfoPreview] = [RoomInfoPreview(postId: 99,
                                                                    title: "개설된 방이 없습니다",
-                                                                   content: "")]
+                                                                   //createdAt: Date(),
+                                                                   postStatus: "",
+                                                                   maxPeopleNum: 5,
+                                                                   currentPeopleNum: 1,
+                                                                   isAnonymous: false,
+                                                                   content: "",
+                                                                   withOrderLink: "",
+                                                                   pickupSpace: "",
+                                                                   spaceType: "",
+                                                                   accountNum: "",
+                                                                   estimatedOrderTime: Date(),
+                                                                   ownerId: 1,
+                                                                   ownerName: "")]
     @State private var showingAlert = false // 로그아웃 alert bool
     var body: some View {
         ZStack {
@@ -38,15 +50,29 @@ struct RoomListView: View {
                         } label: {
                             Text("방 목록 새로고침")
                         }
-                        List {
+                        ScrollView() {
                             ForEach(listJsonArray, id: \.self) { data in
                                 NavigationLink {
                                     BoardView(postId: data.postId!)
                                 } label: {
-                                    Text(String(data.postId!))
-                                    Text(data.title!)
-                                    Text(data.content!)
+                                        HStack {
+                                            VStack(alignment: .leading) {
+                                                Text(data.title!)
+                                                    .font(.headline)
+                                                Text("픽업 장소: " + data.pickupSpace!)
+                                                Spacer()
+                                            }
+                                            Spacer()
+                                            VStack(alignment: .trailing) {
+                                                Text(data.postStatus!)
+                                                Text(String(data.currentPeopleNum!) + " / " + String(data.maxPeopleNum!))
+                                                Text("postid: " + String(data.postId!))
+                                                Spacer()
+                                            }
+                                        }
                                 }
+                                .buttonStyle(.bordered)
+                                .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
                             }
                         }
                     }

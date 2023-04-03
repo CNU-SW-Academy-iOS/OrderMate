@@ -59,10 +59,23 @@ struct RoomInfo: Decodable {
     let ownerName: String?
 }
 
+// boardListView용 데이터...struct RoomInfo와 달라야하는지 리뷰 필요
 struct RoomInfoPreview: Codable, Hashable {
     let postId: Int?
     let title: String?
+    //let createdAt: Date?
+    let postStatus: String?
+    let maxPeopleNum: Int?
+    let currentPeopleNum: Int?
+    let isAnonymous: Bool?
     let content: String?
+    let withOrderLink: String?
+    let pickupSpace: String?
+    let spaceType: String?
+    let accountNum: String?
+    let estimatedOrderTime: Date?
+    let ownerId: Int?
+    let ownerName: String?
 }
 
 struct RoomList {
