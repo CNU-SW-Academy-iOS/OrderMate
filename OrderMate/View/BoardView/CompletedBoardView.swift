@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CompletedBoardView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Text("참가자 전용 대화 뷰입니다")
     }
 }
 
