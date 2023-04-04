@@ -8,4 +8,6 @@ enum APIModel: String {
     case logout
     case user
     case post
+    case get
+    case put
 }

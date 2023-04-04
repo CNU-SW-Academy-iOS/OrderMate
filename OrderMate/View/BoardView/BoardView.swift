@@ -10,6 +10,7 @@ import SwiftUI
 struct BoardView: View {
     var postId: Int
     @State private var isCompleted: Bool = false
+    @State private var isEntered: Bool = false
     @StateObject var manager: BoardViewModel = BoardViewModel.shared
     @State var ownerName: String = "주인장 이름"
     @State var title: String = "교촌 치킨 같이 배달 시키실 분 구합니다"
@@ -68,7 +69,6 @@ struct BoardView: View {
                         .border(Color("green 2"), width: 3)
                 }
                 .padding()
-                
                 Toggle(isOn: $isCompleted) {
                     Text("인원 마감")
                         .font(.title2)
@@ -78,20 +78,74 @@ struct BoardView: View {
                 
                 Spacer()
                 statePeopleView
-                NavigationLink {
-                    CompletedBoardView()
-                } label: {
-                    Text(isCompleted ? "인원 마감" : "참여하기")
+                
+                if isEntered == false && isCompleted == false {
+                    //참가전
+                    Button {
+                        manager.join(postId: postId) { status in
+                            if status {
+                                isEntered = true
+                            }
+                        }
+                    } label: {
+                        Text("방 참여하기")
                         .font(.system(size: 24))
                         .frame(maxWidth: .infinity, minHeight: 30)
                         .padding()
                         .foregroundColor(.white)
                         .fontWeight(.semibold)
                         .background(isCompleted ? Color.orange : Color("green 2"))
+                    }
+                    .padding()
+                } else if  isEntered == false && isCompleted == true {
+                    // 참가안한방 잠겨있는경우 접근 불가
+                    Button {
+                    } label: {
+                        Text("<인원 마감>")
+                            .font(.system(size: 24))
+                            .frame(maxWidth: .infinity, minHeight: 30)
+                            .padding()
+                            .foregroundColor(.white)
+                            .fontWeight(.semibold)
+                            .background(Color.orange)
+                    }.padding()
+                    
+                } else {
+                    //참가후
+                    // 방 참가자만 볼수있는 버튼
+                    
+                    // 방나기기 버튼
+                    Button {
+                        manager.leave(postId: postId) { status in
+                            if status {
+                                isEntered = false
+                            }
+                        }
+                    } label: {
+                        Text("방 나가기")
+                        .font(.system(size: 24))
+                        .frame(maxWidth: .infinity, minHeight: 30)
+                        .padding()
+                        .foregroundColor(.white)
+                        .fontWeight(.semibold)
+                        .background(isCompleted ? Color.orange : Color("green 2"))
+                    }
+                    .padding()
+                    
+                    // 대화뷰 들어가기 버튼
+                    NavigationLink {
+                        CompletedBoardView()
+                    } label: {
+                        Text("대화 뷰 들어가기")
+                            .font(.system(size: 24))
+                            .frame(maxWidth: .infinity, minHeight: 30)
+                            .padding()
+                            .foregroundColor(.white)
+                            .fontWeight(.semibold)
+                            .background(Color("green 2"))
+                    } .padding()
                 }
-                //인원 마감될 경우 NavigationLink 작동 안하도록
-                .disabled(isCompleted)
-                 .padding()
+                
             }
             //리뷰 필요
             .onAppear {

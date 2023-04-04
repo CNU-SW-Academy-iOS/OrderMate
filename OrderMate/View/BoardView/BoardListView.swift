@@ -12,90 +12,93 @@ struct RoomListView: View {
     var body: some View {
         ZStack {
             NavigationStack {
-                VStack {
-                    HStack {
-                        Spacer()
-                        Button {
-                            showingAlert = true
-                        } label: {
-                            Image(systemName: "door.left.hand.open")
-                                .font(.system(size: 20))
-                                .padding()
-                                .foregroundColor(Color.red)
-                        }.alert("로그아웃 하시겠습니까?", isPresented: $showingAlert) {
-                            Button("로그아웃", role: .destructive) {
-                                loginModel.logOut { status in
+                ZStack {
+                    VStack {
+                        HStack {
+                            Spacer()
+                            Button {
+                                showingAlert = true
+                            } label: {
+                                Image(systemName: "door.left.hand.open")
+                                    .font(.system(size: 20))
+                                    .padding()
+                                    .foregroundColor(Color.red)
+                            }.alert("로그아웃 하시겠습니까?", isPresented: $showingAlert) {
+                                Button("로그아웃", role: .destructive) {
+                                    loginModel.logOut { status in
                                     if status {
                                         loginState = false
                                     }
                                 }
-                                
+                                }
+                                Button("취소", role: .cancel) {
+                                    showingAlert = false
+                                }
+                            }.padding()
+                        }
+                        Button {
+                            roomList.getAllRoomList { success, data in
+                                listJsonArray = data as! [RoomInfoPreview]
                             }
-                            Button("취소", role: .cancel) {
-                                showingAlert = false
+                        } label: {
+                            Text("방 목록 새로고침")
+                        }
+                        List {
+                            ForEach(listJsonArray, id: \.self) { data in
+                                NavigationLink {
+                                    BoardView(postId: data.postId!)
+                                } label: {
+                                    Text(String(data.postId!))
+                                    Text(data.title!)
+                                    Text(data.content!)
+                                }
                             }
+                        }
+                    }
+                    VStack {
+                        Spacer()
+                        HStack {
+                            Spacer()
+                            NavigationLink {
+                                CreateBoardView()
+                            } label: {
+                                Image(systemName: "plus")
+                                    .font(.title.bold())
+                            }.padding()
+                            
+                            Button {
+                                roomList.uploadData(post: BoardStructModel(ownerName: "버튼테스트3",
+                                                                           title: "버튼테스트", createdAt: Date(),
+                                                                           postStatus: false,
+                                                                           maxPeopleNum: 5,
+                                                                           currentPeopleNum: 3,
+                                                                           isAnonymous: false,
+                                                                           content: "버튼테스트",
+                                                                           withOrderLink: "버튼테스트",
+                                                                           pickupSpace: "버튼테스트",
+                                                                          spaceType: "DORMITORY",
+                                                                          accountNum: "버튼테스트")) { success in
+                                    if success {
+                                        print("방생성완료")
+                                    } else {
+                                        print("방생성실패")
+                                    }
+                                }
+                            } label: {
+                                Image(systemName: "plus")
+                                    .font(.title.bold())
+                            }.padding()
                         }.padding()
                     }
-                    Button {
-                        roomList.getAllRoomList { success, data in
-                            listJsonArray = data as! [RoomInfoPreview]
-                        }
-                    } label: {
-                        Text("방 목록 새로고침")
-                    }
-                    List {
-                        ForEach(listJsonArray, id: \.self) { data in
-                            NavigationLink {
-                                BoardView(postId: data.postId!)
-                            } label: {
-                                Text(String(data.postId!))
-                                Text(data.title!)
-                                Text(data.content!)
-                            }
-                        }
-                    }
                 }
+                
                 
             }.refreshable {
                 roomList.getAllRoomList { success, data in
                     listJsonArray = data as! [RoomInfoPreview]
                 }
             }
-            VStack {
-                Spacer()
-                HStack {
-                    Spacer()
-                    NavigationLink {
-                        CreateBoardView()
-                    } label: {
-                        Image(systemName: "plus")
-                            .font(.title.bold())
-                    }.padding()
-                    
-                    Button {
-                        roomList.uploadData(post: BoardStructModel(ownerName: "버튼테스트3",
-                                                                   title: "버튼테스트", createdAt: Date(),
-                                                                   postStatus: false,
-                                                                   maxPeopleNum: 5,
-                                                                   currentPeopleNum: 3,
-                                                                   isAnonymous: false,
-                                                                   content: "버튼테스트",
-                                                                   withOrderLink: "버튼테스트",
-                                                                   pickupSpace: "버튼테스트",
-                                                                  spaceType: "DORMITORY",
-                                                                  accountNum: "버튼테스트")) { success in
-                            if success {
-                                print("방생성완료")
-                            } else {
-                                print("방생성실패")
-                            }
-                        }
-                    } label: {
-                        Image(systemName: "plus")
-                            .font(.title.bold())
-                    }.padding()
-                }.padding()
-            }
+            
             
         }
         .onAppear {

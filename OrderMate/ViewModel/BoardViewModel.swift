@@ -81,4 +81,133 @@ class BoardViewModel: ObservableObject {
         }
         task.resume()
     }
+    
+    // 유저의 방 참가
+    func join(postId: Int, completion: @escaping (Bool) -> Void) {
+        let url = URL(string: urlString + APIModel.post.rawValue + "/" + String(postId) + "/" + "enter")
+        
+        var request = URLRequest(url: url!)
+        request.httpMethod = "POST"
+        
+        
+        // 서버 체크
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            let successRange = 200..<300
+            guard error == nil, let statusCode = (response as? HTTPURLResponse)?.statusCode,
+                  successRange.contains(statusCode) else {
+                print()
+                print("Error occur: \(String(describing: error))")
+                print("error code: \(String(describing: (response as? HTTPURLResponse)?.statusCode))")
+                completion(false)
+                return
+            }
+            guard let data = data else {
+                print("invalid data")
+                completion(false)
+                return
+            }
+            let decoder = JSONDecoder()
+            decoder.dateDecodingStrategy = .millisecondsSince1970
+            
+            do {
+                let response = try decoder.decode(BoardStructModel.self, from: data)
+                DispatchQueue.main.async {
+                    self.board = response
+                    completion(true)
+                }
+            } catch let DecodingError.dataCorrupted(context) {
+                print(context)
+            } catch let DecodingError.keyNotFound(key, context) {
+                print("Key '\(key)' not found:", context.debugDescription)
+                print("codingPath:", context.codingPath)
+            } catch let DecodingError.valueNotFound(value, context) {
+                print("Value '\(value)' not found:", context.debugDescription)
+                print("codingPath:", context.codingPath)
+            } catch let DecodingError.typeMismatch(type, context)  {
+                print("Type '\(type)' mismatch:", context.debugDescription)
+                print("codingPath:", context.codingPath)
+            } catch {
+                print("error: ", error)
+            }
+            
+            let getSuccess = 201
+            if getSuccess == (response as? HTTPURLResponse)?.statusCode {
+                print("유저의 방 참가 성공")
+                print(response as Any)
+                completion(true)
+                
+            } else {
+                print("유저의 방 참가 실패")
+                print(response as Any)
+                completion(false)
+            }
+        }
+        task.resume()
+    }
+    
+    
+    // 유저의 방 탈퇴
+    func leave(postId: Int, completion: @escaping (Bool) -> Void) {
+        let url = URL(string: urlString + APIModel.post.rawValue + "/" + String(postId) + "/" + "leave")
+        
+        var request = URLRequest(url: url!)
+        request.httpMethod = "POST"
+        
+        
+        // 서버 체크
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            let successRange = 200..<300
+            guard error == nil, let statusCode = (response as? HTTPURLResponse)?.statusCode,
+                  successRange.contains(statusCode) else {
+                print()
+                print("Error occur: \(String(describing: error))")
+                print("error code: \(String(describing: (response as? HTTPURLResponse)?.statusCode))")
+                completion(false)
+                return
+            }
+            guard let data = data else {
+                print("invalid data")
+                completion(false)
+                return
+            }
+            let decoder = JSONDecoder()
+            decoder.dateDecodingStrategy = .millisecondsSince1970
+            
+            do {
+                let response = try decoder.decode(BoardStructModel.self, from: data)
+                DispatchQueue.main.async {
+                    self.board = response
+                    completion(true)
+                }
+            } catch let DecodingError.dataCorrupted(context) {
+                print(context)
+            } catch let DecodingError.keyNotFound(key, context) {
+                print("Key '\(key)' not found:", context.debugDescription)
+                print("codingPath:", context.codingPath)
+            } catch let DecodingError.valueNotFound(value, context) {
+                print("Value '\(value)' not found:", context.debugDescription)
+                print("codingPath:", context.codingPath)
+            } catch let DecodingError.typeMismatch(type, context)  {
+                print("Type '\(type)' mismatch:", context.debugDescription)
+                print("codingPath:", context.codingPath)
+            } catch {
+                print("error: ", error)
+            }
+            
+            let getSuccess = 201
+            if getSuccess == (response as? HTTPURLResponse)?.statusCode {
+                print("유저의 방 탈퇴 성공")
+                print(response as Any)
+                completion(true)
+                
+            } else {
+                print("유저의 방 탈퇴 실패")
+                print(response as Any)
+                completion(false)
+            }
+        }
+        task.resume()
+    }
+    
+    
 }
