@@ -3,8 +3,10 @@ import Foundation
 struct BoardStructModel: Codable {
     var ownerName: String?
     var title: String
-    var createdAt: Date?
-    var postStatus: Bool?
+    //var createdAt: Date?
+    var createdAt: String? // 명세서 따른 변경, String으로 들어옴
+    //var postStatus: Bool?
+    var postStatus: String? // 명세서 따른 변경, String으로 들어옴
     var maxPeopleNum: Int
     var currentPeopleNum: Int 
     var isAnonymous: Bool

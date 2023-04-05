@@ -94,8 +94,8 @@ struct RoomListView: View {
                             
                             Button {
                                 roomList.uploadData(post: BoardStructModel(ownerName: "버튼테스트3",
-                                                                           title: "버튼테스트", createdAt: Date(),
-                                                                           postStatus: false,
+                                                                           title: "버튼테스트", createdAt: "",
+                                                                           postStatus: "RECRUITING",
                                                                            maxPeopleNum: 5,
                                                                            currentPeopleNum: 3,
                                                                            isAnonymous: false,

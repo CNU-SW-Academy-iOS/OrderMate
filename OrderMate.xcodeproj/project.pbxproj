@@ -19,6 +19,7 @@
 		E40FB24029B625E400A1A4C2 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E40FB23F29B625E400A1A4C2 /* MainView.swift */; };
 		E40FB24229B625F200A1A4C2 /* StartPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E40FB24129B625F200A1A4C2 /* StartPageView.swift */; };
 		E40FB24429B6260200A1A4C2 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E40FB24329B6260200A1A4C2 /* LoginView.swift */; };
+		E4470CF129DD5BF10078C59F /* PostStatusModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4470CF029DD5BF10078C59F /* PostStatusModel.swift */; };
 		E464802629C95352004616D2 /* CreateBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E464802529C95352004616D2 /* CreateBoardView.swift */; };
 		ED40967329BCAF5300B030A9 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED40967229BCAF5300B030A9 /* UserModel.swift */; };
 		ED5013A029D4AA0F00D22410 /* CompletedBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED50139F29D4AA0F00D22410 /* CompletedBoardView.swift */; };
@@ -41,6 +42,7 @@
 		E40FB23F29B625E400A1A4C2 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		E40FB24129B625F200A1A4C2 /* StartPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartPageView.swift; sourceTree = "<group>"; };
 		E40FB24329B6260200A1A4C2 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		E4470CF029DD5BF10078C59F /* PostStatusModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PostStatusModel.swift; path = OrderMate/Model/PostStatusModel.swift; sourceTree = SOURCE_ROOT; };
 		E464802529C95352004616D2 /* CreateBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateBoardView.swift; sourceTree = "<group>"; };
 		ED40967229BCAF5300B030A9 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		ED50139B29D49D7C00D22410 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -127,6 +129,7 @@
 				BAFCF30C29C1AB80006CF5E8 /* BoardStructModel.swift */,
 				ED40967229BCAF5300B030A9 /* UserModel.swift */,
 				EDD4F7AE29CC87C700E578AF /* APIModel.swift */,
+				E4470CF029DD5BF10078C59F /* PostStatusModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -260,6 +263,7 @@
 				E40FB24429B6260200A1A4C2 /* LoginView.swift in Sources */,
 				E40FB24229B625F200A1A4C2 /* StartPageView.swift in Sources */,
 				BA3F37F329B5D120009BF7FE /* BoardListView.swift in Sources */,
+				E4470CF129DD5BF10078C59F /* PostStatusModel.swift in Sources */,
 				BAFCF33029C875D1006CF5E8 /* BoardViewModel.swift in Sources */,
 				BAF470A429B21C0C00F242EF /* OrderMateApp.swift in Sources */,
 				EDD4F7AD29CC87A600E578AF /* LoginViewModel.swift in Sources */,

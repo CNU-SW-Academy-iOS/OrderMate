@@ -11,11 +11,18 @@ struct BoardView: View {
     var postId: Int
     @State private var isCompleted: Bool = false
     @State private var isEntered: Bool = false
+    @State private var isHost: Bool = false // 방장인지 체크
+    @State private var isShowLockAlert: Bool = false // 방 잠금 alert용
+    
     @StateObject var manager: BoardViewModel = BoardViewModel.shared
     @State var ownerName: String = "주인장 이름"
     @State var title: String = "교촌 치킨 같이 배달 시키실 분 구합니다"
-    @State var createdAt: Date = Date()
-    @State var postStatus: Bool?
+    
+    //@State var createdAt: Date = Date()
+    @State var createdAt: String? = "date" // 명세서 따른 변경, String으로 들어옴
+    //@State var postStatus: Bool?
+    @State var postStatus: String? // 명세서 따른 변경, String으로 들어옴
+    
     @State var maxPeopleNum: Int = 5
     @State var currentPeopleNum: Int = 2
     @State var isAnonymous: Bool = false
@@ -31,7 +38,7 @@ struct BoardView: View {
                 // 게시글 작성 날짜 추가
                 HStack {
                     Spacer()
-                    Text("\(manager.changeDateFormat(createdAt))")
+                    Text(createdAt!)
                         .font(.subheadline)
                         .foregroundColor(.gray)
                 }.padding()
@@ -69,18 +76,43 @@ struct BoardView: View {
                         .border(Color("green 2"), width: 3)
                 }
                 .padding()
-                Toggle(isOn: $isCompleted) {
-                    Text("인원 마감")
-                        .font(.title2)
-                        .fontWeight(.semibold)
-                }
-                .padding()
+                
+                //if isHost {
+                    // 방장인지 체크, 방장만 방을 잠글 수 있음
+                    Button {
+                        isShowLockAlert = true
+                    } label: {
+                        Text("인원 마감")
+                            .font(.title2)
+                            .fontWeight(.semibold)
+                    }.alert(isPresented: $isShowLockAlert) {
+                                        Alert(title: Text("인원을 마감하시겠습니까?"),
+                                              message: Text("마감하면 새로운 사람이 들어올 수 없습니다"),
+                                              primaryButton: .destructive(Text("마감"), action: {
+                                            // 방 상태 변경 함수
+                                            manager.goNextFromRecruiting(postId: postId) { status in
+                                                if status {
+                                                    isCompleted = true
+                                                } else {
+                                                    
+                                                }
+                                            }
+                                        }), secondaryButton: .cancel(Text("취소")))
+                                    }
+
+                    Toggle(isOn: $isCompleted) {
+                        Text("인원 마감 UI 테스트 버튼")
+                            .font(.title2)
+                            .fontWeight(.semibold)
+                    }
+                    .padding()
+                //}
                 
                 Spacer()
                 statePeopleView
                 
                 if isEntered == false && isCompleted == false {
-                    //참가전
+                    // 참가전
                     Button {
                         manager.join(postId: postId) { status in
                             if status {
@@ -111,10 +143,8 @@ struct BoardView: View {
                     }.padding()
                     
                 } else {
-                    //참가후
-                    // 방 참가자만 볼수있는 버튼
-                    
-                    // 방나기기 버튼
+                    // 참가후
+                    // 방 참가자만 볼수있는 방나기기 버튼
                     Button {
                         manager.leave(postId: postId) { status in
                             if status {
@@ -147,7 +177,7 @@ struct BoardView: View {
                 }
                 
             }
-            //리뷰 필요
+            // 리뷰 필요
             .onAppear {
                 manager.getBoard(postId: postId) { isComplete in
                     if isComplete {
@@ -174,6 +204,13 @@ struct BoardView: View {
                                 self.pickupSpace = board.pickupSpace
                                 self.spaceType = board.spaceType
                                 self.accountNum = board.accountNum
+                                
+                                if self.ownerName == userModel.username {
+                                    // 방장이 맞는지 확인
+                                    isHost = true
+                                } else {
+                                    isHost = false
+                                }
                             }
                         }
                     }

@@ -14,3 +14,5 @@ struct UserModel: Codable {
         self.password = password
     }
 }
+
+var userModel = UserModel(username: "", password: "")

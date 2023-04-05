@@ -187,7 +187,7 @@ class BoardViewModel: ObservableObject {
             } catch let DecodingError.valueNotFound(value, context) {
                 print("Value '\(value)' not found:", context.debugDescription)
                 print("codingPath:", context.codingPath)
-            } catch let DecodingError.typeMismatch(type, context)  {
+            } catch let DecodingError.typeMismatch(type, context) {
                 print("Type '\(type)' mismatch:", context.debugDescription)
                 print("codingPath:", context.codingPath)
             } catch {
@@ -209,5 +209,45 @@ class BoardViewModel: ObservableObject {
         task.resume()
     }
     
+    // 방 상태 변경
+    func goNextFromRecruiting(postId: Int, completion: @escaping (Bool) -> Void) {
+        var postStatusModel = PostStatusModel(directionType: "NEXT",
+                                              currentStatus: PostStatusEnum.RECRUITING.description())
+
+        let url = URL(string: urlString + APIModel.post.rawValue + "/" + String(postId) + "/" + "status")
+        guard let uploadData = try? JSONEncoder().encode(postStatusModel)
+        else {
+            completion(false)
+            return
+        }
+        var request = URLRequest(url: url!)
+        request.httpMethod = "PUT"
+        
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+
+        let session = URLSession.shared
+        let task = session.uploadTask(with: request, from: uploadData) { data, response, error in
+            let successRange = 200..<300
+            let status = (response as? HTTPURLResponse)?.statusCode ?? 0
+            guard error == nil else {
+                print("Error occur: \(String(describing: error))")
+                return
+            }
+            if !successRange.contains(status) {
+                print("status code: ", status)
+            }
+
+            if status == 201 {
+                print("방 상태 모집 완료로 변경 성공")
+                print(response as Any)
+                completion(true)
+            } else {
+                print("방 상태 모집 완료로 변경 실패")
+                print(response as Any)
+                completion(false)
+            }
+        }
+        task.resume()
+    }
     
 }
