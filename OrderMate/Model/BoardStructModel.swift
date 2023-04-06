@@ -3,9 +3,7 @@ import Foundation
 struct BoardStructModel: Codable {
     var ownerName: String?
     var title: String
-    //var createdAt: Date?
     var createdAt: String? // 명세서 따른 변경, String으로 들어옴
-    //var postStatus: Bool?
     var postStatus: String? // 명세서 따른 변경, String으로 들어옴
     var maxPeopleNum: Int
     var currentPeopleNum: Int 
@@ -16,7 +14,7 @@ struct BoardStructModel: Codable {
     var spaceType: String
     var accountNum: String
     var estimatedOrderTime: String?
-    var participationList: [[String:String]]?
+    var participationList: [[String: String]]?
     var commentList: [String]?
     
 }
@@ -33,12 +31,10 @@ extension String {
         return "yy-MM-dd HH:mm"
     }
     
-    
     /*
     사용예시
      let isoDate = "2023-04-06T19:52:56.296139"
      let customFormattedDate = isoDate.formatISO8601DateToCustom()
      print(customFormattedDate) // "23-04-06 19:52"
-
      */
 }

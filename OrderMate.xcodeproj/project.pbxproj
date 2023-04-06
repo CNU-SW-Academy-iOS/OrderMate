@@ -106,9 +106,9 @@
 			isa = PBXGroup;
 			children = (
 				E464802529C95352004616D2 /* CreateBoardView.swift */,
+				BA3F37F229B5D120009BF7FE /* BoardListView.swift */,
 				BAFCF30929C1A6AB006CF5E8 /* BoardView.swift */,
 				ED50139F29D4AA0F00D22410 /* CompletedBoardView.swift */,
-				BA3F37F229B5D120009BF7FE /* BoardListView.swift */,
 			);
 			path = BoardView;
 			sourceTree = "<group>";

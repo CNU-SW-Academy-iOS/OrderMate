@@ -27,6 +27,7 @@ struct RoomListView: View {
                 ZStack {
                     VStack {
                         HStack {
+                            Text("안녕하세요, \(userModel.username)")
                             Spacer()
                             Button {
                                 showingAlert = true
@@ -46,8 +47,8 @@ struct RoomListView: View {
                                 Button("취소", role: .cancel) {
                                     showingAlert = false
                                 }
-                            }.padding()
-                        }
+                            }
+                        }.padding()
                         Button {
                             roomList.getAllRoomList { success, data in
                                 listJsonArray = data as! [RoomInfoPreview]
@@ -118,15 +119,13 @@ struct RoomListView: View {
                         }.padding()
                     }
                 }
-                
-                
+                    
             }.refreshable {
                 roomList.getAllRoomList { success, data in
                     listJsonArray = data as! [RoomInfoPreview]
                 }
             }
-            
-            
+               
         }
         .onAppear {
             // BoardListview 진입시 1초뒤 자동 새로고침

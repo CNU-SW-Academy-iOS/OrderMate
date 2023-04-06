@@ -250,4 +250,22 @@ class BoardViewModel: ObservableObject {
         task.resume()
     }
     
+    func checkUserIsHost(userName: String, inArray array: [[String: String]]) -> Bool {
+        for dict in array {
+            if let name = dict["name"], name == userName, dict["role"] == "HOST" {
+                return true
+            }
+        }
+        return false
+    }
+    
+    func checkUserIsGuest(userName: String, inArray array: [[String: String]]) -> Bool {
+        for dict in array {
+            if let name = dict["name"], name == userName {
+                return true
+            }
+        }
+        return false
+    }
+    
 }
