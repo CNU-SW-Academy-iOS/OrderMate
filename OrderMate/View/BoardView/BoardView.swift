@@ -42,6 +42,7 @@ struct BoardView: View {
                 ScrollView() {
                     // 게시글 작성 날짜 추가
                     HStack {
+                        Text("안녕하세요, \(userModel.username)")
                         Spacer()
                         Text(boardInfo.createdAt!.formatISO8601DateToCustom()) // "yy-MM-dd HH:mm"
                             .font(.subheadline)
@@ -153,7 +154,33 @@ struct BoardView: View {
                         Button {
                             manager.join(postId: postId) { status in
                                 if status {
-                                    isEntered = true
+                                    manager.getBoard(postId: postId) { isComplete in
+                                        if isComplete {
+                                            if let board = manager.board {
+                                                DispatchQueue.main.async {
+                                                    boardInfo = board // 방 정보 전달
+                                                    if manager.checkUserIsHost(userName: userModel.username,
+                                                                               inArray: boardInfo.participationList!) {
+                                                        // 방장인지 확인
+                                                        isHost = true
+                                                    } else {
+                                                        isHost = false
+                                                    }
+                                                    if boardInfo.postStatus == PostStatusEnum.RECRUITING.description() {
+                                                        // 모집중인지 확인
+                                                        isCompleted = false
+                                                    }
+                                                    if manager.checkUserIsGuest(userName: userModel.username,
+                                                                                inArray: boardInfo.participationList!) {
+                                                        // 게스트인지 확인
+                                                        isEntered = true
+                                                    } else {
+                                                        isEntered = false
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         } label: {
@@ -185,7 +212,35 @@ struct BoardView: View {
                         Button {
                             manager.leave(postId: postId) { status in
                                 if status {
-                                    isEntered = false
+                                    //isEntered = false
+                                    manager.getBoard(postId: postId) { isComplete in
+                                        if isComplete {
+                                            if let board = manager.board {
+                                                DispatchQueue.main.async {
+                                                    boardInfo = board // 방 정보 전달
+                                                    if manager.checkUserIsHost(userName: userModel.username,
+                                                                               inArray: boardInfo.participationList!) {
+                                                        // 방장인지 확인
+                                                        isHost = true
+                                                    } else {
+                                                        isHost = false
+                                                    }
+                                                    if boardInfo.postStatus == PostStatusEnum.RECRUITING.description() {
+                                                        // 모집중인지 확인
+                                                        isCompleted = false
+                                                    }
+                                                    if manager.checkUserIsGuest(userName: userModel.username,
+                                                                                inArray: boardInfo.participationList!) {
+                                                        // 게스트인지 확인
+                                                        isEntered = true
+                                                    } else {
+                                                        isEntered = false
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                    
                                 }
                             }
                         } label: {
