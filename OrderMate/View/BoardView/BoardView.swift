@@ -18,9 +18,7 @@ struct BoardView: View {
     @State var ownerName: String = "주인장 이름"
     @State var title: String = "교촌 치킨 같이 배달 시키실 분 구합니다"
     
-    //@State var createdAt: Date = Date()
-    @State var createdAt: String? = "date" // 명세서 따른 변경, String으로 들어옴
-    //@State var postStatus: Bool?
+    @State var createdAt: String? = "yy-MM-dd HH:mm" // 명세서 따른 변경, String으로 들어옴
     @State var postStatus: String? // 명세서 따른 변경, String으로 들어옴
     
     @State var maxPeopleNum: Int = 5
@@ -188,7 +186,7 @@ struct BoardView: View {
                                 }
                                 self.title = board.title
                                 if let createdAt = board.createdAt {
-                                    self.createdAt = createdAt
+                                    self.createdAt = createdAt.formatISO8601DateToCustom() // "yy-MM-dd HH:mm"
                                 }
                                 if let postStatus = board.postStatus {
                                     self.postStatus = postStatus

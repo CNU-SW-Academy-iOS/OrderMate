@@ -63,7 +63,7 @@ struct RoomInfo: Decodable {
 struct RoomInfoPreview: Codable, Hashable {
     let postId: Int?
     let title: String?
-    //let createdAt: Date?
+    let createdAt: String?
     let postStatus: String?
     let maxPeopleNum: Int?
     let currentPeopleNum: Int?

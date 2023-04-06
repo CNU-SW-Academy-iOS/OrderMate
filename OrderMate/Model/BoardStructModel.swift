@@ -18,28 +18,27 @@ struct BoardStructModel: Codable {
     var estimatedOrderTime: String?
     var participationList: [[String:String]]?
     var commentList: [String]?
-
-//    init(title: String,
-//         maxPeopleNum: Int,
-//         isAnonymous: Bool,
-//         spaceType: String,
-//         content: String,
-//         withOrderLink: String,
-//         pickupSpace: String,
-//         accountNum: String,
-//         createdAt: Date,
-//         currentPeopleNum: Int)
-//    {
-//    self.title = title
-//    self.maxPeopleNum = maxPeopleNum
-//    self.isAnonymous = isAnonymous
-//    self.spaceType = spaceType
-//    self.content = content
-//    self.withOrderLink = withOrderLink
-//    self.pickupSpace = pickupSpace
-//    self.accountNum = accountNum
-//    self.createdAt = createdAt
-//    self.currentPeopleNum = currentPeopleNum
-//}
     
+}
+
+// Date 받아올때 사용함
+extension String {
+    func formatISO8601DateToCustom() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS"
+        if let date = dateFormatter.date(from: self) {
+            dateFormatter.dateFormat = "yy-MM-dd HH:mm"
+            return dateFormatter.string(from: date)
+        }
+        return "yy-MM-dd HH:mm"
+    }
+    
+    
+    /*
+    사용예시
+     let isoDate = "2023-04-06T19:52:56.296139"
+     let customFormattedDate = isoDate.formatISO8601DateToCustom()
+     print(customFormattedDate) // "23-04-06 19:52"
+
+     */
 }

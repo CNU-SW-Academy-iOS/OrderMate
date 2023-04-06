@@ -7,7 +7,7 @@ struct RoomListView: View {
     @State var title = ""
     @State var listJsonArray: [RoomInfoPreview] = [RoomInfoPreview(postId: 99,
                                                                    title: "개설된 방이 없습니다",
-                                                                   //createdAt: Date(),
+                                                                   createdAt: "yy-MM-dd HH:mm",
                                                                    postStatus: "",
                                                                    maxPeopleNum: 5,
                                                                    currentPeopleNum: 1,
@@ -62,6 +62,7 @@ struct RoomListView: View {
                                 } label: {
                                         HStack {
                                             VStack(alignment: .leading) {
+                                                Text(data.createdAt!.formatISO8601DateToCustom()) // "yy-MM-dd HH:mm"
                                                 Text(data.title!)
                                                     .font(.headline)
                                                 Text("픽업 장소: " + data.pickupSpace!)
