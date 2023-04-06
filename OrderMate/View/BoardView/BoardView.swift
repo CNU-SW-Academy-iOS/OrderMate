@@ -108,31 +108,14 @@ struct BoardView: View {
                                     manager.goNextFromRecruiting(postId: postId) { status in
                                         if status {
                                             isCompleted = true
-                                            // 방잠금으로 새로 고침, 리팩토링 대상
+                                            // 방잠금으로 새로 고침
                                             manager.getBoard(postId: postId) { isComplete in
                                                 if isComplete {
-                                                    if let board = manager.board {
-                                                        DispatchQueue.main.async {
-                                                            boardInfo = board // 방 정보 전달
-                                                            if manager.checkUserIsHost(userName: userModel.username,
-                                                                                       inArray: boardInfo.participationList!) {
-                                                                // 방장인지 확인
-                                                                isHost = true
-                                                            } else {
-                                                                isHost = false
-                                                            }
-                                                            if boardInfo.postStatus == PostStatusEnum.RECRUITING.description() {
-                                                                // 모집중인지 확인
-                                                                isCompleted = false
-                                                            }
-                                                            if manager.checkUserIsGuest(userName: userModel.username,
-                                                                                        inArray: boardInfo.participationList!) {
-                                                                // 게스트인지 확인
-                                                                isEntered = true
-                                                            } else {
-                                                                isEntered = false
-                                                            }
-                                                        }
+                                                    manager.processBoardInfo(userModel: userModel) { boardInfo, isHost, isCompleted, isEntered in
+                                                        self.boardInfo = boardInfo
+                                                        self.isHost = isHost
+                                                        self.isCompleted = isCompleted
+                                                        self.isEntered = isEntered
                                                     }
                                                 }
                                             }
