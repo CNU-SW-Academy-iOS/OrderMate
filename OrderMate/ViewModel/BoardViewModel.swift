@@ -145,6 +145,46 @@ class BoardViewModel: ObservableObject {
         task.resume()
     }
     
+    // 참가함수 + 새로고침 함수
+    func joinAndFetchBoard(postId: Int, completion: @escaping (Bool) -> Void) {
+        join(postId: postId) { joinSuccess in
+            if joinSuccess {
+                self.getBoard(postId: postId) { getBoardSuccess in
+                    completion(getBoardSuccess)
+                }
+            } else {
+                completion(false)
+            }
+        }
+    }
+
+    // 방 상태 가져오고 bool값 가져오기
+    func processBoardInfo(userModel: UserModel, completion: @escaping (BoardStructModel, Bool, Bool, Bool) -> Void) {
+        // Published board값 가져오기
+        if let board = self.board {
+            var isHost = false // 방장인지 확인
+            var isCompleted = true // 모집중인지 확인
+            var isEntered = false // 게스트인지 확인
+            
+            let boardInfo = board // 방 정보 전달
+            if self.checkUserIsHost(userName: userModel.username, inArray: boardInfo.participationList!) {
+                // 방장인지 확인
+                isHost = true
+            }
+            if boardInfo.postStatus == PostStatusEnum.RECRUITING.description() {
+                // 모집중인지 확인
+                isCompleted = false
+            }
+            if self.checkUserIsGuest(userName: userModel.username, inArray: boardInfo.participationList!) {
+                // 게스트인지 확인
+                isEntered = true
+            }
+            completion(boardInfo, isHost, isCompleted, isEntered)
+            
+        }
+    }
+    
+    
     
     // 유저의 방 탈퇴
     func leave(postId: Int, completion: @escaping (Bool) -> Void) {

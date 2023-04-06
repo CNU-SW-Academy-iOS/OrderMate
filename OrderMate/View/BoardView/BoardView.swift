@@ -152,34 +152,13 @@ struct BoardView: View {
                     if isEntered == false && isCompleted == false {
                         // 참가전
                         Button {
-                            manager.join(postId: postId) { status in
-                                if status {
-                                    manager.getBoard(postId: postId) { isComplete in
-                                        if isComplete {
-                                            if let board = manager.board {
-                                                DispatchQueue.main.async {
-                                                    boardInfo = board // 방 정보 전달
-                                                    if manager.checkUserIsHost(userName: userModel.username,
-                                                                               inArray: boardInfo.participationList!) {
-                                                        // 방장인지 확인
-                                                        isHost = true
-                                                    } else {
-                                                        isHost = false
-                                                    }
-                                                    if boardInfo.postStatus == PostStatusEnum.RECRUITING.description() {
-                                                        // 모집중인지 확인
-                                                        isCompleted = false
-                                                    }
-                                                    if manager.checkUserIsGuest(userName: userModel.username,
-                                                                                inArray: boardInfo.participationList!) {
-                                                        // 게스트인지 확인
-                                                        isEntered = true
-                                                    } else {
-                                                        isEntered = false
-                                                    }
-                                                }
-                                            }
-                                        }
+                            manager.joinAndFetchBoard(postId: postId) { isComplete in
+                                if isComplete {
+                                    manager.processBoardInfo(userModel: userModel) { boardInfo, isHost, isCompleted, isEntered in
+                                        self.boardInfo = boardInfo
+                                        self.isHost = isHost
+                                        self.isCompleted = isCompleted
+                                        self.isEntered = isEntered
                                     }
                                 }
                             }
@@ -212,31 +191,13 @@ struct BoardView: View {
                         Button {
                             manager.leave(postId: postId) { status in
                                 if status {
-                                    //isEntered = false
                                     manager.getBoard(postId: postId) { isComplete in
                                         if isComplete {
-                                            if let board = manager.board {
-                                                DispatchQueue.main.async {
-                                                    boardInfo = board // 방 정보 전달
-                                                    if manager.checkUserIsHost(userName: userModel.username,
-                                                                               inArray: boardInfo.participationList!) {
-                                                        // 방장인지 확인
-                                                        isHost = true
-                                                    } else {
-                                                        isHost = false
-                                                    }
-                                                    if boardInfo.postStatus == PostStatusEnum.RECRUITING.description() {
-                                                        // 모집중인지 확인
-                                                        isCompleted = false
-                                                    }
-                                                    if manager.checkUserIsGuest(userName: userModel.username,
-                                                                                inArray: boardInfo.participationList!) {
-                                                        // 게스트인지 확인
-                                                        isEntered = true
-                                                    } else {
-                                                        isEntered = false
-                                                    }
-                                                }
+                                            manager.processBoardInfo(userModel: userModel) { boardInfo, isHost, isCompleted, isEntered in
+                                                self.boardInfo = boardInfo
+                                                self.isHost = isHost
+                                                self.isCompleted = isCompleted
+                                                self.isEntered = isEntered
                                             }
                                         }
                                     }
@@ -277,28 +238,11 @@ struct BoardView: View {
                 }.refreshable {
                     manager.getBoard(postId: postId) { isComplete in
                         if isComplete {
-                            if let board = manager.board {
-                                DispatchQueue.main.async {
-                                    boardInfo = board // 방 정보 전달
-                                    if manager.checkUserIsHost(userName: userModel.username,
-                                                               inArray: boardInfo.participationList!) {
-                                        // 방장인지 확인
-                                        isHost = true
-                                    } else {
-                                        isHost = false
-                                    }
-                                    if boardInfo.postStatus == PostStatusEnum.RECRUITING.description() {
-                                        // 모집중인지 확인
-                                        isCompleted = false
-                                    }
-                                    if manager.checkUserIsGuest(userName: userModel.username,
-                                                                inArray: boardInfo.participationList!) {
-                                        // 게스트인지 확인
-                                        isEntered = true
-                                    } else {
-                                        isEntered = false
-                                    }
-                                }
+                            manager.processBoardInfo(userModel: userModel) { boardInfo, isHost, isCompleted, isEntered in
+                                self.boardInfo = boardInfo
+                                self.isHost = isHost
+                                self.isCompleted = isCompleted
+                                self.isEntered = isEntered
                             }
                         }
                     }
@@ -308,36 +252,11 @@ struct BoardView: View {
             .onAppear {
                 manager.getBoard(postId: postId) { isComplete in
                     if isComplete {
-                        if let board = manager.board {
-                            DispatchQueue.main.async {
-                                boardInfo = board // 방 정보 전달
-                                if manager.checkUserIsHost(userName: userModel.username,
-                                                           inArray: boardInfo.participationList!) {
-                                    // 방장인지 확인
-                                    isHost = true
-                                } else {
-                                    isHost = false
-                                }
-                                if boardInfo.postStatus == PostStatusEnum.RECRUITING.description() {
-                                    // 모집중인지 확인
-                                    isCompleted = false
-                                }
-                                if manager.checkUserIsGuest(userName: userModel.username,
-                                                            inArray: boardInfo.participationList!) {
-                                    // 게스트인지 확인
-                                    isEntered = true
-                                } else {
-                                    isEntered = false
-                                }
-                                
-                                //                                if boardStructModel.ownerName == userModel.username {
-                                //                                    // 방장이 맞는지 확인
-                                //                                    isHost = true
-                                //                                } else {
-                                //                                    isHost = false
-                                //                                }
-                                
-                            }
+                        manager.processBoardInfo(userModel: userModel) { boardInfo, isHost, isCompleted, isEntered in
+                            self.boardInfo = boardInfo
+                            self.isHost = isHost
+                            self.isCompleted = isCompleted
+                            self.isEntered = isEntered
                         }
                     }
                 }
