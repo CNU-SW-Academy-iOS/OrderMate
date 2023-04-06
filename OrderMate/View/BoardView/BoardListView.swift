@@ -7,7 +7,7 @@ struct RoomListView: View {
     @State var title = ""
     @State var listJsonArray: [RoomInfoPreview] = [RoomInfoPreview(postId: 99,
                                                                    title: "개설된 방이 없습니다",
-                                                                   //createdAt: Date(),
+                                                                   createdAt: "yy-MM-dd HH:mm",
                                                                    postStatus: "",
                                                                    maxPeopleNum: 5,
                                                                    currentPeopleNum: 1,
@@ -27,6 +27,7 @@ struct RoomListView: View {
                 ZStack {
                     VStack {
                         HStack {
+                            Text("안녕하세요, \(userModel.username)")
                             Spacer()
                             Button {
                                 showingAlert = true
@@ -46,8 +47,8 @@ struct RoomListView: View {
                                 Button("취소", role: .cancel) {
                                     showingAlert = false
                                 }
-                            }.padding()
-                        }
+                            }
+                        }.padding()
                         Button {
                             roomList.getAllRoomList { success, data in
                                 listJsonArray = data as! [RoomInfoPreview]
@@ -62,6 +63,7 @@ struct RoomListView: View {
                                 } label: {
                                         HStack {
                                             VStack(alignment: .leading) {
+                                                Text(data.createdAt!.formatISO8601DateToCustom()) // "yy-MM-dd HH:mm"
                                                 Text(data.title!)
                                                     .font(.headline)
                                                 Text("픽업 장소: " + data.pickupSpace!)
@@ -94,8 +96,8 @@ struct RoomListView: View {
                             
                             Button {
                                 roomList.uploadData(post: BoardStructModel(ownerName: "버튼테스트3",
-                                                                           title: "버튼테스트", createdAt: Date(),
-                                                                           postStatus: false,
+                                                                           title: "버튼테스트", createdAt: "",
+                                                                           postStatus: "RECRUITING",
                                                                            maxPeopleNum: 5,
                                                                            currentPeopleNum: 3,
                                                                            isAnonymous: false,
@@ -117,15 +119,13 @@ struct RoomListView: View {
                         }.padding()
                     }
                 }
-                
-                
+                    
             }.refreshable {
                 roomList.getAllRoomList { success, data in
                     listJsonArray = data as! [RoomInfoPreview]
                 }
             }
-            
-            
+               
         }
         .onAppear {
             // BoardListview 진입시 1초뒤 자동 새로고침

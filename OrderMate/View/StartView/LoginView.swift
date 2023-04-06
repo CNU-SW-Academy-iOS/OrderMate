@@ -18,15 +18,14 @@ struct LoginView: View {
         VStack {
             Spacer()
             Text("Table Mate").font(.title).bold()
-            VStack{
+            VStack {
                 TextField("ID space", text: $user.username)
                     .textFieldStyle(.roundedBorder).padding()
-                ZStack{
+                ZStack {
                     if isSecureMode {
                         SecureField("password", text: $user.password)
                             .textFieldStyle(.roundedBorder).padding()
-                    }
-                    else{
+                    } else {
                         TextField("password", text: $user.password)
                             .textFieldStyle(.roundedBorder).padding()
                     }

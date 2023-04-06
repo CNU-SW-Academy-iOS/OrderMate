@@ -18,12 +18,12 @@ class LoginViewModel: ObservableObject {
         let task = session.uploadTask(with: request, from: uploadData) { data, response, error in
             let successRange = 200..<300
             let status = (response as? HTTPURLResponse)?.statusCode ?? 0
-            guard error == nil else{
+            guard error == nil else {
                 print("Error occur: \(String(describing: error))")
                 return
             }
             if !successRange.contains(status) {
-                print("status code: ",status)
+                print("status code: ", status)
             }
 
             if status == 201 {
@@ -38,7 +38,6 @@ class LoginViewModel: ObservableObject {
         }
         task.resume()
     }
-
 
     func loginGetStatus(user: UserModel, completion: @escaping (Bool) -> Void) {
         guard let uploadData = try? JSONEncoder().encode(user)
@@ -56,15 +55,16 @@ class LoginViewModel: ObservableObject {
         let task = session.uploadTask(with: request, from: uploadData) { data, response, error in
             let successRange = 200..<300
             let status = (response as? HTTPURLResponse)?.statusCode ?? 0
-            guard error == nil else{
+            guard error == nil else {
                 print("Error occur: \(String(describing: error))")
                 return
             }
             if !successRange.contains(status) {
-                print("status code: ",status)
+                print("status code: ", status)
             }
 
             if status == 200 {
+                userModel.username = user.username // 현재 로그인 정보
                 print("User login 성공")
                 print(response as Any)
                 completion(true)
@@ -83,8 +83,7 @@ class LoginViewModel: ObservableObject {
         var request = URLRequest(url: url!)
         request.httpMethod = "GET"
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            
-            
+             
             let successRange = 200..<300
             let status = (response as? HTTPURLResponse)?.statusCode ?? 0
             guard error == nil else{
@@ -92,10 +91,11 @@ class LoginViewModel: ObservableObject {
                 return
             }
             if !successRange.contains(status) {
-                print("status code: ",status)
+                print("status code: ",status )
             }
 
             if status == 200 {
+                userModel.username = "" // 현재 로그인 유저 정보 삭제
                 print("User logout 성공")
                 print(response as Any)
                 completion(true)
