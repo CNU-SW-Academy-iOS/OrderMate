@@ -17,7 +17,6 @@ struct CreateBoardView: View {
     @State var accountNum: String = "계좌 번호"
     
     
-    
     var body: some View {
         Text("방 만들기 텍스트필드 화면")
     }

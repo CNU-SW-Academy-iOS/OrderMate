@@ -12,28 +12,12 @@ struct PostStatusModel: Codable {
     var currentStatus: String
 }
 
-enum PostStatusEnum: Codable {
-    case ENDOFROOM
-    case RECRUITING
-    case RECRUITMENTCOMPLETE
-    case ORDERCOMPLETE
-    case PAYMENTCOMPLETE
-    case DELIVERYCOMPLETE
-    
-    func description() -> String {
-        switch self {
-        case .ENDOFROOM:
-            return "END_OF_ROOM"
-        case .RECRUITING:
-            return "RECRUITING"
-        case .RECRUITMENTCOMPLETE:
-            return "RECRUITMENT_COMPLETE"
-        case .ORDERCOMPLETE:
-            return "ORDER_COMPLETE"
-        case .PAYMENTCOMPLETE:
-            return "PAYMENT_COMPLETE"
-        case .DELIVERYCOMPLETE:
-            return "DELIVERY_COMPLETE"
-        }
-    }
+enum PostStatusEnum: String, Codable {
+    case ENDOFROOM = "END_OF_ROOM"
+    case RECRUITING = "RECRUITING"
+    case RECRUITMENTCOMPLETE = "RECRUITMENT_COMPLETE"
+    case ORDERCOMPLETE = "ORDER_COMPLETE"
+    case PAYMENTCOMPLETE = "PAYMENT_COMPLETE"
+    case DELIVERYCOMPLETE = "DELIVERY_COMPLETE"
+
 }
