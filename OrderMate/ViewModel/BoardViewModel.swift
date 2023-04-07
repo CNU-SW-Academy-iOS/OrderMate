@@ -19,6 +19,7 @@ class BoardViewModel: ObservableObject {
     }
     
     func getBoard(postId: Int, completion: @escaping (Bool) -> Void) {
+        // 방잠금으로 새로 고침
         let url = URL(string: urlString + APIModel.post.rawValue + "/" + String(postId))
         
         var request = URLRequest(url: url!)
@@ -60,7 +61,7 @@ class BoardViewModel: ObservableObject {
             } catch let DecodingError.valueNotFound(value, context) {
                 print("Value '\(value)' not found:", context.debugDescription)
                 print("codingPath:", context.codingPath)
-            } catch let DecodingError.typeMismatch(type, context)  {
+            } catch let DecodingError.typeMismatch(type, context) {
                 print("Type '\(type)' mismatch:", context.debugDescription)
                 print("codingPath:", context.codingPath)
             } catch {
@@ -88,7 +89,6 @@ class BoardViewModel: ObservableObject {
         
         var request = URLRequest(url: url!)
         request.httpMethod = "POST"
-        
         
         // 서버 체크
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
@@ -123,7 +123,7 @@ class BoardViewModel: ObservableObject {
             } catch let DecodingError.valueNotFound(value, context) {
                 print("Value '\(value)' not found:", context.debugDescription)
                 print("codingPath:", context.codingPath)
-            } catch let DecodingError.typeMismatch(type, context)  {
+            } catch let DecodingError.typeMismatch(type, context) {
                 print("Type '\(type)' mismatch:", context.debugDescription)
                 print("codingPath:", context.codingPath)
             } catch {
@@ -185,14 +185,12 @@ class BoardViewModel: ObservableObject {
     }
     
     
-    
     // 유저의 방 탈퇴
     func leave(postId: Int, completion: @escaping (Bool) -> Void) {
         let url = URL(string: urlString + APIModel.post.rawValue + "/" + String(postId) + "/" + "leave")
         
         var request = URLRequest(url: url!)
         request.httpMethod = "POST"
-        
         
         // 서버 체크
         let task = URLSession.shared.dataTask(with: request) { data, response, error in

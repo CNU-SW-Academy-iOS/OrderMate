@@ -152,4 +152,42 @@ struct RoomList {
         }
         task.resume()
     }
+    
+    func getParticipatedBoard(completionHandler: @escaping (Bool, Any) -> Void) {
+        // 내가 속한 방 정보 가져오기
+        // http://localhost:8080/user/post-list
+        
+        if let url = URL(string: urlString + APIModel.user.rawValue + "/" + "post-list") {
+            var request = URLRequest(url: url)
+            request.httpMethod = "GET"
+
+            let session = URLSession.shared
+            let task = session.dataTask(with: request) { (data, response, error) in
+                guard error == nil else {
+                    print("Error: error calling GET")
+                    print(error!)
+                    return
+                }
+                guard let data = data else {
+                    print("Error: Did not receive data")
+                    return
+                }
+                guard let response = response as? HTTPURLResponse, (200 ..< 300) ~= response.statusCode else {
+                    print("Error: HTTP request failed")
+                    return
+                }
+                
+                do {
+                    let output = try JSONDecoder().decode([RoomInfoPreview].self, from: data)
+                    print(output)
+                    print("JSON Data Parsing")
+                    
+                    completionHandler(true, output)
+                } catch {
+                    print(error)
+                }
+            }
+            task.resume()
+        }
+    }
 }

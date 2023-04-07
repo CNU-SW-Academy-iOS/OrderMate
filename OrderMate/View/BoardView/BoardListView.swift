@@ -22,6 +22,21 @@ struct RoomListView: View {
                                                                    estimatedOrderTime: Date(),
                                                                    ownerId: 1,
                                                                    ownerName: "")]
+    @State var recentListArray: [RoomInfoPreview] = [RoomInfoPreview(postId: 99,
+                                                                     title: "개설된 방이 없습니다",
+                                                                     createdAt: "yy-MM-dd HH:mm",
+                                                                     postStatus: "",
+                                                                     maxPeopleNum: 5,
+                                                                     currentPeopleNum: 1,
+                                                                     isAnonymous: false,
+                                                                     content: "",
+                                                                     withOrderLink: "",
+                                                                     pickupSpace: "",
+                                                                     spaceType: "",
+                                                                     accountNum: "",
+                                                                     estimatedOrderTime: Date(),
+                                                                     ownerId: 1,
+                                                                     ownerName: "")]
     @State private var showingAlert = false // 로그아웃 alert bool
     var body: some View {
         ZStack {
@@ -43,10 +58,10 @@ struct RoomListView: View {
                             }.alert("로그아웃 하시겠습니까?", isPresented: $showingAlert) {
                                 Button("로그아웃", role: .destructive) {
                                     loginModel.logOut { status in
-                                    if status {
-                                        loginState = false
+                                        if status {
+                                            loginState = false
+                                        }
                                     }
-                                }
                                 }
                                 Button("취소", role: .cancel) {
                                     showingAlert = false
@@ -57,30 +72,69 @@ struct RoomListView: View {
                             roomList.getAllRoomList { success, data in
                                 listJsonArray = data as! [RoomInfoPreview]
                             }
+                            roomList.getParticipatedBoard { success, data in
+                                recentListArray = data as! [RoomInfoPreview]
+                            }
+                            
                         } label: {
                             Text("방 목록 새로고침")
                         }
                         ScrollView() {
+                            if userManager.authorityModel.authority == false {
+                                // 나의 방생성/참가 bool이 false면
+                                Divider()
+                                // 내가 소속된 방정보를 불러와 제일 위에 보여줍니다
+                                VStack {
+                                    ForEach(recentListArray, id: \.self) { data in
+                                        NavigationLink {
+                                            BoardView(postId: data.postId!)
+                                        } label: {
+                                            HStack {
+                                                VStack(alignment: .leading) {
+                                                    Text(data.createdAt!.formatISO8601DateToCustom())
+                                                    // "yy-MM-dd HH:mm"
+                                                    Text(data.title!)
+                                                        .font(.headline)
+                                                    Text("픽업 장소: " + data.pickupSpace!)
+                                                    Spacer()
+                                                }
+                                                Spacer()
+                                                VStack(alignment: .trailing) {
+                                                    Text(data.postStatus!)
+                                                    Text(String(data.currentPeopleNum!) + " / " + String(data.maxPeopleNum!))
+                                                    Text("postid: " + String(data.postId!))
+                                                    Spacer()
+                                                }
+                                            }
+                                        }
+                                        .buttonStyle(.bordered)
+                                        .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
+                                    }
+                                }
+                                Text("⬆️ 내가 참가중인 방")
+                                Divider()
+                            }
+                            
                             ForEach(listJsonArray, id: \.self) { data in
                                 NavigationLink {
                                     BoardView(postId: data.postId!)
                                 } label: {
-                                        HStack {
-                                            VStack(alignment: .leading) {
-                                                Text(data.createdAt!.formatISO8601DateToCustom()) // "yy-MM-dd HH:mm"
-                                                Text(data.title!)
-                                                    .font(.headline)
-                                                Text("픽업 장소: " + data.pickupSpace!)
-                                                Spacer()
-                                            }
+                                    HStack {
+                                        VStack(alignment: .leading) {
+                                            Text(data.createdAt!.formatISO8601DateToCustom()) // "yy-MM-dd HH:mm"
+                                            Text(data.title!)
+                                                .font(.headline)
+                                            Text("픽업 장소: " + data.pickupSpace!)
                                             Spacer()
-                                            VStack(alignment: .trailing) {
-                                                Text(data.postStatus!)
-                                                Text(String(data.currentPeopleNum!) + " / " + String(data.maxPeopleNum!))
-                                                Text("postid: " + String(data.postId!))
-                                                Spacer()
-                                            }
                                         }
+                                        Spacer()
+                                        VStack(alignment: .trailing) {
+                                            Text(data.postStatus!)
+                                            Text(String(data.currentPeopleNum!) + " / " + String(data.maxPeopleNum!))
+                                            Text("postid: " + String(data.postId!))
+                                            Spacer()
+                                        }
+                                    }
                                 }
                                 .buttonStyle(.bordered)
                                 .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
@@ -108,8 +162,8 @@ struct RoomListView: View {
                                                                            content: "버튼테스트",
                                                                            withOrderLink: "버튼테스트",
                                                                            pickupSpace: "버튼테스트",
-                                                                          spaceType: "DORMITORY",
-                                                                          accountNum: "버튼테스트")) { success in
+                                                                           spaceType: "DORMITORY",
+                                                                           accountNum: "버튼테스트")) { success in
                                     if success {
                                         print("방생성완료")
                                     } else {
@@ -123,21 +177,28 @@ struct RoomListView: View {
                         }.padding()
                     }
                 }
-                    
+                
             }.refreshable {
                 roomList.getAllRoomList { success, data in
                     listJsonArray = data as! [RoomInfoPreview]
                 }
+                roomList.getParticipatedBoard { success, data in
+                    recentListArray = data as! [RoomInfoPreview]
+                }
             }
-               
+            
         }
         .onAppear {
             // user Info 받아오기
             userManager.getMyInfo()
+            userManager.getAuthority()
             // BoardListview 진입시 1초뒤 자동 새로고침
             DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
                 roomList.getAllRoomList { success, data in
                     listJsonArray = data as! [RoomInfoPreview]
+                }
+                roomList.getParticipatedBoard { success, data in
+                    recentListArray = data as! [RoomInfoPreview]
                 }
             })
         }

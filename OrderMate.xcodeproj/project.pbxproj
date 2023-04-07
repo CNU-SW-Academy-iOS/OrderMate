@@ -118,9 +118,9 @@
 		ED40966E29BCAEC400B030A9 /* StartView */ = {
 			isa = PBXGroup;
 			children = (
+				E40FB24129B625F200A1A4C2 /* StartPageView.swift */,
 				E40FB24329B6260200A1A4C2 /* LoginView.swift */,
 				F37C7CFF29B98489004B011C /* MakeAccountView.swift */,
-				E40FB24129B625F200A1A4C2 /* StartPageView.swift */,
 			);
 			path = StartView;
 			sourceTree = "<group>";

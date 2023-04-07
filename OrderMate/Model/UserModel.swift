@@ -23,3 +23,7 @@ struct UserInfoModel: Codable {
     var school: String = ""
     var major: String = ""
 }
+
+struct Authority: Codable {
+    var authority: Bool
+}
