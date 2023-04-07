@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct RoomListView: View {
+    @EnvironmentObject var userManager: UserViewModel // user Info 받아오기
+    
     @Binding var loginState: Bool
     @State var loginModel = LoginViewModel()
     @State var roomList = RoomList()
@@ -27,7 +29,8 @@ struct RoomListView: View {
                 ZStack {
                     VStack {
                         HStack {
-                            Text("안녕하세요, \(userModel.username)")
+                            Text("이름, \(userManager.userModel.name)")
+                            Text("닉네임, \(userManager.userModel.nickname)")
                             Spacer()
                             Button {
                                 showingAlert = true
@@ -128,6 +131,8 @@ struct RoomListView: View {
                
         }
         .onAppear {
+            // user Info 받아오기
+            userManager.getMyInfo()
             // BoardListview 진입시 1초뒤 자동 새로고침
             DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
                 roomList.getAllRoomList { success, data in
