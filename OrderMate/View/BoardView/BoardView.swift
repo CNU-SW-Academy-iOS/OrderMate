@@ -23,7 +23,7 @@ struct BoardView: View {
     @State var boardInfo = BoardStructModel(ownerName: "주인장 이름",
                                             title: "교촌 치킨 같이 배달 시키실 분 구합니다",
                                             createdAt: "yy-MM-dd HH:mm",
-                                            postStatus: PostStatusEnum.RECRUITING.description(),
+                                            postStatus: PostStatusEnum.RECRUITING.rawValue,
                                             maxPeopleNum: 5,
                                             currentPeopleNum: 2,
                                             isAnonymous: false,
@@ -93,7 +93,7 @@ struct BoardView: View {
                             Text("\(name) (\(role))")
                         }
                         
-                        if boardInfo.postStatus == PostStatusEnum.RECRUITING.description() {
+                        if boardInfo.postStatus == PostStatusEnum.RECRUITING.rawValue {
                             Button {
                                 isShowLockAlert = true
                             } label: {
@@ -205,7 +205,7 @@ struct BoardView: View {
                             if dict["name"] == userModel.username {
                                 // 대화뷰 들어가기 버튼
                                 NavigationLink {
-                                    CompletedBoardView()
+                                    ChatView()
                                 } label: {
                                     Text("대화 뷰 들어가기")
                                         .font(.system(size: 24))

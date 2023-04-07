@@ -171,7 +171,7 @@ class BoardViewModel: ObservableObject {
                 // 방장인지 확인
                 isHost = true
             }
-            if boardInfo.postStatus == PostStatusEnum.RECRUITING.description() {
+            if boardInfo.postStatus == PostStatusEnum.RECRUITING.rawValue {
                 // 모집중인지 확인
                 isCompleted = false
             }
@@ -252,7 +252,7 @@ class BoardViewModel: ObservableObject {
     // 방 상태 변경
     func goNextFromRecruiting(postId: Int, completion: @escaping (Bool) -> Void) {
         var postStatusModel = PostStatusModel(directionType: "NEXT",
-                                              currentStatus: PostStatusEnum.RECRUITING.description())
+                                              currentStatus: PostStatusEnum.RECRUITING.rawValue)
 
         let url = URL(string: urlString + APIModel.post.rawValue + "/" + String(postId) + "/" + "status")
         guard let uploadData = try? JSONEncoder().encode(postStatusModel)

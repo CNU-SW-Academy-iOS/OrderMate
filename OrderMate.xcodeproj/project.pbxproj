@@ -22,7 +22,10 @@
 		E4470CF129DD5BF10078C59F /* PostStatusModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4470CF029DD5BF10078C59F /* PostStatusModel.swift */; };
 		E464802629C95352004616D2 /* CreateBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E464802529C95352004616D2 /* CreateBoardView.swift */; };
 		ED40967329BCAF5300B030A9 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED40967229BCAF5300B030A9 /* UserModel.swift */; };
-		ED5013A029D4AA0F00D22410 /* CompletedBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED50139F29D4AA0F00D22410 /* CompletedBoardView.swift */; };
+		ED7286B829E0392E00FC9E42 /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7286B729E0392E00FC9E42 /* ChatView.swift */; };
+		ED7286BD29E03B1800FC9E42 /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7286BC29E03B1800FC9E42 /* ChatViewModel.swift */; };
+		ED7286BF29E03B3900FC9E42 /* MessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7286BE29E03B3900FC9E42 /* MessageModel.swift */; };
+		ED7286C529E03D7C00FC9E42 /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7286C429E03D7C00FC9E42 /* MessageView.swift */; };
 		EDD4F7AD29CC87A600E578AF /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD4F7AC29CC87A600E578AF /* LoginViewModel.swift */; };
 		EDD4F7AF29CC87C700E578AF /* APIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD4F7AE29CC87C700E578AF /* APIModel.swift */; };
 		F37C7D0029B98489004B011C /* MakeAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37C7CFF29B98489004B011C /* MakeAccountView.swift */; };
@@ -45,8 +48,11 @@
 		E4470CF029DD5BF10078C59F /* PostStatusModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PostStatusModel.swift; path = OrderMate/Model/PostStatusModel.swift; sourceTree = SOURCE_ROOT; };
 		E464802529C95352004616D2 /* CreateBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateBoardView.swift; sourceTree = "<group>"; };
 		ED40967229BCAF5300B030A9 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
-		ED50139B29D49D7C00D22410 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		ED50139F29D4AA0F00D22410 /* CompletedBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedBoardView.swift; sourceTree = "<group>"; };
+		ED7286B529E038EF00FC9E42 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ED7286B729E0392E00FC9E42 /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
+		ED7286BC29E03B1800FC9E42 /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
+		ED7286BE29E03B3900FC9E42 /* MessageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageModel.swift; sourceTree = "<group>"; };
+		ED7286C429E03D7C00FC9E42 /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
 		EDD4F7AC29CC87A600E578AF /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		EDD4F7AE29CC87C700E578AF /* APIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIModel.swift; sourceTree = "<group>"; };
 		F37C7CFF29B98489004B011C /* MakeAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeAccountView.swift; sourceTree = "<group>"; };
@@ -83,7 +89,7 @@
 		BAF470A229B21C0C00F242EF /* OrderMate */ = {
 			isa = PBXGroup;
 			children = (
-				ED50139B29D49D7C00D22410 /* Info.plist */,
+				ED7286B529E038EF00FC9E42 /* Info.plist */,
 				BAF470A329B21C0C00F242EF /* OrderMateApp.swift */,
 				EDD4F7A929CC86D000E578AF /* Model */,
 				EDD4F7AA29CC86D900E578AF /* View */,
@@ -108,7 +114,6 @@
 				E464802529C95352004616D2 /* CreateBoardView.swift */,
 				BA3F37F229B5D120009BF7FE /* BoardListView.swift */,
 				BAFCF30929C1A6AB006CF5E8 /* BoardView.swift */,
-				ED50139F29D4AA0F00D22410 /* CompletedBoardView.swift */,
 			);
 			path = BoardView;
 			sourceTree = "<group>";
@@ -123,6 +128,15 @@
 			path = StartView;
 			sourceTree = "<group>";
 		};
+		ED7286B929E039F200FC9E42 /* ChatView */ = {
+			isa = PBXGroup;
+			children = (
+				ED7286B729E0392E00FC9E42 /* ChatView.swift */,
+				ED7286C429E03D7C00FC9E42 /* MessageView.swift */,
+			);
+			path = ChatView;
+			sourceTree = "<group>";
+		};
 		EDD4F7A929CC86D000E578AF /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -130,6 +144,7 @@
 				ED40967229BCAF5300B030A9 /* UserModel.swift */,
 				EDD4F7AE29CC87C700E578AF /* APIModel.swift */,
 				E4470CF029DD5BF10078C59F /* PostStatusModel.swift */,
+				ED7286BE29E03B3900FC9E42 /* MessageModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -138,6 +153,7 @@
 			isa = PBXGroup;
 			children = (
 				E40FB23F29B625E400A1A4C2 /* MainView.swift */,
+				ED7286B929E039F200FC9E42 /* ChatView */,
 				ED0398F829CCBFBC00DA50F5 /* BoardView */,
 				ED40966E29BCAEC400B030A9 /* StartView */,
 			);
@@ -150,6 +166,7 @@
 				EDD4F7AC29CC87A600E578AF /* LoginViewModel.swift */,
 				BAFCF32F29C875D1006CF5E8 /* BoardViewModel.swift */,
 				BA3F37EE29B5C989009BF7FE /* BoardStruct.swift */,
+				ED7286BC29E03B1800FC9E42 /* ChatViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -253,8 +270,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				F37C7D0029B98489004B011C /* MakeAccountView.swift in Sources */,
-				ED5013A029D4AA0F00D22410 /* CompletedBoardView.swift in Sources */,
 				E464802629C95352004616D2 /* CreateBoardView.swift in Sources */,
+				ED7286BF29E03B3900FC9E42 /* MessageModel.swift in Sources */,
+				ED7286B829E0392E00FC9E42 /* ChatView.swift in Sources */,
 				EDD4F7AF29CC87C700E578AF /* APIModel.swift in Sources */,
 				BAFCF30A29C1A6AB006CF5E8 /* BoardView.swift in Sources */,
 				E40FB24029B625E400A1A4C2 /* MainView.swift in Sources */,
@@ -263,11 +281,13 @@
 				E40FB24429B6260200A1A4C2 /* LoginView.swift in Sources */,
 				E40FB24229B625F200A1A4C2 /* StartPageView.swift in Sources */,
 				BA3F37F329B5D120009BF7FE /* BoardListView.swift in Sources */,
+				ED7286C529E03D7C00FC9E42 /* MessageView.swift in Sources */,
 				E4470CF129DD5BF10078C59F /* PostStatusModel.swift in Sources */,
 				BAFCF33029C875D1006CF5E8 /* BoardViewModel.swift in Sources */,
 				BAF470A429B21C0C00F242EF /* OrderMateApp.swift in Sources */,
 				EDD4F7AD29CC87A600E578AF /* LoginViewModel.swift in Sources */,
 				BAFCF30D29C1AB80006CF5E8 /* BoardStructModel.swift in Sources */,
+				ED7286BD29E03B1800FC9E42 /* ChatViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

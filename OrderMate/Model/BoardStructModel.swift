@@ -16,7 +16,6 @@ struct BoardStructModel: Codable {
     var estimatedOrderTime: String?
     var participationList: [[String: String]]?
     var commentList: [String]?
-    
 }
 
 // Date 받아올때 사용함
