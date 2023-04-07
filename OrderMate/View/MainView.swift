@@ -8,7 +8,6 @@ struct MainView: View {
         } else {
             RoomListView(loginState: $loginState)
         }
-        
     }
 }
 

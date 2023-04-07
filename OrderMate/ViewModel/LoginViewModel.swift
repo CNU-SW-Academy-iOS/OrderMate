@@ -64,7 +64,11 @@ class LoginViewModel: ObservableObject {
             }
 
             if status == 200 {
+                let userDefaults = UserDefaults.standard
+                userDefaults.set(user.username, forKey: "username")
+                userDefaults.set(user.password, forKey: "password")
                 userModel.username = user.username // 현재 로그인 정보
+                userModel.password = user.password // 현재 로그인 정보
                 print("User login 성공")
                 print(response as Any)
                 completion(true)
@@ -86,16 +90,19 @@ class LoginViewModel: ObservableObject {
              
             let successRange = 200..<300
             let status = (response as? HTTPURLResponse)?.statusCode ?? 0
-            guard error == nil else{
+            guard error == nil else {
                 print("Error occur: \(String(describing: error))")
                 return
             }
             if !successRange.contains(status) {
-                print("status code: ",status )
+                print("status code: ", status )
             }
-
             if status == 200 {
                 userModel.username = "" // 현재 로그인 유저 정보 삭제
+                userModel.password = "" // 현재 로그인 유저 정보 삭제
+                let userDefaults = UserDefaults.standard
+                userDefaults.set(userModel.username, forKey: "username")
+                userDefaults.set(userModel.password, forKey: "password")
                 print("User logout 성공")
                 print(response as Any)
                 completion(true)
@@ -106,6 +113,24 @@ class LoginViewModel: ObservableObject {
             }
         }
         task.resume()
-        
     }
+    
+    func attemptAutoLogin(completion: @escaping (Bool) -> Void) {
+        if let username = UserDefaults.standard.string(forKey: "username"),
+           let password = UserDefaults.standard.string(forKey: "password") {
+            if username != "" && password != "" {
+                let user = UserModel(username: username, password: password)
+                self.loginGetStatus(user: user) { success in
+                    if success {
+                        print("자동 로그인 성공")
+                        completion(true)
+                    } else {
+                        print("자동 로그인 실패")
+                        completion(false)
+                    }
+                }
+            }
+        }
+    }
+
 }
