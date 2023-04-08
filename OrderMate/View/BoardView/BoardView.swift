@@ -9,7 +9,7 @@ import SwiftUI
 
 struct BoardView: View {
     var postId: Int
-    
+    @EnvironmentObject var userManager: UserViewModel // user Info 받아오기
     @State private var isCompleted: Bool = false // 방이 모집완료인지 체크
     // if boardStructModel.postStatus == PostStatusEnum.RECRUITING.description()로 대체 가능
     
@@ -42,7 +42,7 @@ struct BoardView: View {
                 ScrollView() {
                     // 게시글 작성 날짜 추가
                     HStack {
-                        Text("안녕하세요, \(userModel.username)")
+                        Text("안녕하세요, \(userManager.userModel.name)")
                         Spacer()
                         Text(boardInfo.createdAt!.formatISO8601DateToCustom()) // "yy-MM-dd HH:mm"
                             .font(.subheadline)

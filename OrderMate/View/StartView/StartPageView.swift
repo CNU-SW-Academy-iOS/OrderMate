@@ -9,6 +9,7 @@ import SwiftUI
 
 struct StartPageView: View {
     @Binding var loginState: Bool
+    @State var loginModel = LoginViewModel()
     var body: some View {
         NavigationStack {
             VStack {
@@ -47,8 +48,13 @@ struct StartPageView: View {
                     .frame(height: 10)
             }
             
+        }.onAppear {
+            let autoLogin = loginModel.attemptAutoLogin { success in
+                if success {
+                    loginState = true
+                }
+            }
         }
-        
     }
 }
 
