@@ -202,7 +202,7 @@ struct BoardView: View {
                     // 목록중에 내가 있다면
                     if let list = boardInfo.participationList {
                         ForEach(list, id: \.self) { dict in
-                            if dict["name"] == userModel.username {
+                            if dict["username"] == userModel.username {
                                 // 대화뷰 들어가기 버튼
                                 NavigationLink {
                                     ChatView()
