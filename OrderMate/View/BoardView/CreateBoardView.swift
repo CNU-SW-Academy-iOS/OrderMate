@@ -6,7 +6,7 @@ struct CreateBoardView: View {
     @State var ownerName: String = "주인장 이름"
     @State var title: String = "타이틀"
     @State var createdAt: Date = Date()
-    @State var postStatus: Bool? = nil
+    @State var postStatus: Bool? = false
     @State var maxPeopleNum: Int = 5
     @State var currentPeopleNum: Int = 2
     @State var isAnonymous: Bool = false
@@ -15,7 +15,6 @@ struct CreateBoardView: View {
     @State var withOrderLink: String = "배민 함꼐하기 주소"
     @State var spaceType: String = "기숙사 / 충대 내부"
     @State var accountNum: String = "계좌 번호"
-    
     
     var body: some View {
         Text("방 만들기 텍스트필드 화면")

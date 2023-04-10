@@ -14,6 +14,7 @@ struct MakeAccountView: View {
     @State var user = UserModel()
     @State var isPresented = false
     @State var isSecureMode: Bool = true
+    @State var isShowAlert: Bool = false
     var body: some View {
         ScrollView {
             VStack {
@@ -83,16 +84,16 @@ struct MakeAccountView: View {
                 }.padding()
                 
             }
-            if  user.username != "" &&
-                user.password != "" &&
-                user.name != "" &&
-                user.nickname != "" &&
-                user.gender != "" &&
-                user.school != "" &&
-                user.major != "" {
-                // 모든 멤버가 빈 문자열이 아닌 경우에만 가입 버튼이 보입니다
+            
+            if [user.username,
+                user.password,
+                user.name,
+                user.nickname,
+                user.gender,
+                user.school,
+                user.major].allSatisfy({ !$0.isEmpty }) {
+                // 모든 항목이 빈 문자열이 아닌 경우에만 가입이 진행됩니다
                 Button {
-                    print(user)
                     loginModel.postNewUserInfo(user: user) { success in
                         if success {
                             loginModel.loginGetStatus(user: user) { loginSucceess in
@@ -115,11 +116,24 @@ struct MakeAccountView: View {
                         .background(Color("AccentColor"))
                         .font(.title)
                 }.alert(isPresented: $isPresented) {
-                    Alert(title: Text("Title"), message: Text("이미 존재하는 아이디입니다."), dismissButton: .default(Text("Dismiss")))
+                    Alert(title: Text("경고"), message: Text("이미 존재하는 아이디입니다."), dismissButton: .default(Text("확인")))
+                }
+            } else {
+                // 모든 멤버가 빈 문자열이 있는 경우 경고창을 표시
+                Button {
+                    isShowAlert = true
+                } label: {
+                    Text("회원 가입")
+                        .fontWeight(.bold)
+                        .frame(width: 300.0, height: 30)
+                        .padding()
+                        .foregroundColor(.white)
+                        .background(Color("AccentColor"))
+                        .font(.title)
+                }.alert(isPresented: $isShowAlert) {
+                    Alert(title: Text("경고"), message: Text("모든 정보를 입력해주세요."), dismissButton: .default(Text("확인")))
                 }
             }
-            
-            
         }.padding()
     }
 }

@@ -11,10 +11,10 @@ class BoardViewModel: ObservableObject {
         return dateFormatter.string(from: date)
     }
     // 뷰에서 발생하는 함수들은 ViewModel에 작성해주세요
-    func getPeopleList(_ board: BoardStructModel) -> Array<String> {
+    func getPeopleList() -> Array<String> {
         var totalPeople: [String] = []
-        totalPeople = Array(repeating: "person.fill", count: board.currentPeopleNum)
-        totalPeople += Array(repeating: "person", count: board.maxPeopleNum - board.currentPeopleNum)
+        totalPeople = Array(repeating: "person.fill", count: self.board!.currentPeopleNum)
+        totalPeople += Array(repeating: "person", count: self.board!.maxPeopleNum - self.board!.currentPeopleNum)
         return totalPeople
     }
     

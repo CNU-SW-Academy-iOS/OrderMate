@@ -8,7 +8,7 @@ struct BoardStructModel: Codable {
     var createdAt: String? // 명세서 따른 변경, String으로 들어옴
     var postStatus: String? // 명세서 따른 변경, String으로 들어옴
     var maxPeopleNum: Int
-    var currentPeopleNum: Int 
+    var currentPeopleNum: Int
     var isAnonymous: Bool
     var content: String
     var withOrderLink: String?
