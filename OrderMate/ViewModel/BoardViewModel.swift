@@ -184,7 +184,6 @@ class BoardViewModel: ObservableObject {
         }
     }
     
-    
     // 유저의 방 탈퇴
     func leave(postId: Int, completion: @escaping (Bool) -> Void) {
         let url = URL(string: urlString + APIModel.post.rawValue + "/" + String(postId) + "/" + "leave")
@@ -290,7 +289,7 @@ class BoardViewModel: ObservableObject {
     
     func checkUserIsHost(userName: String, inArray array: [[String: String]]) -> Bool {
         for dict in array {
-            if let name = dict["name"], name == userName, dict["role"] == "HOST" {
+            if let name = dict["username"], name == userName, dict["role"] == "HOST" {
                 return true
             }
         }
@@ -299,7 +298,7 @@ class BoardViewModel: ObservableObject {
     
     func checkUserIsGuest(userName: String, inArray array: [[String: String]]) -> Bool {
         for dict in array {
-            if let name = dict["name"], name == userName {
+            if let name = dict["username"], name == userName {
                 return true
             }
         }
