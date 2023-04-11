@@ -1,12 +1,14 @@
 import Foundation
 
+// 게시글 상세 조회용
 struct BoardStructModel: Codable {
-    var ownerName: String?
+    var loginUsername: String? // 아이디
+    var ownerName: String? // 익명 여부에 따라 이름 혹은 별명
     var title: String
     var createdAt: String? // 명세서 따른 변경, String으로 들어옴
     var postStatus: String? // 명세서 따른 변경, String으로 들어옴
     var maxPeopleNum: Int
-    var currentPeopleNum: Int 
+    var currentPeopleNum: Int
     var isAnonymous: Bool
     var content: String
     var withOrderLink: String?

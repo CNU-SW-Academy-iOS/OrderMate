@@ -74,8 +74,8 @@ struct RoomInfoPreview: Codable, Hashable {
     let spaceType: String?
     let accountNum: String?
     let estimatedOrderTime: Date?
-    let ownerId: Int?
-    let ownerName: String?
+    let ownerId: Int? // 아이디별 고유 넘버링
+    let ownerName: String? // 익명 여부에 따라 이름 혹은 별명
 }
 
 struct RoomList {

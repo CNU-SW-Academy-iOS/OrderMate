@@ -79,7 +79,7 @@ struct RoomListView: View {
                         } label: {
                             Text("방 목록 새로고침")
                         }
-                        ScrollView() {
+                        ScrollView {
                             if userManager.authorityModel.authority == false {
                                 // 나의 방생성/참가 bool이 false면
                                 Divider()

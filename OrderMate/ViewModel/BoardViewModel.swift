@@ -11,10 +11,10 @@ class BoardViewModel: ObservableObject {
         return dateFormatter.string(from: date)
     }
     // 뷰에서 발생하는 함수들은 ViewModel에 작성해주세요
-    func getPeopleList(_ board: BoardStructModel) -> Array<String> {
+    func getPeopleList() -> Array<String> {
         var totalPeople: [String] = []
-        totalPeople = Array(repeating: "person.fill", count: board.currentPeopleNum)
-        totalPeople += Array(repeating: "person", count: board.maxPeopleNum - board.currentPeopleNum)
+        totalPeople = Array(repeating: "person.fill", count: self.board!.currentPeopleNum)
+        totalPeople += Array(repeating: "person", count: self.board!.maxPeopleNum - self.board!.currentPeopleNum)
         return totalPeople
     }
     
@@ -184,7 +184,6 @@ class BoardViewModel: ObservableObject {
         }
     }
     
-    
     // 유저의 방 탈퇴
     func leave(postId: Int, completion: @escaping (Bool) -> Void) {
         let url = URL(string: urlString + APIModel.post.rawValue + "/" + String(postId) + "/" + "leave")
@@ -290,7 +289,7 @@ class BoardViewModel: ObservableObject {
     
     func checkUserIsHost(userName: String, inArray array: [[String: String]]) -> Bool {
         for dict in array {
-            if let name = dict["name"], name == userName, dict["role"] == "HOST" {
+            if let name = dict["username"], name == userName, dict["role"] == "HOST" {
                 return true
             }
         }
@@ -299,7 +298,7 @@ class BoardViewModel: ObservableObject {
     
     func checkUserIsGuest(userName: String, inArray array: [[String: String]]) -> Bool {
         for dict in array {
-            if let name = dict["name"], name == userName {
+            if let name = dict["username"], name == userName {
                 return true
             }
         }
