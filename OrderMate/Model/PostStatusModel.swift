@@ -13,11 +13,11 @@ struct PostStatusModel: Codable {
 }
 
 enum PostStatusEnum: String, Codable {
-    case ENDOFROOM = "END_OF_ROOM"
-    case RECRUITING = "RECRUITING"
-    case RECRUITMENTCOMPLETE = "RECRUITMENT_COMPLETE"
-    case ORDERCOMPLETE = "ORDER_COMPLETE"
-    case PAYMENTCOMPLETE = "PAYMENT_COMPLETE"
-    case DELIVERYCOMPLETE = "DELIVERY_COMPLETE"
+    case endOfRoom = "END_OF_ROOM"
+    case recruiting = "RECRUITING"
+    case recruitmentComplete = "RECRUITMENT_COMPLETE"
+    case orderComplete = "ORDER_COMPLETE"
+    case paymentComplete = "PAYMENT_COMPLETE"
+    case deliveryComplete = "DELIVERY_COMPLETE"
 
 }
