@@ -19,7 +19,7 @@ struct RoomListView: View {
                                                                    pickupSpace: "",
                                                                    spaceType: "",
                                                                    accountNum: "",
-                                                                   estimatedOrderTime: Date(),
+                                                                   estimatedOrderTime: "",
                                                                    ownerId: 1,
                                                                    ownerName: "")]
     @State var recentListArray: [RoomInfoPreview] = [RoomInfoPreview(postId: 99,
@@ -34,7 +34,7 @@ struct RoomListView: View {
                                                                      pickupSpace: "",
                                                                      spaceType: "",
                                                                      accountNum: "",
-                                                                     estimatedOrderTime: Date(),
+                                                                     estimatedOrderTime: "",
                                                                      ownerId: 1,
                                                                      ownerName: "")]
     @State private var showingAlert = false // 로그아웃 alert bool
@@ -117,21 +117,34 @@ struct RoomListView: View {
                             
                             ForEach(listJsonArray, id: \.self) { data in
                                 NavigationLink {
-                                    BoardView(postId: data.postId!)
+                                    if let data = data.postId {
+                                        BoardView(postId: data)
+                                    }
                                 } label: {
                                     HStack {
                                         VStack(alignment: .leading) {
-                                            Text(data.createdAt!.formatISO8601DateToCustom()) // "yy-MM-dd HH:mm"
-                                            Text(data.title!)
-                                                .font(.headline)
-                                            Text("픽업 장소: " + data.pickupSpace!)
+                                            if let createdAt = data.createdAt {
+                                                Text(createdAt.formatISO8601DateToCustom()) // "yy-MM-dd HH:mm"
+                                            }
+                                            if let title = data.title {
+                                                Text(title)
+                                                    .font(.headline)
+                                            }
+                                            if let pickupSpace = data.pickupSpace {
+                                                Text("픽업 장소: " + pickupSpace)
+                                            }
                                             Spacer()
                                         }
                                         Spacer()
                                         VStack(alignment: .trailing) {
-                                            Text(data.postStatus!)
-                                            Text(String(data.currentPeopleNum!) + " / " + String(data.maxPeopleNum!))
-                                            Text("postid: " + String(data.postId!))
+                                            if let postStatus = data.postStatus,
+                                               let currentPeopleNum = data.currentPeopleNum,
+                                               let maxPeopleNum = data.maxPeopleNum,
+                                               let postId = data.postId {
+                                                Text(postStatus)
+                                                Text(String(currentPeopleNum) + " / " + String(maxPeopleNum))
+                                                Text("postid: " + String(postId))
+                                            }
                                             Spacer()
                                         }
                                     }
@@ -154,16 +167,17 @@ struct RoomListView: View {
                             
                             Button {
                                 roomList.uploadData(post: BoardStructModel(ownerName: "버튼테스트3",
-                                                                           title: "버튼테스트", createdAt: "",
-                                                                           postStatus: "RECRUITING",
-                                                                           maxPeopleNum: 5,
-                                                                           currentPeopleNum: 3,
+                                                                           title: "버튼테스트",
+                                                                           createdAt: "",
+                                                                           maxPeopleNum: 2,
+                                                                           currentPeopleNum: 1,
                                                                            isAnonymous: false,
                                                                            content: "버튼테스트",
                                                                            withOrderLink: "버튼테스트",
                                                                            pickupSpace: "버튼테스트",
                                                                            spaceType: "DORMITORY",
-                                                                           accountNum: "버튼테스트")) { success in
+                                                                           accountNum: "버튼테스트",
+                                                                           estimatedOrderTime: "2023-02-05T12:59:11.332")) { success in
                                     if success {
                                         print("방생성완료")
                                     } else {
@@ -186,7 +200,6 @@ struct RoomListView: View {
                     recentListArray = data as! [RoomInfoPreview]
                 }
             }
-            
         }
         .onAppear {
             // user Info 받아오기
