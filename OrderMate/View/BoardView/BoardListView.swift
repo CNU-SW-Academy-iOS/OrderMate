@@ -95,17 +95,18 @@ struct RoomListView: View {
                             }.padding()
                             
                             Button {
-                                roomList.uploadData(post: BoardStructModel(ownerName: "버튼테스트3",
-                                                                           title: "버튼테스트", createdAt: "",
-                                                                           postStatus: "RECRUITING",
-                                                                           maxPeopleNum: 5,
-                                                                           currentPeopleNum: 3,
-                                                                           isAnonymous: false,
-                                                                           content: "버튼테스트",
-                                                                           withOrderLink: "버튼테스트",
-                                                                           pickupSpace: "버튼테스트",
-                                                                          spaceType: "DORMITORY",
-                                                                          accountNum: "버튼테스트")) { success in
+                                var boardEx = BoardStructModel(ownerName: "버튼테스트3",
+                                                           title: "버튼테스트", createdAt: "",
+                                                           postStatus: "RECRUITING",
+                                                           maxPeopleNum: 5,
+                                                           currentPeopleNum: 3,
+                                                           isAnonymous: false,
+                                                           content: "버튼테스트",
+                                                           withOrderLink: "버튼테스트",
+                                                           pickupSpace: "버튼테스트",
+                                                          spaceType: "DORMITORY",
+                                                          accountNum: "버튼테스트")
+                                roomList.uploadData(post: boardEx) { success in
                                     if success {
                                         print("방생성완료")
                                     } else {

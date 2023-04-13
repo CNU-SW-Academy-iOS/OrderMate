@@ -89,7 +89,6 @@ class BoardViewModel: ObservableObject {
         var request = URLRequest(url: url!)
         request.httpMethod = "POST"
         
-        
         // 서버 체크
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             let successRange = 200..<300
@@ -123,7 +122,7 @@ class BoardViewModel: ObservableObject {
             } catch let DecodingError.valueNotFound(value, context) {
                 print("Value '\(value)' not found:", context.debugDescription)
                 print("codingPath:", context.codingPath)
-            } catch let DecodingError.typeMismatch(type, context)  {
+            } catch let DecodingError.typeMismatch(type, context) {
                 print("Type '\(type)' mismatch:", context.debugDescription)
                 print("codingPath:", context.codingPath)
             } catch {
@@ -184,15 +183,12 @@ class BoardViewModel: ObservableObject {
         }
     }
     
-    
-    
     // 유저의 방 탈퇴
     func leave(postId: Int, completion: @escaping (Bool) -> Void) {
         let url = URL(string: urlString + APIModel.post.rawValue + "/" + String(postId) + "/" + "leave")
         
         var request = URLRequest(url: url!)
         request.httpMethod = "POST"
-        
         
         // 서버 체크
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
@@ -288,6 +284,48 @@ class BoardViewModel: ObservableObject {
             }
         }
         task.resume()
+    }
+    
+    // CreateBoardView 를 통해 얻은 struct 정보를 바탕으로 게시글을 생성하는 함수.
+    // 현재는 Encoding error 확인용으로 만들어놨다.
+    func createBoard(_ boardInfo: BoardStructModel, completion: @escaping (Bool) -> Void) {
+        guard let uploadData = try? JSONEncoder().encode(boardInfo)
+        else {
+            completion(false)
+            return
+        }
+        
+        let url = URL(string: "http://localhost:8080/post/upload")
+        
+        var request = URLRequest(url: url!)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        let session = URLSession.shared
+        let task = session.uploadTask(with: request, from: uploadData) { data, response, error in
+
+            let successRange = 200..<300
+            guard error == nil, let statusCode = (response as? HTTPURLResponse)?.statusCode,
+                  successRange.contains(statusCode) else {
+                print((response as? HTTPURLResponse)?.statusCode)
+                print("Post 실패 | Error occur: \(String(describing: error))")
+                
+                return
+            }
+            
+            let postSuccess = 201
+            if postSuccess == (response as? HTTPURLResponse)?.statusCode {
+                print("새 글 post 성공")
+                print(response as Any)
+                completion(true)
+            } else {
+                print("새 글 post 실패")
+                print(response as Any)
+                completion(false)
+            }
+        }
+        task.resume()
+    
     }
     
     func checkUserIsHost(userName: String, inArray array: [[String: String]]) -> Bool {
