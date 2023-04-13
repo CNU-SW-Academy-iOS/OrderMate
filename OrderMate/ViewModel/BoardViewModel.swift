@@ -11,14 +11,15 @@ class BoardViewModel: ObservableObject {
         return dateFormatter.string(from: date)
     }
     // 뷰에서 발생하는 함수들은 ViewModel에 작성해주세요
-    func getPeopleList(_ board: BoardStructModel) -> Array<String> {
+    func getPeopleList() -> Array<String> {
         var totalPeople: [String] = []
-        totalPeople = Array(repeating: "person.fill", count: board.currentPeopleNum)
-        totalPeople += Array(repeating: "person", count: board.maxPeopleNum - board.currentPeopleNum)
+        totalPeople = Array(repeating: "person.fill", count: self.board!.currentPeopleNum)
+        totalPeople += Array(repeating: "person", count: self.board!.maxPeopleNum - self.board!.currentPeopleNum)
         return totalPeople
     }
     
     func getBoard(postId: Int, completion: @escaping (Bool) -> Void) {
+        // 방잠금으로 새로 고침
         let url = URL(string: urlString + APIModel.post.rawValue + "/" + String(postId))
         
         var request = URLRequest(url: url!)
@@ -41,6 +42,7 @@ class BoardViewModel: ObservableObject {
             }
             let decoder = JSONDecoder()
             decoder.dateDecodingStrategy = .millisecondsSince1970
+            decoder.keyDecodingStrategy = .convertFromSnakeCase
             
             do {
                 let response = try decoder.decode(BoardStructModel.self, from: data)
@@ -48,10 +50,6 @@ class BoardViewModel: ObservableObject {
                     self.board = response
                     completion(true)
                 }
-//            } catch let error {
-//                print(String(data: data, encoding: .utf8))
-//                print("error occured.")
-//                print(error.localizedDescription )
             } catch let DecodingError.dataCorrupted(context) {
                 print(context)
             } catch let DecodingError.keyNotFound(key, context) {
@@ -60,7 +58,7 @@ class BoardViewModel: ObservableObject {
             } catch let DecodingError.valueNotFound(value, context) {
                 print("Value '\(value)' not found:", context.debugDescription)
                 print("codingPath:", context.codingPath)
-            } catch let DecodingError.typeMismatch(type, context)  {
+            } catch let DecodingError.typeMismatch(type, context) {
                 print("Type '\(type)' mismatch:", context.debugDescription)
                 print("codingPath:", context.codingPath)
             } catch {
@@ -83,7 +81,7 @@ class BoardViewModel: ObservableObject {
     }
     
     // 유저의 방 참가
-    func join(postId: Int, completion: @escaping (Bool) -> Void) {
+    private func join(postId: Int, completion: @escaping (Bool) -> Void) {
         let url = URL(string: urlString + APIModel.post.rawValue + "/" + String(postId) + "/" + "enter")
         
         var request = URLRequest(url: url!)
@@ -169,8 +167,9 @@ class BoardViewModel: ObservableObject {
             if self.checkUserIsHost(userName: userModel.username, inArray: boardInfo.participationList!) {
                 // 방장인지 확인
                 isHost = true
+                isEntered = true
             }
-            if boardInfo.postStatus == PostStatusEnum.RECRUITING.rawValue {
+            if boardInfo.postStatus == PostStatusEnum.recruiting {
                 // 모집중인지 확인
                 isCompleted = false
             }
@@ -245,10 +244,12 @@ class BoardViewModel: ObservableObject {
         task.resume()
     }
     
-    // 방 상태 변경
-    func goNextFromRecruiting(postId: Int, completion: @escaping (Bool) -> Void) {
+    /**
+     방 상태를 모집완료로 변경
+     */
+    func changeToRecruitingComplete(postId: Int, completion: @escaping (Bool) -> Void) {
         var postStatusModel = PostStatusModel(directionType: "NEXT",
-                                              currentStatus: PostStatusEnum.RECRUITING.rawValue)
+                                              currentStatus: PostStatusEnum.recruiting.rawValue)
 
         let url = URL(string: urlString + APIModel.post.rawValue + "/" + String(postId) + "/" + "status")
         guard let uploadData = try? JSONEncoder().encode(postStatusModel)
@@ -274,11 +275,96 @@ class BoardViewModel: ObservableObject {
             }
 
             if status == 201 {
-                print("방 상태 모집 완료로 변경 성공")
+                print("방 상태 모집중으로 변경 성공")
                 print(response as Any)
                 completion(true)
             } else {
-                print("방 상태 모집 완료로 변경 실패")
+                print("방 상태 모집중으로 변경 실패")
+                print(response as Any)
+                completion(false)
+            }
+        }
+        task.resume()
+    }
+    
+    /**
+     방 상태를 모집중으로 변경
+     */
+    func changeToRecruiting(postId: Int, completion: @escaping (Bool) -> Void) {
+        var postStatusModel = PostStatusModel(directionType: "PREV",
+                                              currentStatus: PostStatusEnum.recruitmentComplete.rawValue)
+
+        let url = URL(string: urlString + APIModel.post.rawValue + "/" + String(postId) + "/" + "status")
+        guard let uploadData = try? JSONEncoder().encode(postStatusModel)
+        else {
+            completion(false)
+            return
+        }
+        var request = URLRequest(url: url!)
+        request.httpMethod = "PUT"
+        
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+
+        let session = URLSession.shared
+        let task = session.uploadTask(with: request, from: uploadData) { data, response, error in
+            let successRange = 200..<300
+            let status = (response as? HTTPURLResponse)?.statusCode ?? 0
+            guard error == nil else {
+                print("Error occur: \(String(describing: error))")
+                return
+            }
+            if !successRange.contains(status) {
+                print("status code: ", status)
+            }
+
+            if status == 201 {
+                print("방 상태 모집중으로 변경 성공")
+                print(response as Any)
+                completion(true)
+            } else {
+                print("방 상태 모집중으로 변경 실패")
+                print(response as Any)
+                completion(false)
+            }
+        }
+        task.resume()
+    }
+    /**
+     방 상태를 방 완료로 변경
+     */
+    func changeBoardComplete(postId: Int, completion: @escaping (Bool) -> Void) {
+        var postStatusModel = PostStatusModel(directionType: "NEXT",
+                                              currentStatus: PostStatusEnum.deliveryComplete.rawValue)
+
+        let url = URL(string: urlString + APIModel.post.rawValue + "/" + String(postId) + "/" + "status")
+        guard let uploadData = try? JSONEncoder().encode(postStatusModel)
+        else {
+            completion(false)
+            return
+        }
+        var request = URLRequest(url: url!)
+        request.httpMethod = "PUT"
+        
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+
+        let session = URLSession.shared
+        let task = session.uploadTask(with: request, from: uploadData) { data, response, error in
+            let successRange = 200..<300
+            let status = (response as? HTTPURLResponse)?.statusCode ?? 0
+            guard error == nil else {
+                print("Error occur: \(String(describing: error))")
+                return
+            }
+            if !successRange.contains(status) {
+                print("status code: ", status)
+            }
+
+            if status == 201 {
+                print("방 상태 완료로 변경 성공")
+                print(response as Any)
+                completion(true)
+            } else {
+                print("방 상태 완료로 변경 실패")
                 print(response as Any)
                 completion(false)
             }
@@ -294,13 +380,13 @@ class BoardViewModel: ObservableObject {
             completion(false)
             return
         }
-        
+
         let url = URL(string: "http://localhost:8080/post/upload")
-        
+
         var request = URLRequest(url: url!)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        
+
         let session = URLSession.shared
         let task = session.uploadTask(with: request, from: uploadData) { data, response, error in
 
@@ -309,10 +395,10 @@ class BoardViewModel: ObservableObject {
                   successRange.contains(statusCode) else {
                 print((response as? HTTPURLResponse)?.statusCode)
                 print("Post 실패 | Error occur: \(String(describing: error))")
-                
+
                 return
             }
-            
+
             let postSuccess = 201
             if postSuccess == (response as? HTTPURLResponse)?.statusCode {
                 print("새 글 post 성공")
@@ -325,12 +411,12 @@ class BoardViewModel: ObservableObject {
             }
         }
         task.resume()
-    
+
     }
     
     func checkUserIsHost(userName: String, inArray array: [[String: String]]) -> Bool {
         for dict in array {
-            if let name = dict["name"], name == userName, dict["role"] == "HOST" {
+            if let name = dict["username"], name == userName, dict["role"] == "HOST" {
                 return true
             }
         }
@@ -339,7 +425,7 @@ class BoardViewModel: ObservableObject {
     
     func checkUserIsGuest(userName: String, inArray array: [[String: String]]) -> Bool {
         for dict in array {
-            if let name = dict["name"], name == userName {
+            if let name = dict["username"], name == userName {
                 return true
             }
         }

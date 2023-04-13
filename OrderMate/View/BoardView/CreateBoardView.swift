@@ -24,7 +24,7 @@ struct CreateBoardView: View {
     @State var boardInfo = BoardStructModel(ownerName: UUID().uuidString,
                                             title: "",
                                             createdAt: "",
-                                            postStatus: "RECRUITING",
+                                            postStatus: .recruiting,
                                             maxPeopleNum: 5,
                                             currentPeopleNum: 1,
                                             isAnonymous: false,
@@ -52,7 +52,7 @@ struct CreateBoardView: View {
             
         }
     }
-    
+
     var body: some View {
         ScrollView {
             VStack(alignment: .leading) {
@@ -82,21 +82,11 @@ struct CreateBoardView: View {
                     .cornerRadius(10)
                     .padding()
 
-                // DatePicer 사용 전 데이터 잘 가나 체크
-//                TextField("주문 시각을 입력해주세요.", text: convertBinding($boardExam.estimatedOrderTime))
-//                    .frame(height: 50)
-//                    .background(Color("green 0"))
-//                    .cornerRadius(10)
-//                    .padding()
-//
                 DatePicker("주문 시각을 선택해주세요.", selection: $estimatedOrderTime)
                     .frame(height: 50)
                     .foregroundColor(Color("green 2"))
                     .cornerRadius(10)
                     .padding()
-//                    .onDisappear {
-//                        boardInfo.withOrderLink = withOrderLink
-//                    }
 
                 HStack {
                     Text("모집 인원을 선택하세요")

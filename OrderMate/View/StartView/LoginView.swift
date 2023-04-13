@@ -8,12 +8,10 @@
 import SwiftUI
 
 struct LoginView: View {
-        @Binding var loginState: Bool
-//    @State var myIdString: String = ""
-//    @State var myPasswordString: String = ""
+    @Binding var loginState: Bool
     @State var isSecureMode: Bool = true
     @State var loginModel = LoginViewModel()
-    @State var user = UserModel(username: "", password: "")
+    @State var user = UserModel()
     var body: some View {
         VStack {
             Spacer()
@@ -61,8 +59,6 @@ struct LoginView: View {
         .padding()
     }
 }
-
-
 
 struct LoginView_Previews: PreviewProvider {
     @State static var loginState = false

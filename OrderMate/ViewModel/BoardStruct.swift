@@ -7,57 +7,57 @@
 
 import Foundation
 
-struct Board: Hashable, Identifiable, Codable {
-    var id: String
-    var title: String
-    var location: String
-    var date: Date
-    var maxUser: Int
-    var userList: [String] = []
-}
+//struct Board: Hashable, Identifiable, Codable {
+//    var id: String
+//    var title: String
+//    var location: String
+//    var date: Date
+//    var maxUser: Int
+//    var userList: [String] = []
+//}
 
-struct CreatBoard: Codable {
-    var title: String
-    var maxPeopleNum: String
-    var isAnonymous: Int?
-    var spaceType: String?
-    var content: String
-    var withOrderLink: String?
-    var pickupSpace: String?
-    var accountNum: String?
-    var estimatedOrdTime: String?
-   
-}
+//struct CreatBoard: Codable {
+//    var title: String
+//    var maxPeopleNum: String
+//    var isAnonymous: Int?
+//    var spaceType: String?
+//    var content: String
+//    var withOrderLink: String?
+//    var pickupSpace: String?
+//    var accountNum: String?
+//    var estimatedOrdTime: String?
+//
+//}
 
-struct UploadData {
-    var title: String
-    var maxPeopleNum: String
-    var isAnonymous: Int
-    var spaceType: String
-    var content: String
-    var withOrderLink: String
-    var pickupSpace: String
-    var accountNum: String
-    var estimatedOrdTime: String
-}
-
-struct RoomInfo: Decodable {
-    let postId: Int?
-    let title: String?
-    let createdAt: Date?
-    let postStatus: String?
-    let maxPeopleNum: Int?
-    let currentPeopleNum: Int?
-    let isAnonymous: Bool?
-    let content: String?
-    let withOrderLink: String?
-    let pickupSpace: String?
-    let spaceType: String?
-    let accountNum: String?
-    let estimatedOrderTime: Date?
-    let ownerId: Int?
-    let ownerName: String?
-}
+//struct UploadData {
+//    var title: String
+//    var maxPeopleNum: String
+//    var isAnonymous: Int
+//    var spaceType: String
+//    var content: String
+//    var withOrderLink: String
+//    var pickupSpace: String
+//    var accountNum: String
+//    var estimatedOrdTime: String
+//}
+//
+//struct RoomInfo: Decodable {
+//    let postId: Int?
+//    let title: String?
+//    let createdAt: Date?
+//    let postStatus: String?
+//    let maxPeopleNum: Int?
+//    let currentPeopleNum: Int?
+//    let isAnonymous: Bool?
+//    let content: String?
+//    let withOrderLink: String?
+//    let pickupSpace: String?
+//    let spaceType: String?
+//    let accountNum: String?
+//    let estimatedOrderTime: Date?
+//    let ownerId: Int?
+//    let ownerName: String?
+//}
 
 // boardListView용 데이터...struct RoomInfo와 달라야하는지 리뷰 필요
 struct RoomInfoPreview: Codable, Hashable {
@@ -73,9 +73,9 @@ struct RoomInfoPreview: Codable, Hashable {
     let pickupSpace: String?
     let spaceType: String?
     let accountNum: String?
-    let estimatedOrderTime: Date?
-    let ownerId: Int?
-    let ownerName: String?
+    let estimatedOrderTime: String?
+    let ownerId: Int? // 아이디별 고유 넘버링
+    let ownerName: String? // 익명 여부에 따라 이름 혹은 별명
 }
 
 struct RoomList {
@@ -151,5 +151,43 @@ struct RoomList {
             }
         }
         task.resume()
+    }
+    
+    func getParticipatedBoard(completionHandler: @escaping (Bool, Any) -> Void) {
+        // 내가 속한 방 정보 가져오기
+        // http://localhost:8080/user/post-list
+        
+        if let url = URL(string: urlString + APIModel.user.rawValue + "/" + "post-list") {
+            var request = URLRequest(url: url)
+            request.httpMethod = "GET"
+
+            let session = URLSession.shared
+            let task = session.dataTask(with: request) { (data, response, error) in
+                guard error == nil else {
+                    print("Error: error calling GET")
+                    print(error!)
+                    return
+                }
+                guard let data = data else {
+                    print("Error: Did not receive data")
+                    return
+                }
+                guard let response = response as? HTTPURLResponse, (200 ..< 300) ~= response.statusCode else {
+                    print("Error: HTTP request failed")
+                    return
+                }
+                
+                do {
+                    let output = try JSONDecoder().decode([RoomInfoPreview].self, from: data)
+                    print(output)
+                    print("JSON Data Parsing")
+                    
+                    completionHandler(true, output)
+                } catch {
+                    print(error)
+                }
+            }
+            task.resume()
+        }
     }
 }
