@@ -38,6 +38,22 @@ struct RoomListView: View {
                                                                      ownerId: 1,
                                                                      ownerName: "")]
     @State private var showingAlert = false // 로그아웃 alert bool
+    
+    func roomListreFreash() {
+        // user Info 받아오기
+        userManager.getMyInfo()
+        userManager.getAuthority()
+        // BoardListview 새로고침
+        DispatchQueue.main.async {
+            roomList.getAllRoomList { success, data in
+                listJsonArray = data as! [RoomInfoPreview]
+            }
+            roomList.getParticipatedBoard { success, data in
+                recentListArray = data as! [RoomInfoPreview]
+            }
+        }
+    }
+    
     var body: some View {
         ZStack {
             NavigationStack {
@@ -69,13 +85,7 @@ struct RoomListView: View {
                             }
                         }.padding()
                         Button {
-                            roomList.getAllRoomList { success, data in
-                                listJsonArray = data as! [RoomInfoPreview]
-                            }
-                            roomList.getParticipatedBoard { success, data in
-                                recentListArray = data as! [RoomInfoPreview]
-                            }
-                            
+                            roomListreFreash()
                         } label: {
                             Text("방 목록 새로고침")
                         }
@@ -88,6 +98,7 @@ struct RoomListView: View {
                                     ForEach(recentListArray, id: \.self) { data in
                                         NavigationLink {
                                             BoardView(postId: data.postId!)
+                                                .toolbar(.hidden, for: .tabBar)
                                         } label: {
                                             HStack {
                                                 VStack(alignment: .leading) {
@@ -119,6 +130,7 @@ struct RoomListView: View {
                                 NavigationLink {
                                     if let data = data.postId {
                                         BoardView(postId: data)
+                                            .toolbar(.hidden, for: .tabBar)
                                     }
                                 } label: {
                                     HStack {
@@ -154,43 +166,32 @@ struct RoomListView: View {
                             }
                         }
                     }
+                    .onAppear {
+                        roomListreFreash()
+                    }
                     VStack {
                         Spacer()
                         HStack {
                             Spacer()
                             NavigationLink {
                                 CreateBoardView()
+                                    .toolbar(.hidden, for: .tabBar)
                             } label: {
                                 Image(systemName: "plus.circle.fill")
                                     .font(.title.bold())
-                            }.padding()
+                            }
+                            .padding()
                         }.padding()
                     }
                 }
                 
-            }.refreshable {
-                roomList.getAllRoomList { success, data in
-                    listJsonArray = data as! [RoomInfoPreview]
-                }
-                roomList.getParticipatedBoard { success, data in
-                    recentListArray = data as! [RoomInfoPreview]
-                }
+            }
+            
+            .refreshable {
+                roomListreFreash()
             }
         }
-        .onAppear {
-            // user Info 받아오기
-            userManager.getMyInfo()
-            userManager.getAuthority()
-            // BoardListview 진입시 1초뒤 자동 새로고침
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
-                roomList.getAllRoomList { success, data in
-                    listJsonArray = data as! [RoomInfoPreview]
-                }
-                roomList.getParticipatedBoard { success, data in
-                    recentListArray = data as! [RoomInfoPreview]
-                }
-            })
-        }
+        
     }
 }
 

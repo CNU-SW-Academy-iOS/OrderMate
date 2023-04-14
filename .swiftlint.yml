@@ -13,3 +13,5 @@ disabled_rules: # Default Rules에서 비활성화할 규칙
     - force_unwrapping
 
     - type_body_length
+
+    - function_body_length
