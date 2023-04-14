@@ -10,4 +10,5 @@ enum APIModel: String {
     case post
     case get
     case put
+    case upload
 }

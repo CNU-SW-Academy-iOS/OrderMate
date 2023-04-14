@@ -161,31 +161,7 @@ struct RoomListView: View {
                             NavigationLink {
                                 CreateBoardView()
                             } label: {
-                                Image(systemName: "plus")
-                                    .font(.title.bold())
-                            }.padding()
-                            
-                            Button {
-                                roomList.uploadData(post: BoardStructModel(ownerName: "버튼테스트3",
-                                                                           title: "버튼테스트",
-                                                                           createdAt: "",
-                                                                           maxPeopleNum: 2,
-                                                                           currentPeopleNum: 1,
-                                                                           isAnonymous: false,
-                                                                           content: "버튼테스트",
-                                                                           withOrderLink: "버튼테스트",
-                                                                           pickupSpace: "버튼테스트",
-                                                                           spaceType: "DORMITORY",
-                                                                           accountNum: "버튼테스트",
-                                                                           estimatedOrderTime: "2023-02-05T12:59:11.332")) { success in
-                                    if success {
-                                        print("방생성완료")
-                                    } else {
-                                        print("방생성실패")
-                                    }
-                                }
-                            } label: {
-                                Image(systemName: "plus")
+                                Image(systemName: "plus.circle.fill")
                                     .font(.title.bold())
                             }.padding()
                         }.padding()
