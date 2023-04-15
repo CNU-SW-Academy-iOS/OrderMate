@@ -6,7 +6,19 @@ struct MainView: View {
         if loginState == false {
             StartPageView(loginState: $loginState)
         } else {
-            RoomListView(loginState: $loginState)
+            TabView {
+                RoomListView(loginState: $loginState)
+                    .tabItem {
+                        Image(systemName: "house")
+                        Text("Rooms")
+                    }
+                ProfileView()
+                    .tabItem {
+                        Image(systemName: "gear")
+                        Text("Settings")
+                    }
+            }
+            
         }
     }
 }

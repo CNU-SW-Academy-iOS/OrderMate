@@ -24,6 +24,17 @@ struct BoardView: View {
     
     @StateObject var manager: BoardViewModel = BoardViewModel.shared
     
+    func boardViewRefreash() {
+        manager.getBoard(postId: postId) { isComplete in
+            if isComplete {
+                manager.processBoardInfo(userModel: userModel) { _, isHost, isCompleted, isEntered in
+                    self.isHost = isHost
+                    self.isCompleted = isCompleted
+                    self.isEntered = isEntered
+                }
+            }
+        }
+    }
     var body: some View {
         NavigationStack {
             VStack {
@@ -122,16 +133,7 @@ struct BoardView: View {
                                                     if status {
                                                         isCompleted = false
                                                         // 방잠금으로 새로 고침
-                                                        manager.getBoard(postId: postId) { isComplete in
-                                                            if isComplete {
-                                                                manager.processBoardInfo(userModel: userModel) { _, isHost, isCompleted, isEntered in
-                                                                    self.isHost = isHost
-                                                                    self.isCompleted = isCompleted
-                                                                    self.isEntered = isEntered
-                                                                }
-                                                            }
-                                                        }
-                                                        
+                                                        boardViewRefreash()
                                                     } else {
                                                         
                                                     }
@@ -156,15 +158,7 @@ struct BoardView: View {
                                                     if status {
                                                         isCompleted = true
                                                         // 방잠금으로 새로 고침
-                                                        manager.getBoard(postId: postId) { isComplete in
-                                                            if isComplete {
-                                                                manager.processBoardInfo(userModel: userModel) { _, isHost, isCompleted, isEntered in
-                                                                    self.isHost = isHost
-                                                                    self.isCompleted = isCompleted
-                                                                    self.isEntered = isEntered
-                                                                }
-                                                            }
-                                                        }
+                                                        boardViewRefreash()
                                                     } else {
                                                     }
                                                 }
@@ -189,15 +183,7 @@ struct BoardView: View {
                                                 if status {
                                                     isCompleted = true
                                                     // 방잠금으로 새로 고침
-                                                    manager.getBoard(postId: postId) { isComplete in
-                                                        if isComplete {
-                                                            manager.processBoardInfo(userModel: userModel) { _, isHost, isCompleted, isEntered in
-                                                                self.isHost = isHost
-                                                                self.isCompleted = isCompleted
-                                                                self.isEntered = isEntered
-                                                            }
-                                                        }
-                                                    }
+                                                    boardViewRefreash()
                                                     
                                                 } else {
                                                     
@@ -205,15 +191,9 @@ struct BoardView: View {
                                             }
                                         }), secondaryButton: .cancel(Text("취소")))
                                     }
-                                    
-                                    
-                                    
-                                    
-                                    
                                 }
                             }
                         }
-                        
                         Spacer()
                         statePeopleView
                         // 참가 안한 상태고 방이 잠기지 않으면
@@ -258,16 +238,7 @@ struct BoardView: View {
                             Button {
                                 manager.leave(postId: postId) { status in
                                     if status {
-                                        manager.getBoard(postId: postId) { isComplete in
-                                            if isComplete {
-                                                manager.processBoardInfo(userModel: userModel) { _, isHost, isCompleted, isEntered in
-                                                    self.isHost = isHost
-                                                    self.isCompleted = isCompleted
-                                                    self.isEntered = isEntered
-
-                                                }
-                                            }
-                                        }
+                                        boardViewRefreash()
                                         DispatchQueue.main.async {
                                             self.presentationMode.wrappedValue.dismiss()
                                         }
@@ -306,28 +277,12 @@ struct BoardView: View {
                             }
                         }
                     }.refreshable {
-                        manager.getBoard(postId: postId) { isComplete in
-                            if isComplete {
-                                manager.processBoardInfo(userModel: userModel) { _, isHost, isCompleted, isEntered in
-                                    self.isHost = isHost
-                                    self.isCompleted = isCompleted
-                                    self.isEntered = isEntered
-                                }
-                            }
-                        }
+                        boardViewRefreash()
                     }
                 }
             }
             .onAppear {
-                manager.getBoard(postId: postId) { isComplete in
-                    if isComplete {
-                        manager.processBoardInfo(userModel: userModel) { _, isHost, isCompleted, isEntered in
-                            self.isHost = isHost
-                            self.isCompleted = isCompleted
-                            self.isEntered = isEntered
-                        }
-                    }
-                }
+                boardViewRefreash()
             }
         }
     }
