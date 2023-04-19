@@ -38,6 +38,7 @@ struct RoomListView: View {
                                                                      ownerId: 1,
                                                                      ownerName: "")]
     @State private var showingAlert = false // 로그아웃 alert bool
+    @State private var joinErrorFlag = false
     
     func roomListreFreash() {
         // user Info 받아오기
@@ -173,14 +174,27 @@ struct RoomListView: View {
                         Spacer()
                         HStack {
                             Spacer()
-                            NavigationLink {
-                                CreateBoardView()
-                                    .toolbar(.hidden, for: .tabBar)
-                            } label: {
-                                Image(systemName: "plus.circle.fill")
-                                    .font(.title.bold())
+                            if userManager.authorityModel.authority == false {
+                                Button {
+                                    joinErrorFlag = true
+                                }  label: {
+                                    Image(systemName: "plus.circle.fill")
+                                        .font(.title.bold())
+                                }.alert(isPresented: $joinErrorFlag) {
+                                    Alert(title: Text("경고"), message: Text("이미 다른 방에 소속중입니다"), dismissButton: .default(Text("확인")))
+                                }
+                                .padding()
+                            } else {
+                                NavigationLink {
+                                    CreateBoardView()
+                                        .toolbar(.hidden, for: .tabBar)
+                                } label: {
+                                    Image(systemName: "plus.circle.fill")
+                                        .font(.title.bold())
+                                }
+                                .padding()
                             }
-                            .padding()
+                            
                         }.padding()
                     }
                 }

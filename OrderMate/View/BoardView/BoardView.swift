@@ -14,6 +14,7 @@ struct BoardView: View {
     @State private var isShowUnlockAlert: Bool = false // 방 잠금해제 alert용
     @State private var isShowCompleteAlert: Bool = false // 방 완료 alert용
     @State private var isShowDeleteAlert: Bool = false // 방 폭파 alert용
+    @State private var joinErrorFlag: Bool = false
     
     @StateObject var manager: BoardViewModel = BoardViewModel.shared
     
@@ -193,15 +194,20 @@ struct BoardView: View {
                         if isEntered == false && isCompleted == false {
                             // 참가전
                             Button {
-                                manager.joinAndFetchBoard(postId: postId) { isComplete in
-                                    if isComplete {
-                                        manager.processBoardInfo(userModel: userModel) { _, isHost, isCompleted, isEntered in
-                                            self.isHost = isHost
-                                            self.isCompleted = isCompleted
-                                            self.isEntered = isEntered
+                                if userManager.authorityModel.authority == false {
+                                    joinErrorFlag = true
+                                } else {
+                                    manager.joinAndFetchBoard(postId: postId) { isComplete in
+                                        if isComplete {
+                                            manager.processBoardInfo(userModel: userModel) { _, isHost, isCompleted, isEntered in
+                                                self.isHost = isHost
+                                                self.isCompleted = isCompleted
+                                                self.isEntered = isEntered
+                                            }
                                         }
                                     }
                                 }
+                                
                             } label: {
                                 Text("방 참여하기")
                                     .font(.system(size: 24))
@@ -212,6 +218,9 @@ struct BoardView: View {
                                     .background(isCompleted ? Color.orange : Color("green 2"))
                             }
                             .padding()
+                            .alert(isPresented: $joinErrorFlag) {
+                                Alert(title: Text("경고"), message: Text("이미 다른 방에 소속중입니다"), dismissButton: .default(Text("확인")))
+                            }
                         } else if isEntered == false && isCompleted == true {
                             // 참가안한방 잠겨있는경우 접근 불가
                             Button {
