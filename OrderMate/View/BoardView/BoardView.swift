@@ -40,7 +40,7 @@ struct BoardView: View {
                             Text("안녕하세요, \(userManager.userModel.name)")
                             Spacer()
                             if let createdAt = board.createdAt {
-                                Text(createdAt.formatISO8601DateToCustom())
+                                Text(createdAt.toStringYYMMDDHHMM())
                                     .font(.subheadline)
                                     .foregroundColor(.gray)
                             }
@@ -70,7 +70,13 @@ struct BoardView: View {
                         }.padding()
                         
                         VStack {
-                            // 다른 정보들도 넣을 수 있도록 칸 변경 2x2 모양이 가장 깔끔할 것 같음
+                            if let estimatedOrderTime = board.estimatedOrderTime {
+                                Text("주문 예정 시간")
+                                Text(estimatedOrderTime.toStringYYMMDDHHMM())
+                                    .font(.subheadline)
+                                    .foregroundColor(.gray)
+                            }
+                            
                             HStack {
                                 Text("\(board.pickupSpace)").customBoardInfo()
                                 Text("\(board.spaceType)").customBoardInfo()

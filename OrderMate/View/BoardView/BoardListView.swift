@@ -9,7 +9,7 @@ struct RoomListView: View {
     @State var title = ""
     @State var listJsonArray: [RoomInfoPreview] = [RoomInfoPreview(postId: 99,
                                                                    title: "개설된 방이 없습니다",
-                                                                   createdAt: "yy-MM-dd HH:mm",
+                                                                   createdAt: Date(),
                                                                    postStatus: "",
                                                                    maxPeopleNum: 5,
                                                                    currentPeopleNum: 1,
@@ -19,12 +19,12 @@ struct RoomListView: View {
                                                                    pickupSpace: "",
                                                                    spaceType: "",
                                                                    accountNum: "",
-                                                                   estimatedOrderTime: "",
+                                                                   estimatedOrderTime: Date(),
                                                                    ownerId: 1,
                                                                    ownerName: "")]
     @State var recentListArray: [RoomInfoPreview] = [RoomInfoPreview(postId: 99,
                                                                      title: "개설된 방이 없습니다",
-                                                                     createdAt: "yy-MM-dd HH:mm",
+                                                                     createdAt: Date(),
                                                                      postStatus: "",
                                                                      maxPeopleNum: 5,
                                                                      currentPeopleNum: 1,
@@ -34,7 +34,7 @@ struct RoomListView: View {
                                                                      pickupSpace: "",
                                                                      spaceType: "",
                                                                      accountNum: "",
-                                                                     estimatedOrderTime: "",
+                                                                     estimatedOrderTime: Date(),
                                                                      ownerId: 1,
                                                                      ownerName: "")]
     @State private var showingAlert = false // 로그아웃 alert bool
@@ -103,7 +103,7 @@ struct RoomListView: View {
                                         } label: {
                                             HStack {
                                                 VStack(alignment: .leading) {
-                                                    Text(data.createdAt!.formatISO8601DateToCustom())
+                                                    Text(data.createdAt!.toStringYYMMDDHHMM())
                                                     // "yy-MM-dd HH:mm"
                                                     Text(data.title!)
                                                         .font(.headline)
@@ -137,7 +137,7 @@ struct RoomListView: View {
                                     HStack {
                                         VStack(alignment: .leading) {
                                             if let createdAt = data.createdAt {
-                                                Text(createdAt.formatISO8601DateToCustom()) // "yy-MM-dd HH:mm"
+                                                Text(createdAt.toStringYYMMDDHHMM()) // "yy-MM-dd HH:mm"
                                             }
                                             if let title = data.title {
                                                 Text(title)

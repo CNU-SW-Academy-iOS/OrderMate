@@ -4,7 +4,7 @@ import Foundation
 struct RoomInfoPreview: Codable, Hashable {
     let postId: Int?
     let title: String?
-    let createdAt: String?
+    let createdAt: Date?
     let postStatus: String?
     let maxPeopleNum: Int?
     let currentPeopleNum: Int?
@@ -14,7 +14,7 @@ struct RoomInfoPreview: Codable, Hashable {
     let pickupSpace: String?
     let spaceType: String?
     let accountNum: String?
-    let estimatedOrderTime: String?
+    let estimatedOrderTime: Date?
     let ownerId: Int? // 아이디별 고유 넘버링
     let ownerName: String? // 익명 여부에 따라 이름 혹은 별명
 }
@@ -43,7 +43,9 @@ struct RoomList {
                 }
                 
                 do {
-                    let output = try JSONDecoder().decode([RoomInfoPreview].self, from: data)
+                    let decoder = JSONDecoder()
+                    decoder.dateDecodingStrategy = .formatted(DateFormatter.customISO8601)
+                    let output = try decoder.decode([RoomInfoPreview].self, from: data)
                     print(output)
                     print("JSON Data Parsing")
                     
@@ -57,7 +59,16 @@ struct RoomList {
     }
     
     func uploadData(post: BoardStructModel, completion: @escaping (Bool) -> Void) {
-        guard let uploadData = try? JSONEncoder().encode(post)
+
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+        dateFormatter.timeZone = TimeZone.current
+           dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS"
+        
+        let encoder = JSONEncoder()
+            encoder.dateEncodingStrategy = .formatted(dateFormatter)
+        
+        guard let uploadData = try? encoder.encode(post)
         else {
             completion(false)
             return
@@ -119,7 +130,9 @@ struct RoomList {
                 }
                 
                 do {
-                    let output = try JSONDecoder().decode([RoomInfoPreview].self, from: data)
+                    let decoder = JSONDecoder()
+                    decoder.dateDecodingStrategy = .formatted(DateFormatter.customISO8601)
+                    let output = try decoder.decode([RoomInfoPreview].self, from: data)
                     print(output)
                     print("JSON Data Parsing")
                     

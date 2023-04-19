@@ -41,9 +41,8 @@ class BoardViewModel: ObservableObject {
                 return
             }
             let decoder = JSONDecoder()
-            decoder.dateDecodingStrategy = .millisecondsSince1970
             decoder.keyDecodingStrategy = .convertFromSnakeCase
-            
+            decoder.dateDecodingStrategy = .formatted(DateFormatter.customISO8601)
             do {
                 let response = try decoder.decode(BoardStructModel.self, from: data)
                 DispatchQueue.main.async {
