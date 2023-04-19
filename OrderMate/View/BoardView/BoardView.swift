@@ -14,6 +14,7 @@ struct BoardView: View {
     @State private var isShowUnlockAlert: Bool = false // 방 잠금해제 alert용
     @State private var isShowCompleteAlert: Bool = false // 방 완료 alert용
     @State private var isShowDeleteAlert: Bool = false // 방 폭파 alert용
+    @State private var isLeaveAlert: Bool = false // 방 나가기 alert용
     @State private var joinErrorFlag: Bool = false
     
     @StateObject var manager: BoardViewModel = BoardViewModel.shared
@@ -238,15 +239,7 @@ struct BoardView: View {
                             // 참가후
                             // 방 참가자만 볼수있는 방나기기 버튼
                             Button {
-                                manager.leave(postId: postId) { status in
-                                    if status {
-                                        boardViewRefreash()
-                                        DispatchQueue.main.async {
-                                            self.presentationMode.wrappedValue.dismiss()
-                                        }
-                                    }
-                                }
-                                
+                                isLeaveAlert = true
                             } label: {
                                 Text("방 나가기")
                                     .font(.system(size: 24))
@@ -257,7 +250,21 @@ struct BoardView: View {
                                     .background(isCompleted ? Color.orange : Color("green 2"))
                             }
                             .padding()
-                            
+                            .alert("방을 나가시겠습니까?", isPresented: $isLeaveAlert) {
+                                Button("방 나가기", role: .destructive) {
+                                    manager.leave(postId: postId) { status in
+                                        if status {
+                                            boardViewRefreash()
+                                            DispatchQueue.main.async {
+                                                self.presentationMode.wrappedValue.dismiss()
+                                            }
+                                        }
+                                    }
+                                }
+                                Button("취소", role: .cancel) {
+                                    isLeaveAlert = false
+                                }
+                            }
                         }
                         // 목록중에 내가 있다면
                         if let list = board.participationList {
