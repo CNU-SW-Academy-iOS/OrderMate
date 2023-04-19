@@ -1,10 +1,3 @@
-//
-//  BoardView.swift
-//  OrderMate
-//
-//  Created by 문영균 on 2023/03/15.
-//
-
 import SwiftUI
 
 struct BoardView: View {

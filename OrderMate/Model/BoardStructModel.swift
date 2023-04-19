@@ -19,18 +19,6 @@ struct BoardStructModel: Codable {
     var estimatedOrderTime: String?
     var participationList: [[String: String]]?
     var commentList: [String]?
-    
-//    enum SpaceTypes: CodingKey {
-//        case DORMITORY
-//        case STUDIO_APARTMENT
-//        case ALL
-//    }
-//    
-//    enum CodingKeys : String, CodingKey {
-//        case 기숙사 = "DORMITORY"
-//        case 자취 = "STUDIO_APARTMENT"
-//        case 상관없음 = "ALL"
-//    }
 }
 
 // Date 받아올때 사용함
