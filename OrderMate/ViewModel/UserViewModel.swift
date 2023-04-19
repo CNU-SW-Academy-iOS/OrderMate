@@ -1,10 +1,3 @@
-//
-//  UserViewModel.swift
-//  OrderMate
-//
-//  Created by yook on 2023/04/07.
-//
-
 import Foundation
 
 class UserViewModel: ObservableObject {

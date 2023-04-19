@@ -1,10 +1,3 @@
-//
-//  LoginView.swift
-//  iosOrdermate
-//
-//  Created by cnu on 2023/03/02.
-//
-
 import SwiftUI
 
 struct LoginView: View {
