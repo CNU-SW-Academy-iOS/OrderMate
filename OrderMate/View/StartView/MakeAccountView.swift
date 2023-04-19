@@ -15,6 +15,7 @@ struct MakeAccountView: View {
     @State var isPresented = false
     @State var isSecureMode: Bool = true
     @State var isShowAlert: Bool = false
+    
     var body: some View {
         ScrollView {
             VStack {
@@ -62,11 +63,13 @@ struct MakeAccountView: View {
                                 Text($0)
                             }
                         }
-                        .frame(width: 150)
-                        .background(Color("green 0"))
+                        .frame(width: 150, height: 36)
                         .pickerStyle(.segmented)
-                        .cornerRadius(15)
-                        
+                        .accentColor(Color("green 0"))
+                        .cornerRadius(10)
+                        .onAppear {
+                            UISegmentedControl.appearance().backgroundColor = UIColor(named: "green 0")
+                        }
                     }
                     
                 }.padding()
@@ -109,12 +112,11 @@ struct MakeAccountView: View {
                     }
                 } label: {
                     Text("회원 가입")
-                        .fontWeight(.bold)
-                        .frame(width: 300.0, height: 30)
+                        .font(.title2)
+                        .fontWeight(.semibold)
                         .padding()
                         .foregroundColor(.white)
                         .background(Color("AccentColor"))
-                        .font(.title)
                 }.alert(isPresented: $isPresented) {
                     Alert(title: Text("경고"), message: Text("이미 존재하는 아이디입니다."), dismissButton: .default(Text("확인")))
                 }
@@ -124,12 +126,13 @@ struct MakeAccountView: View {
                     isShowAlert = true
                 } label: {
                     Text("회원 가입")
-                        .fontWeight(.bold)
+                        .fontWeight(.semibold)
                         .frame(width: 300.0, height: 30)
                         .padding()
-                        .foregroundColor(.white)
-                        .background(Color("AccentColor"))
-                        .font(.title)
+                        .foregroundColor(.black)
+                        .background(Color("green 0"))
+                        .font(.title2)
+                        .cornerRadius(10)
                 }.alert(isPresented: $isShowAlert) {
                     Alert(title: Text("경고"), message: Text("모든 정보를 입력해주세요."), dismissButton: .default(Text("확인")))
                 }
