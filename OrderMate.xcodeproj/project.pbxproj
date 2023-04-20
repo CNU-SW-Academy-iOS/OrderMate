@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		BA3F37EF29B5C989009BF7FE /* BoardStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3F37EE29B5C989009BF7FE /* BoardStruct.swift */; };
+		BA3F37EF29B5C989009BF7FE /* CreateBoardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3F37EE29B5C989009BF7FE /* CreateBoardViewModel.swift */; };
 		BA3F37F329B5D120009BF7FE /* BoardListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3F37F229B5D120009BF7FE /* BoardListView.swift */; };
 		BABBA82929CAA63300C61F54 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = BABBA82829CAA63300C61F54 /* .swiftlint.yml */; };
 		BAF470A429B21C0C00F242EF /* OrderMateApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF470A329B21C0C00F242EF /* OrderMateApp.swift */; };
@@ -40,7 +40,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		BA3F37EE29B5C989009BF7FE /* BoardStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardStruct.swift; sourceTree = "<group>"; };
+		BA3F37EE29B5C989009BF7FE /* CreateBoardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateBoardViewModel.swift; sourceTree = "<group>"; };
 		BA3F37F229B5D120009BF7FE /* BoardListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardListView.swift; sourceTree = "<group>"; };
 		BABBA82829CAA63300C61F54 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		BAF470A029B21C0C00F242EF /* OrderMate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OrderMate.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -182,8 +182,8 @@
 		EDD4F7AB29CC86DD00E578AF /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				EDF682C429EF9DAC00F2F37E /* ChatViewModel */,
 				EDF682C329EF9D4800F2F37E /* BoardViewModel */,
+				EDF682C429EF9DAC00F2F37E /* ChatViewModel */,
 				EDF682C229EF9D1700F2F37E /* UserViewModel */,
 			);
 			path = ViewModel;
@@ -202,7 +202,7 @@
 			isa = PBXGroup;
 			children = (
 				BAFCF32F29C875D1006CF5E8 /* BoardViewModel.swift */,
-				BA3F37EE29B5C989009BF7FE /* BoardStruct.swift */,
+				BA3F37EE29B5C989009BF7FE /* CreateBoardViewModel.swift */,
 			);
 			path = BoardViewModel;
 			sourceTree = "<group>";
@@ -327,7 +327,7 @@
 				EDD4F7AF29CC87C700E578AF /* APIModel.swift in Sources */,
 				BAFCF30A29C1A6AB006CF5E8 /* BoardView.swift in Sources */,
 				E40FB24029B625E400A1A4C2 /* MainView.swift in Sources */,
-				BA3F37EF29B5C989009BF7FE /* BoardStruct.swift in Sources */,
+				BA3F37EF29B5C989009BF7FE /* CreateBoardViewModel.swift in Sources */,
 				ED40967329BCAF5300B030A9 /* UserModel.swift in Sources */,
 				E40FB24429B6260200A1A4C2 /* LoginView.swift in Sources */,
 				E40FB24229B625F200A1A4C2 /* StartPageView.swift in Sources */,
