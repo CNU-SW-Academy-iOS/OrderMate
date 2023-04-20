@@ -5,8 +5,7 @@ struct BoardStructModel: Codable {
     var loginUsername: String? // 아이디
     var ownerName: String? // 익명 여부에 따라 이름 혹은 별명
     var title: String
-    var createdAt: String? // 명세서 따른 변경, String으로 들어옴
-    //var postStatus: String? // 명세서 따른 변경, String으로 들어옴
+    var createdAt: Date? // 명세서 따른 변경, String으로 들어옴
     var postStatus: PostStatusEnum? // 명세서 따른 변경, String으로 들어옴
     var maxPeopleNum: Int
     var currentPeopleNum: Int
@@ -16,7 +15,7 @@ struct BoardStructModel: Codable {
     var pickupSpace: String
     var spaceType: String
     var accountNum: String
-    var estimatedOrderTime: String?
+    var estimatedOrderTime: Date?
     var participationList: [[String: String]]?
     var commentList: [String]?
 }
@@ -39,4 +38,23 @@ extension String {
      let customFormattedDate = isoDate.formatISO8601DateToCustom()
      print(customFormattedDate) // "23-04-06 19:52"
      */
+}
+
+extension Date {
+    func toStringYYMMDDHHMM() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yy-MM-dd HH:mm"
+        return dateFormatter.string(from: self)
+    }
+}
+
+extension DateFormatter {
+    static let customISO8601: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.calendar = Calendar(identifier: .iso8601)
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.timeZone = TimeZone.current
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS"
+        return formatter
+    }()
 }

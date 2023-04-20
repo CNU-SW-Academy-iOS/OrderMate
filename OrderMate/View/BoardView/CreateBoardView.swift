@@ -16,7 +16,7 @@ struct CreateBoardView: View {
     
     @State var boardInfo = BoardStructModel(ownerName: UUID().uuidString,
                                             title: "",
-                                            createdAt: "",
+                                            createdAt: Date(),
                                             postStatus: .recruiting,
                                             maxPeopleNum: 5,
                                             currentPeopleNum: 1,
@@ -25,7 +25,32 @@ struct CreateBoardView: View {
                                             withOrderLink: "",
                                             pickupSpace: "",
                                             spaceType: "DORMITORY",
-                                            accountNum: "")
+                                            accountNum: "",
+                                            estimatedOrderTime: Date())
+    
+    var formattedDateBinding: Binding<Date> {
+          Binding<Date>(
+              get: { self.estimatedOrderTime },
+              set: { newValue in
+                  let dateFormatter = DateFormatter()
+                  dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+
+                  let fractionalFormatter = DateFormatter()
+                  fractionalFormatter.dateFormat = ".SSSSSS"
+
+                  let combinedFormatter = DateFormatter()
+                  combinedFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS"
+
+                  let formattedDateString = dateFormatter.string(from: newValue) + fractionalFormatter.string(from: Date())
+
+                  if let formattedDate = combinedFormatter.date(from: formattedDateString) {
+                      self.estimatedOrderTime = formattedDate
+                      self.boardInfo.estimatedOrderTime = formattedDate
+                  }
+              }
+          )
+      }
+    
     // String 옵셔널을 String으로 바꾸기 위한 함수
     func convertBinding(_ optionalBinding: Binding<String?>) -> Binding<String> {
         return Binding<String>(
@@ -74,13 +99,13 @@ struct CreateBoardView: View {
                     .background(Color("green 0"))
                     .cornerRadius(10)
                     .padding()
-
-                DatePicker("주문 시각을 선택해주세요.", selection: $estimatedOrderTime)
-                    .frame(height: 50)
-                    .foregroundColor(Color("green 2"))
-                    .cornerRadius(10)
-                    .padding()
-
+                
+                DatePicker("주문 시각을 선택해주세요.", selection: formattedDateBinding)
+                      .frame(height: 50)
+                      .foregroundColor(Color.green)
+                      .cornerRadius(10)
+                      .padding()
+                
                 HStack {
                     Text("모집 인원을 선택하세요")
                         .foregroundColor(Color("green 2"))
@@ -123,7 +148,7 @@ struct CreateBoardView: View {
                     Text("")
                     Spacer()
                     Button {
-                        boardInfo.createdAt = Date().description
+                        boardInfo.createdAt = Date()
                         boardList.uploadData(post: boardInfo) { success in
                             if success {
                                 print("방 생성 완료")
