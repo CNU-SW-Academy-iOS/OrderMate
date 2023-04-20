@@ -1,60 +1,58 @@
 import SwiftUI
 
 struct ChatView: View {
-    let postID = 1
-    let nickname = "sumin"
+    var postId: Int
+    var chatBoard: BoardStructModel
+    @State private var sendMessage: String = ""
+    @StateObject private var manager = ChatViewModel.shared
+    let userID = UserDefaults.standard.string(forKey: "username")
     
     var body: some View {
+        
         VStack {
-            HStack {
-                Text("방 제목")
-                    .font(.title)
-                Spacer()
-                Text("3/5")
+            VStack {
+                ZStack {
+                    Text(chatBoard.title)
+                    HStack {
+                        Spacer()
+                        Text("\(chatBoard.currentPeopleNum)/\(chatBoard.maxPeopleNum)")
+                    }
+                    
+                }
+                Text("함께 주문하기 링크: \(chatBoard.withOrderLink ?? "")")
             }
             ScrollViewReader { scrollView in
                 ScrollView {
                     VStack {
-                        MessageView(username: "12",
-                                    currentMessage: Message(username: "12",
-                                                            nickname: "soom",
-                                                            text: "안녕하세요",
-                                                            timestamp: Date()))
-                        MessageView(username: "12",
-                                    currentMessage: Message(username: "23",
-                                                            nickname: "lee",
-                                                            text: "반갑습니다",
-                                                            timestamp: Date()))
-                        MessageView(username: "12",
-                                    currentMessage: Message(username: "12",
-                                                            nickname: "soom",
-                                                            text: "배고파서 얼른 주문하고 싶네요",
-                                                            timestamp: Date()))
-                        MessageView(username: "12",
-                                    currentMessage: Message(username: "12",
-                                                            nickname: "soom",
-                                                            text: "뭐먹지",
-                                                            timestamp: Date()))
-                        MessageView(username: "12",
-                                    currentMessage: Message(username: "23",
-                                                            nickname: "lee",
-                                                            text: "그러게요",
-                                                            timestamp: Date()))
-                        MessageView(username: "12",
-                                    currentMessage: Message(username: "33",
-                                                            nickname: "kim",
-                                                            text: "그냥 지금 주문할까요 ?",
-                                                            timestamp: Date()))
-                        
+                        ForEach(manager.msgList) {
+                            MessageView(currentMessage: $0).id($0.id)
+                        }
                     }
+                    .onChange(of: manager.lastMsgID, perform: { newValue in
+                        withAnimation {
+                            scrollView.scrollTo(newValue, anchor: .bottom)
+                        }
+                    })
                 }
             }
-        }.padding(.horizontal)
-    }
-}
+            HStack {
+                TextField("Message 입력", text: $sendMessage, axis: .vertical)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                Button("send") {
+                    send()
+                }
+            }
 
-struct ChatView_Previews: PreviewProvider {
-    static var previews: some View {
-        ChatView()
+        }.padding(.horizontal)
+            .onAppear(perform: {
+                ChatViewModel.shared.getChatInfo(postId: postId)
+                ChatViewModel.shared.listenRoomChat(postId: postId)
+            })
     }
+    func send() {
+        let msg = Message(id: UUID().uuidString, text: sendMessage, timestamp: Date(), userId: userID ?? "", userNickName: UserViewModel.shared.userModel.nickname)
+        ChatViewModel.shared.sendMessageInServer(postId: postId, msg: msg)
+        sendMessage = ""
+    }
+   
 }

@@ -149,9 +149,20 @@ struct CreateBoardView: View {
                     Spacer()
                     Button {
                         boardInfo.createdAt = Date()
-                        boardList.uploadData(post: boardInfo) { success in
+                        boardList.uploadData(post: boardInfo) { success, board in
                             if success {
                                 print("방 생성 완료")
+                                if let board = board {
+                                    print("board : ", board)
+                                    
+                                    ChatViewModel.shared.createChat(board: board) { success in
+                                        if success {
+                                            print("firebase에 데이터 쓰기 성공")
+                                        } else {
+                                            print("firebase에 데이터 쓰기 실패")
+                                        }
+                                    }
+                                }
                             } else {
                                 print("오류 발생으로 방 생성 실패")
                             }

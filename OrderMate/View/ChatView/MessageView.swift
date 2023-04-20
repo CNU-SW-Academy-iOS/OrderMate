@@ -1,17 +1,24 @@
+//
+//  MyMessage.swift
+//  OrderMate
+//
+//  Created by 이수민 on 2023/04/07.
+//
+
 import SwiftUI
 
 struct MessageView: View {
     
-    var username: String // 현재 채팅방 들어온 사람의 id
     var currentMessage: Message
+    let userID = UserDefaults.standard.string(forKey: "username")
     var body: some View {
         VStack {
-            let isCurrentUser = username == currentMessage.username
+            let isCurrentUser = userID == currentMessage.userId
             
             if isCurrentUser {
                 HStack {
                     Spacer()
-                    Text(currentMessage.nickname)
+                    Text(currentMessage.userNickName)
                 }
                 HStack {
                     Spacer()
@@ -33,7 +40,7 @@ struct MessageView: View {
                 }
             } else {
                 HStack {
-                    Text(currentMessage.nickname)
+                    Text(currentMessage.userNickName)
                     Spacer()
                 }
                 HStack {
@@ -62,7 +69,6 @@ struct MessageView: View {
 
 struct MessageView_Previews: PreviewProvider {
     static var previews: some View {
-        MessageView(username: "12",
-                    currentMessage: Message(username: "12", nickname: "sumin", text: "hi", timestamp: Date()))
+        MessageView(currentMessage: Message(id: "11", text: "11", timestamp: Date(), userId: "11", userNickName: "11"))
     }
 }
