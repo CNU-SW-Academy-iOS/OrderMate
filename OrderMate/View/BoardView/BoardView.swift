@@ -22,7 +22,7 @@ struct BoardView: View {
     func boardViewRefreash() {
         manager.getBoard(postId: postId) { isComplete in
             if isComplete {
-                manager.processBoardInfo(userModel: userModel) { _, isHost, isCompleted, isEntered in
+                manager.processBoardInfo(userModel: userIDModel) { _, isHost, isCompleted, isEntered in
                     self.isHost = isHost
                     self.isCompleted = isCompleted
                     self.isEntered = isEntered
@@ -206,7 +206,7 @@ struct BoardView: View {
                                 } else {
                                     manager.joinAndFetchBoard(postId: postId) { isComplete in
                                         if isComplete {
-                                            manager.processBoardInfo(userModel: userModel) { _, isHost, isCompleted, isEntered in
+                                            manager.processBoardInfo(userModel: userIDModel) { _, isHost, isCompleted, isEntered in
                                                 self.isHost = isHost
                                                 self.isCompleted = isCompleted
                                                 self.isEntered = isEntered
@@ -275,7 +275,7 @@ struct BoardView: View {
                         // 목록중에 내가 있다면
                         if let list = board.participationList {
                             ForEach(list, id: \.self) { dict in
-                                if dict["username"] == userModel.username {
+                                if dict["username"] == userIDModel.username {
                                     // 대화뷰 들어가기 버튼
                                     NavigationLink(
                                         destination: ChatView(postId: postId, chatBoard: board),
