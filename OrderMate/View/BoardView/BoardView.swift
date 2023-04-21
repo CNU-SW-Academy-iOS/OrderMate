@@ -159,7 +159,7 @@ struct BoardView: View {
                                                     if status {
                                                         isCompleted = true
                                                         // 방잠금으로 새로 고침
-                                                        boardViewRefreash()
+                                                        self.boardViewRefreash()
                                                     } else {
                                                     }
                                                 }
@@ -277,17 +277,17 @@ struct BoardView: View {
                             ForEach(list, id: \.self) { dict in
                                 if dict["username"] == userModel.username {
                                     // 대화뷰 들어가기 버튼
-                                    NavigationLink {
-                                        ChatView()
-                                    } label: {
-                                        Text("대화 뷰 들어가기")
-                                            .font(.system(size: 24))
-                                            .frame(maxWidth: .infinity, minHeight: 30)
-                                            .padding()
-                                            .foregroundColor(.white)
-                                            .fontWeight(.semibold)
-                                            .background(Color("green 2"))
-                                    } .padding()
+                                    NavigationLink(
+                                        destination: ChatView(postId: postId, chatBoard: board),
+                                        label: {
+                                            Text("대화 뷰 들어가기")
+                                                .font(.system(size: 24))
+                                                .frame(maxWidth: .infinity, minHeight: 30)
+                                                .padding()
+                                                .foregroundColor(.white)
+                                                .fontWeight(.semibold)
+                                                .background(Color("green 2"))
+                                        }) .padding()
                                 }
                             }
                         }
@@ -328,7 +328,6 @@ extension Text {
             .background(Color("green 2"))
     }
 }
-
 struct BoardView_Previews: PreviewProvider {
     var postId = 1
     static var previews: some View {

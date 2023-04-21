@@ -7,11 +7,14 @@
 
 import Foundation
 
-struct Message: Hashable, Codable {
-    var username: String
-    var nickname: String
+struct Message: Codable, Identifiable {
+    var id: String
     var text: String
     var timestamp: Date
+    var userId: String
+    var userNickName: String
+
+
 }
 
 extension Message {
