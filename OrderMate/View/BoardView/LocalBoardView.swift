@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct BoardView: View {
+struct LocalBoardView: View {
     @Environment(\.presentationMode) var presentationMode
     var postId: Int
     @EnvironmentObject var userManager: UserViewModel // user Info 받아오기
@@ -99,8 +99,7 @@ struct BoardView: View {
                                 .frame(maxWidth: .infinity, minHeight: 30)
                                 .padding()
                                 .foregroundColor(.black)
-                                .border(Color("green 0"), width: 3)
-                                .cornerRadius(10)
+                                .border(Color("green 2"), width: 3)
                         }
                         
                         // 방장인지 체크, 방장만 방을 잠글 수 있음
@@ -217,8 +216,7 @@ struct BoardView: View {
                                     .padding()
                                     .foregroundColor(.white)
                                     .fontWeight(.semibold)
-                                    .background(isCompleted ? Color.orange : Color("green 0"))
-                                    .cornerRadius(10)
+                                    .background(isCompleted ? Color.orange : Color("green 2"))
                             }
                             .padding()
                         } else if isEntered == false && isCompleted == true {
@@ -249,13 +247,12 @@ struct BoardView: View {
                                 
                             } label: {
                                 Text("방 나가기")
-                                    .font(.headline)
+                                    .font(.system(size: 24))
                                     .frame(maxWidth: .infinity, minHeight: 30)
                                     .padding()
-                                    .foregroundColor(.black)
+                                    .foregroundColor(.white)
                                     .fontWeight(.semibold)
-                                    .background(isCompleted ? Color.orange : Color("green 0"))
-                                    .cornerRadius(10)
+                                    .background(isCompleted ? Color.orange : Color("green 2"))
                             }
                             .padding()
                             
@@ -269,13 +266,12 @@ struct BoardView: View {
                                         ChatView()
                                     } label: {
                                         Text("대화 뷰 들어가기")
-                                            .font(.headline)
+                                            .font(.system(size: 24))
                                             .frame(maxWidth: .infinity, minHeight: 30)
                                             .padding()
-                                            .foregroundColor(.black)
+                                            .foregroundColor(.white)
                                             .fontWeight(.semibold)
-                                            .background(Color("green 0"))
-                                            .cornerRadius(10)
+                                            .background(Color("green 2"))
                                     } .padding()
                                 }
                             }
@@ -297,7 +293,7 @@ struct BoardView: View {
                 ForEach(manager.getPeopleList(), id: \.self) { imageName in
                     Image(systemName: imageName)
                         .imageScale(.large)
-                        .foregroundColor(Color("green 0"))
+                        .foregroundColor(Color("green 2"))
                         .padding()
                 }
             }
@@ -305,23 +301,9 @@ struct BoardView: View {
     }
 }
 
-// 반복되는 Text 수식 코드를 줄여줌
-extension Text {
-    func customBoardInfo() -> some View {
-        self
-            .font(.subheadline)
-            .font(.title)
-            .frame(maxWidth: .infinity, minHeight: 20)
-            .padding()
-            .foregroundColor(.black)
-            .background(Color("green 0"))
-            .cornerRadius(10)
-    }
-}
-
-struct BoardView_Previews: PreviewProvider {
+struct LocalBoardView_Previews: PreviewProvider {
     var postId = 1
     static var previews: some View {
-        BoardView(postId: 1)
+        LocalBoardView(postId: 1)
     }
 }

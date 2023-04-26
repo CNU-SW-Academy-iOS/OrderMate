@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		BA3F37EF29B5C989009BF7FE /* BoardStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3F37EE29B5C989009BF7FE /* BoardStruct.swift */; };
 		BA3F37F329B5D120009BF7FE /* BoardListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3F37F229B5D120009BF7FE /* BoardListView.swift */; };
+		BAABBAA929EFDDF000CA5D5C /* LocalBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAABBAA829EFDDF000CA5D5C /* LocalBoardView.swift */; };
 		BABBA82929CAA63300C61F54 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = BABBA82829CAA63300C61F54 /* .swiftlint.yml */; };
 		BAF470A429B21C0C00F242EF /* OrderMateApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF470A329B21C0C00F242EF /* OrderMateApp.swift */; };
 		BAF470A829B21C0D00F242EF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BAF470A729B21C0D00F242EF /* Assets.xcassets */; };
@@ -36,6 +37,7 @@
 /* Begin PBXFileReference section */
 		BA3F37EE29B5C989009BF7FE /* BoardStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardStruct.swift; sourceTree = "<group>"; };
 		BA3F37F229B5D120009BF7FE /* BoardListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardListView.swift; sourceTree = "<group>"; };
+		BAABBAA829EFDDF000CA5D5C /* LocalBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalBoardView.swift; sourceTree = "<group>"; };
 		BABBA82829CAA63300C61F54 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		BAF470A029B21C0C00F242EF /* OrderMate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OrderMate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BAF470A329B21C0C00F242EF /* OrderMateApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderMateApp.swift; sourceTree = "<group>"; };
@@ -119,6 +121,7 @@
 				BA3F37F229B5D120009BF7FE /* BoardListView.swift */,
 				BAFCF30929C1A6AB006CF5E8 /* BoardView.swift */,
 				E49BA76929E9B16200EF4361 /* ProfileView.swift */,
+				BAABBAA829EFDDF000CA5D5C /* LocalBoardView.swift */,
 			);
 			path = BoardView;
 			sourceTree = "<group>";
@@ -276,6 +279,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F37C7D0029B98489004B011C /* MakeAccountView.swift in Sources */,
+				BAABBAA929EFDDF000CA5D5C /* LocalBoardView.swift in Sources */,
 				E464802629C95352004616D2 /* CreateBoardView.swift in Sources */,
 				ED7286BF29E03B3900FC9E42 /* MessageModel.swift in Sources */,
 				ED7286B829E0392E00FC9E42 /* ChatView.swift in Sources */,
