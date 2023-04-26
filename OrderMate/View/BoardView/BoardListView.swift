@@ -152,7 +152,7 @@ struct RoomListView: View {
                                     CreateBoardView()
                                         .toolbar(.hidden, for: .tabBar)
                                 } label: {
-                                    Image(systemName: "plus.circle.fill").font(.system(size: 100))
+                                    Image(systemName: "plus.circle.fill").font(.system(size: 50))
                                 }
                                 .padding()
                             }
