@@ -13,8 +13,14 @@ struct ChatListView: View {
         DispatchQueue.main.async {
             roomList.getParticipatedBoard { success, data in
                 if let list = data as? [RoomInfoPreview] {
-                    currentChat = list[0]
-                    chatList = Array(list[1...])
+                    if list.count > 0 {
+                        currentChat = list[0]
+                        if list.count > 1 {
+                            chatList = Array(list[1...])
+                        }
+                    }
+                    
+               
                 }
             }
         }
