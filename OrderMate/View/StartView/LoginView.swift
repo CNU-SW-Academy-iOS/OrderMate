@@ -40,11 +40,13 @@ struct LoginView: View {
                         }
                     }
                 } label: {
-                    Text("login")
-                        .font(.title2)
+                    Text("로그인")
+                        .font(.title3)
+                        .fontWeight(.semibold)
                         .frame(width: 330, height: 60)
-                        .foregroundColor(.white)
-                        .background(Color("green 2"))
+                        .foregroundColor(.black)
+                        .background(Color("green 0"))
+                        .cornerRadius(10)
                 }
             }
             Spacer()

@@ -1,6 +1,13 @@
+//
+//  BoardView.swift
+//  OrderMate
+//
+//  Created by 문영균 on 2023/03/15.
+//
+
 import SwiftUI
 
-struct BoardView: View {
+struct LocalBoardView: View {
     @Environment(\.presentationMode) var presentationMode
     var postId: Int
     @EnvironmentObject var userManager: UserViewModel // user Info 받아오기
@@ -14,15 +21,13 @@ struct BoardView: View {
     @State private var isShowUnlockAlert: Bool = false // 방 잠금해제 alert용
     @State private var isShowCompleteAlert: Bool = false // 방 완료 alert용
     @State private var isShowDeleteAlert: Bool = false // 방 폭파 alert용
-    @State private var isLeaveAlert: Bool = false // 방 나가기 alert용
-    @State private var joinErrorFlag: Bool = false
     
     @StateObject var manager: BoardViewModel = BoardViewModel.shared
     
     func boardViewRefreash() {
         manager.getBoard(postId: postId) { isComplete in
             if isComplete {
-                manager.processBoardInfo(userModel: userIDModel) { _, isHost, isCompleted, isEntered in
+                manager.processBoardInfo(userModel: userModel) { _, isHost, isCompleted, isEntered in
                     self.isHost = isHost
                     self.isCompleted = isCompleted
                     self.isEntered = isEntered
@@ -40,7 +45,7 @@ struct BoardView: View {
                             Text("안녕하세요, \(userManager.userModel.name)")
                             Spacer()
                             if let createdAt = board.createdAt {
-                                Text(createdAt.toStringYYMMDDHHMM())
+                                Text(createdAt.formatISO8601DateToCustom())
                                     .font(.subheadline)
                                     .foregroundColor(.gray)
                             }
@@ -70,13 +75,7 @@ struct BoardView: View {
                         }.padding()
                         
                         VStack {
-                            if let estimatedOrderTime = board.estimatedOrderTime {
-                                Text("주문 예정 시간")
-                                Text(estimatedOrderTime.toStringYYMMDDHHMM())
-                                    .font(.subheadline)
-                                    .foregroundColor(.gray)
-                            }
-                            
+                            // 다른 정보들도 넣을 수 있도록 칸 변경 2x2 모양이 가장 깔끔할 것 같음
                             HStack {
                                 Text("\(board.pickupSpace)").customBoardInfo()
                                 Text("\(board.spaceType)").customBoardInfo()
@@ -100,8 +99,7 @@ struct BoardView: View {
                                 .frame(maxWidth: .infinity, minHeight: 30)
                                 .padding()
                                 .foregroundColor(.black)
-                                .border(Color("green 0"), width: 3)
-                                .cornerRadius(10)
+                                .border(Color("green 2"), width: 3)
                         }
                         
                         // 방장인지 체크, 방장만 방을 잠글 수 있음
@@ -160,7 +158,7 @@ struct BoardView: View {
                                                     if status {
                                                         isCompleted = true
                                                         // 방잠금으로 새로 고침
-                                                        self.boardViewRefreash()
+                                                        boardViewRefreash()
                                                     } else {
                                                     }
                                                 }
@@ -202,20 +200,15 @@ struct BoardView: View {
                         if isEntered == false && isCompleted == false {
                             // 참가전
                             Button {
-                                if userManager.authorityModel.authority == false {
-                                    joinErrorFlag = true
-                                } else {
-                                    manager.joinAndFetchBoard(postId: postId) { isComplete in
-                                        if isComplete {
-                                            manager.processBoardInfo(userModel: userIDModel) { _, isHost, isCompleted, isEntered in
-                                                self.isHost = isHost
-                                                self.isCompleted = isCompleted
-                                                self.isEntered = isEntered
-                                            }
+                                manager.joinAndFetchBoard(postId: postId) { isComplete in
+                                    if isComplete {
+                                        manager.processBoardInfo(userModel: userModel) { _, isHost, isCompleted, isEntered in
+                                            self.isHost = isHost
+                                            self.isCompleted = isCompleted
+                                            self.isEntered = isEntered
                                         }
                                     }
                                 }
-                                
                             } label: {
                                 Text("방 참여하기")
                                     .font(.system(size: 24))
@@ -223,13 +216,9 @@ struct BoardView: View {
                                     .padding()
                                     .foregroundColor(.white)
                                     .fontWeight(.semibold)
-                                    .background(isCompleted ? Color.orange : Color("green 0"))
-                                    .cornerRadius(10)
+                                    .background(isCompleted ? Color.orange : Color("green 2"))
                             }
                             .padding()
-                            .alert(isPresented: $joinErrorFlag) {
-                                Alert(title: Text("경고"), message: Text("이미 다른 방에 소속중입니다"), dismissButton: .default(Text("확인")))
-                            }
                         } else if isEntered == false && isCompleted == true {
                             // 참가안한방 잠겨있는경우 접근 불가
                             Button {
@@ -247,51 +236,43 @@ struct BoardView: View {
                             // 참가후
                             // 방 참가자만 볼수있는 방나기기 버튼
                             Button {
-                                isLeaveAlert = true
-                            } label: {
-                                Text("방 나가기")
-                                    .font(.headline)
-                                    .frame(maxWidth: .infinity, minHeight: 30)
-                                    .padding()
-                                    .foregroundColor(.black)
-                                    .fontWeight(.semibold)
-                                    .background(isCompleted ? Color.orange : Color("green 0"))
-                                    .cornerRadius(10)
-                            }
-                            .padding()
-                            .alert("방을 나가시겠습니까?", isPresented: $isLeaveAlert) {
-                                Button("방 나가기", role: .destructive) {
-                                    manager.leave(postId: postId) { status in
-                                        if status {
-                                            boardViewRefreash()
-                                            DispatchQueue.main.async {
-                                                self.presentationMode.wrappedValue.dismiss()
-                                            }
+                                manager.leave(postId: postId) { status in
+                                    if status {
+                                        boardViewRefreash()
+                                        DispatchQueue.main.async {
+                                            self.presentationMode.wrappedValue.dismiss()
                                         }
                                     }
                                 }
-                                Button("취소", role: .cancel) {
-                                    isLeaveAlert = false
-                                }
+                                
+                            } label: {
+                                Text("방 나가기")
+                                    .font(.system(size: 24))
+                                    .frame(maxWidth: .infinity, minHeight: 30)
+                                    .padding()
+                                    .foregroundColor(.white)
+                                    .fontWeight(.semibold)
+                                    .background(isCompleted ? Color.orange : Color("green 2"))
                             }
+                            .padding()
+                            
                         }
                         // 목록중에 내가 있다면
                         if let list = board.participationList {
                             ForEach(list, id: \.self) { dict in
-                                if dict["username"] == userIDModel.username {
+                                if dict["username"] == userModel.username {
                                     // 대화뷰 들어가기 버튼
-                                    NavigationLink(
-                                        destination: ChatView(postId: postId, chatBoard: board),
-                                        label: {
-                                            Text("대화 뷰 들어가기")
-                                                .font(.headline)
-                                                .frame(maxWidth: .infinity, minHeight: 30)
-                                                .padding()
-                                                .foregroundColor(.black)
-                                                .fontWeight(.semibold)
-                                                .background(Color("green 0"))
-                                                .cornerRadius(10)
-                                        }) .padding()
+                                    NavigationLink {
+                                        ChatView()
+                                    } label: {
+                                        Text("대화 뷰 들어가기")
+                                            .font(.system(size: 24))
+                                            .frame(maxWidth: .infinity, minHeight: 30)
+                                            .padding()
+                                            .foregroundColor(.white)
+                                            .fontWeight(.semibold)
+                                            .background(Color("green 2"))
+                                    } .padding()
                                 }
                             }
                         }
@@ -312,7 +293,7 @@ struct BoardView: View {
                 ForEach(manager.getPeopleList(), id: \.self) { imageName in
                     Image(systemName: imageName)
                         .imageScale(.large)
-                        .foregroundColor(Color("green 0"))
+                        .foregroundColor(Color("green 2"))
                         .padding()
                 }
             }
@@ -320,22 +301,9 @@ struct BoardView: View {
     }
 }
 
-// 반복되는 Text 수식 코드를 줄여줌
-extension Text {
-    func customBoardInfo() -> some View {
-        self
-            .font(.subheadline)
-            .font(.title)
-            .frame(maxWidth: .infinity, minHeight: 20)
-            .padding()
-            .foregroundColor(.black)
-            .background(Color("green 0"))
-            .cornerRadius(10)
-    }
-}
-struct BoardView_Previews: PreviewProvider {
+struct LocalBoardView_Previews: PreviewProvider {
     var postId = 1
     static var previews: some View {
-        BoardView(postId: 1)
+        LocalBoardView(postId: 1)
     }
 }
