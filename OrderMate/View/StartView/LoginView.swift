@@ -13,15 +13,18 @@ struct LoginView: View {
                 TextField("ID space", text: $user.username)
                     .padding()
                      .background(Color(uiColor: .secondarySystemBackground))
+                .cornerRadius(10)
                 ZStack {
                     if isSecureMode {
                         SecureField("password", text: $user.password)
                             .padding()
                              .background(Color(uiColor: .secondarySystemBackground))
+                        .cornerRadius(10)
                     } else {
                         TextField("password", text: $user.password)
                             .padding()
                              .background(Color(uiColor: .secondarySystemBackground))
+                        .cornerRadius(10)
                     }
                     HStack {
                         Spacer()
@@ -47,11 +50,15 @@ struct LoginView: View {
                     Text("로그인")
                         .font(.title3)
                         .fontWeight(.semibold)
-                        .frame(width: 370, height: 80)
                         .foregroundColor(.black)
+                        .multilineTextAlignment(.center)
+                        .padding(.horizontal, 155.0)
+                        .padding(.vertical, 30.0)
                         .background(Color("green 0"))
                         .cornerRadius(10)
+                    
                 }
+                .padding(.vertical)
                 .padding(.top, 20)
             }.padding()
             Spacer()
