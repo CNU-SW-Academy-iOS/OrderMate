@@ -131,6 +131,7 @@ struct MakeAccountView: View {
                 }
             }
         }.padding()
+            .onAppear (perform : UIApplication.shared.hideKeyboard)
     }
 }
 

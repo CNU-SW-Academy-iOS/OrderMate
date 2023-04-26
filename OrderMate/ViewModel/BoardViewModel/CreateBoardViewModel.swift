@@ -5,6 +5,7 @@ struct RoomList {
     // 외부 (ChatListViewModel)에서 RoomList의 사용할 수 있도록 싱글톤 객체 생성
     static let shared = RoomList()
     
+   
     
     func getAllRoomList(completionHandler: @escaping (Bool, Any) -> Void) {
         print("모든 리스트 정보 가져오기")

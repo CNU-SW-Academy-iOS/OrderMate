@@ -11,14 +11,17 @@ struct LoginView: View {
             Text("Table Mate").font(.title).bold()
             VStack {
                 TextField("ID space", text: $user.username)
-                    .textFieldStyle(.roundedBorder).padding()
+                    .padding()
+                     .background(Color(uiColor: .secondarySystemBackground))
                 ZStack {
                     if isSecureMode {
                         SecureField("password", text: $user.password)
-                            .textFieldStyle(.roundedBorder).padding()
+                            .padding()
+                             .background(Color(uiColor: .secondarySystemBackground))
                     } else {
                         TextField("password", text: $user.password)
-                            .textFieldStyle(.roundedBorder).padding()
+                            .padding()
+                             .background(Color(uiColor: .secondarySystemBackground))
                     }
                     HStack {
                         Spacer()
@@ -39,18 +42,21 @@ struct LoginView: View {
                             print("error")
                         }
                     }
+                   
                 } label: {
                     Text("로그인")
                         .font(.title3)
                         .fontWeight(.semibold)
-                        .frame(width: 330, height: 60)
+                        .frame(width: 370, height: 80)
                         .foregroundColor(.black)
                         .background(Color("green 0"))
                         .cornerRadius(10)
                 }
-            }
+                .padding(.top, 20)
+            }.padding()
             Spacer()
         }
+        .onAppear (perform : UIApplication.shared.hideKeyboard)
         .padding()
     }
 }

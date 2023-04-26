@@ -1,7 +1,7 @@
 import Foundation
 
 // 게시글 상세 조회용
-struct BoardStructModel: Codable {
+struct BoardStructModel: Codable, Hashable {
     var loginUsername: String? // 아이디
     var ownerName: String? // 익명 여부에 따라 이름 혹은 별명
     var title: String

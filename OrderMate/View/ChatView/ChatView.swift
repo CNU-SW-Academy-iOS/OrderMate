@@ -2,7 +2,6 @@ import SwiftUI
 
 struct ChatView: View {
     var postId: Int
-    var chatBoard: BoardStructModel
     @State private var sendMessage: String = ""
     @StateObject private var manager = ChatViewModel.shared
     let userID = userIDModel.username
@@ -12,14 +11,14 @@ struct ChatView: View {
         VStack {
             VStack {
                 ZStack {
-                    Text(chatBoard.title)
+                    Text(manager.board.title)
                     HStack {
                         Spacer()
-                        Text("\(chatBoard.currentPeopleNum)/\(chatBoard.maxPeopleNum)")
+                        Text("\(manager.board.currentPeopleNum)/\(manager.board.maxPeopleNum)")
                     }
                     
                 }
-                Text("함께 주문하기 링크: \(chatBoard.withOrderLink ?? "")")
+                Text("함께 주문하기 링크: \(manager.board.withOrderLink ?? "")")
             }
             ScrollViewReader { scrollView in
                 ScrollView {
@@ -48,6 +47,8 @@ struct ChatView: View {
                 ChatViewModel.shared.getChatInfo(postId: postId)
                 ChatViewModel.shared.listenRoomChat(postId: postId)
             })
+            .onAppear (perform : UIApplication.shared.hideKeyboard)
+        
     }
     func send() {
         let msg = Message(id: UUID().uuidString, text: sendMessage, timestamp: Date(), userId: userID ?? "", userNickName: UserViewModel.shared.userModel.nickname)
