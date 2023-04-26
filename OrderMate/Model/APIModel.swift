@@ -1,6 +1,6 @@
 import Foundation
 
-let urlString = "http://localhost:8080/" // 개인 로컬 서버
+let urlString = "http://175.106.93.14:8080/" // 개인 로컬 서버
 
 enum APIModel: String {
     case join

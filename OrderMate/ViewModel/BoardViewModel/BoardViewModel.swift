@@ -380,7 +380,7 @@ class BoardViewModel: ObservableObject {
             return
         }
 
-        let url = URL(string: "http://localhost:8080/post/upload")
+        let url = URL(string: "http://175.106.93.14:8080/post/upload")
 
         var request = URLRequest(url: url!)
         request.httpMethod = "POST"
