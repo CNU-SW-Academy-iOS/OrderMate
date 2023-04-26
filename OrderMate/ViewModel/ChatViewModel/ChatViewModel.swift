@@ -19,6 +19,10 @@ class ChatViewModel: ObservableObject {
     
     var listIDArray: [Int] = [] // 내가 속한 boardID들
 
+    // 채팅 했던 목록 불러오기
+    func getChatList() {
+        
+    }
     // postid 입력시 firebase의 board 정보 반환
     func getChatInfo(postId: Int) {
         print(postId)

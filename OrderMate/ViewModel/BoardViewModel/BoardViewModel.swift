@@ -18,26 +18,30 @@ class BoardViewModel: ObservableObject {
         return totalPeople
     }
     
-    func getBoard(postId: Int, completion: @escaping (Bool) -> Void) {
+//    func getBoardInfo(postId: Int, completion: @escaping (Bool) -> (BoardStructModel) {
+//        let url = URL(string: urlString + APIModel.post.rawValue) + "/" + String(postId))
+//
+//    }
+    func getBoard(postId: Int, completion: @escaping (Bool, BoardStructModel?) -> Void) {
         // 방잠금으로 새로 고침
         let url = URL(string: urlString + APIModel.post.rawValue + "/" + String(postId))
         
         var request = URLRequest(url: url!)
         request.httpMethod = "GET"
         
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+        let task = URLSession.shared.dataTask(with: request) { [self] data, response, error in
             let successRange = 200..<300
             guard error == nil, let statusCode = (response as? HTTPURLResponse)?.statusCode,
                   successRange.contains(statusCode) else {
                 print()
                 print("Error occur: \(String(describing: error))")
                 print("error code: \(String(describing: (response as? HTTPURLResponse)?.statusCode))")
-                completion(false)
+                completion(false, nil)
                 return
             }
             guard let data = data else {
                 print("invalid data")
-                completion(false)
+                completion(false, nil)
                 return
             }
             let decoder = JSONDecoder()
@@ -47,7 +51,7 @@ class BoardViewModel: ObservableObject {
                 let response = try decoder.decode(BoardStructModel.self, from: data)
                 DispatchQueue.main.async {
                     self.board = response
-                    completion(true)
+                    completion(true, response)
                 }
             } catch let DecodingError.dataCorrupted(context) {
                 print(context)
@@ -68,12 +72,12 @@ class BoardViewModel: ObservableObject {
             if getSuccess == (response as? HTTPURLResponse)?.statusCode {
                 print("게시글 정보 get 성공")
                 print(response as Any)
-                completion(true)
+                completion(true, self.board)
                 
             } else {
                 print("게시글 정보 get 실패")
                 print(response as Any)
-                completion(false)
+                completion(false, nil)
             }
         }
         task.resume()
@@ -145,7 +149,7 @@ class BoardViewModel: ObservableObject {
     func joinAndFetchBoard(postId: Int, completion: @escaping (Bool) -> Void) {
         join(postId: postId) { joinSuccess in
             if joinSuccess {
-                self.getBoard(postId: postId) { getBoardSuccess in
+                self.getBoard(postId: postId) { getBoardSuccess, _ in
                     completion(getBoardSuccess)
                 }
             } else {

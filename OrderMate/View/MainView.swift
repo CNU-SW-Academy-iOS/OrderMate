@@ -17,6 +17,11 @@ struct MainView: View {
                         Image(systemName: "gear")
                         Text("Settings")
                     }
+                ChatListView()
+                    .tabItem {
+                        Image(systemName: "list")
+                        Text("ChatList")
+                    }
             }
             
         }
