@@ -17,7 +17,21 @@ struct MainView: View {
                         Image(systemName: "gear")
                         Text("Settings")
                     }
-                ChatListView()
+                ChatListView(currentChat: RoomInfoPreview(postId: 5,
+                                                          title: "교촌치킨 같이 시켜먹어요",
+                                                          createdAt: Date(),
+                                                          postStatus: "배달 완료",
+                                                          maxPeopleNum: 5,
+                                                          currentPeopleNum: 3,
+                                                          isAnonymous: true,
+                                                          content: "hi",
+                                                          withOrderLink: "hi",
+                                                          pickupSpace: "기숙사",
+                                                          spaceType: "hi",
+                                                          accountNum: "hi",
+                                                          estimatedOrderTime: Date(),
+                                                          ownerId: 2,
+                                                          ownerName: "soom"))
                     .tabItem {
                         Image(systemName: "list")
                         Text("ChatList")
