@@ -5,7 +5,8 @@ struct ChatView: View {
     var chatBoard: BoardStructModel
     @State private var sendMessage: String = ""
     @StateObject private var manager = ChatViewModel.shared
-    let userID = UserDefaults.standard.string(forKey: "username")
+    //let userID = UserDefaults.standard.string(forKey: "username")
+    let userID = userIDModel.username
     
     var body: some View {
         

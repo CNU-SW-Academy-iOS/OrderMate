@@ -10,7 +10,8 @@ import SwiftUI
 struct MessageView: View {
     
     var currentMessage: Message
-    let userID = UserDefaults.standard.string(forKey: "username")
+    //let userID = UserDefaults.standard.string(forKey: "username")
+    let userID = userIDModel.username
     var body: some View {
         VStack {
             let isCurrentUser = userID == currentMessage.userId

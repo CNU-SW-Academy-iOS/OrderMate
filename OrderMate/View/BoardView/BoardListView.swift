@@ -61,7 +61,7 @@ struct RoomListView: View {
                 ZStack {
                     VStack {
                         HStack {
-                            Text("아이디, \(userModel.username)")
+                            Text("아이디, \(userIDModel.username)")
                             Text("이름, \(userManager.userModel.name)")
                             Text("닉네임, \(userManager.userModel.nickname)")
                             Spacer()

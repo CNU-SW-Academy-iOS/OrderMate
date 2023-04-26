@@ -13,7 +13,7 @@ struct UserModel: Codable {
 }
 
 // 로그인 후 내 아이디 조회용으로 사용 전역변수
-var userModel = UserModel()
+var userIDModel = UserModel()
 
 // 가입시 쓰는 UserModel 쓰면 Json 항목이달라 Json 연결시 에러가 발생합니다
 struct UserInfoModel: Codable {
