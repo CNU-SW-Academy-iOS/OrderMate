@@ -9,7 +9,7 @@ struct RoomListView: View {
     @State var title = ""
     @State var listJsonArray: [RoomInfoPreview] = [RoomInfoPreview(postId: 99,
                                                                    title: "개설된 방이 없습니다",
-                                                                   createdAt: "yy-MM-dd HH:mm",
+                                                                   createdAt: Date(),
                                                                    postStatus: "",
                                                                    maxPeopleNum: 5,
                                                                    currentPeopleNum: 1,
@@ -19,12 +19,12 @@ struct RoomListView: View {
                                                                    pickupSpace: "",
                                                                    spaceType: "",
                                                                    accountNum: "",
-                                                                   estimatedOrderTime: "",
+                                                                   estimatedOrderTime: Date(),
                                                                    ownerId: 1,
                                                                    ownerName: "")]
     @State var recentListArray: [RoomInfoPreview] = [RoomInfoPreview(postId: 99,
                                                                      title: "개설된 방이 없습니다",
-                                                                     createdAt: "yy-MM-dd HH:mm",
+                                                                     createdAt: Date(),
                                                                      postStatus: "",
                                                                      maxPeopleNum: 5,
                                                                      currentPeopleNum: 1,
@@ -34,10 +34,11 @@ struct RoomListView: View {
                                                                      pickupSpace: "",
                                                                      spaceType: "",
                                                                      accountNum: "",
-                                                                     estimatedOrderTime: "",
+                                                                     estimatedOrderTime: Date(),
                                                                      ownerId: 1,
                                                                      ownerName: "")]
     @State private var showingAlert = false // 로그아웃 alert bool
+    @State private var joinErrorFlag = false
     
     func roomListreFreash() {
         // user Info 받아오기
@@ -60,7 +61,7 @@ struct RoomListView: View {
                 ZStack {
                     VStack {
                         HStack {
-                            Text("아이디, \(userModel.username)")
+                            Text("아이디, \(userIDModel.username)")
                             Text("이름, \(userManager.userModel.name)")
                             Text("닉네임, \(userManager.userModel.nickname)")
                             Spacer()
@@ -102,7 +103,7 @@ struct RoomListView: View {
                                         } label: {
                                             HStack {
                                                 VStack(alignment: .leading) {
-                                                    Text(data.createdAt!.formatISO8601DateToCustom())
+                                                    Text(data.createdAt!.toStringYYMMDDHHMM())
                                                     // "yy-MM-dd HH:mm"
                                                     Text(data.title!)
                                                         .font(.headline)
@@ -136,7 +137,7 @@ struct RoomListView: View {
                                     HStack {
                                         VStack(alignment: .leading) {
                                             if let createdAt = data.createdAt {
-                                                Text(createdAt.formatISO8601DateToCustom()) // "yy-MM-dd HH:mm"
+                                                Text(createdAt.toStringYYMMDDHHMM()) // "yy-MM-dd HH:mm"
                                             }
                                             if let title = data.title {
                                                 Text(title)
@@ -173,14 +174,27 @@ struct RoomListView: View {
                         Spacer()
                         HStack {
                             Spacer()
-                            NavigationLink {
-                                CreateBoardView()
-                                    .toolbar(.hidden, for: .tabBar)
-                            } label: {
-                                Image(systemName: "plus.circle.fill")
-                                    .font(.title.bold())
+                            if userManager.authorityModel.authority == false {
+                                Button {
+                                    joinErrorFlag = true
+                                }  label: {
+                                    Image(systemName: "plus.circle.fill")
+                                        .font(.title.bold())
+                                }.alert(isPresented: $joinErrorFlag) {
+                                    Alert(title: Text("경고"), message: Text("이미 다른 방에 소속중입니다"), dismissButton: .default(Text("확인")))
+                                }
+                                .padding()
+                            } else {
+                                NavigationLink {
+                                    CreateBoardView()
+                                        .toolbar(.hidden, for: .tabBar)
+                                } label: {
+                                    Image(systemName: "plus.circle.fill")
+                                        .font(.title.bold())
+                                }
+                                .padding()
                             }
-                            .padding()
+                            
                         }.padding()
                     }
                 }

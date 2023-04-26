@@ -67,8 +67,8 @@ class LoginViewModel: ObservableObject {
                 let userDefaults = UserDefaults.standard
                 userDefaults.set(user.username, forKey: "username")
                 userDefaults.set(user.password, forKey: "password")
-                userModel.username = user.username // 현재 로그인 정보
-                userModel.password = user.password // 현재 로그인 정보
+                userIDModel.username = user.username // 현재 로그인 정보
+                userIDModel.password = user.password // 현재 로그인 정보
                 print("User login 성공")
                 print(response as Any)
                 completion(true)
@@ -98,11 +98,11 @@ class LoginViewModel: ObservableObject {
                 print("status code: ", status )
             }
             if status == 200 {
-                userModel.username = "" // 현재 로그인 유저 정보 삭제
-                userModel.password = "" // 현재 로그인 유저 정보 삭제
+                userIDModel.username = "" // 현재 로그인 유저 정보 삭제
+                userIDModel.password = "" // 현재 로그인 유저 정보 삭제
                 let userDefaults = UserDefaults.standard
-                userDefaults.set(userModel.username, forKey: "username")
-                userDefaults.set(userModel.password, forKey: "password")
+                userDefaults.set(userIDModel.username, forKey: "username")
+                userDefaults.set(userIDModel.password, forKey: "password")
                 print("User logout 성공")
                 print(response as Any)
                 completion(true)

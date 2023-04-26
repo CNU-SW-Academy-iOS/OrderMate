@@ -1,10 +1,3 @@
-//
-//  MakeAccountView.swift
-//  OrderMate
-//
-//  Created by cnu on 2023/03/09.
-//
-
 import SwiftUI
 
 struct MakeAccountView: View {
