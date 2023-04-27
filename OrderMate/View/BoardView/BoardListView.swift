@@ -61,7 +61,7 @@ struct RoomListView: View {
                 ZStack {
                     VStack {
                         HStack {
-                            Text("\(userIDModel.nickname) 님 오늘도 맛있는 식사하세요 😃")
+                            Text("\(userManager.userModel.nickname) 님 오늘도 맛있는 식사하세요 😃")
                             Spacer()
                             Button {
                                 showingAlert = true
