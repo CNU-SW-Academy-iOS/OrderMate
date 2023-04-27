@@ -20,7 +20,7 @@ struct BoardView: View {
     @StateObject var manager: BoardViewModel = BoardViewModel.shared
     
     func boardViewRefreash() {
-        manager.getBoard(postId: postId) { isComplete in
+        manager.getBoard(postId: postId) { isComplete, _ in
             if isComplete {
                 manager.processBoardInfo(userModel: userIDModel) { _, isHost, isCompleted, isEntered in
                     self.isHost = isHost
@@ -281,7 +281,7 @@ struct BoardView: View {
                                 if dict["username"] == userIDModel.username {
                                     // 대화뷰 들어가기 버튼
                                     NavigationLink(
-                                        destination: ChatView(postId: postId, chatBoard: board),
+                                        destination: ChatView(postId: postId),
                                         label: {
                                             Text("대화 뷰 들어가기")
                                                 .font(.headline)

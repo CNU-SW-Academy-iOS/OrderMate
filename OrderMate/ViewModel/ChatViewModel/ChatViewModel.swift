@@ -19,6 +19,7 @@ class ChatViewModel: ObservableObject {
     
     var listIDArray: [Int] = [] // 내가 속한 boardID들
 
+    
     // postid 입력시 firebase의 board 정보 반환
     func getChatInfo(postId: Int) {
         print(postId)

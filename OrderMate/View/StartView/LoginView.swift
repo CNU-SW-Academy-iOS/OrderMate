@@ -11,14 +11,20 @@ struct LoginView: View {
             Text("Table Mate").font(.title).bold()
             VStack {
                 TextField("ID space", text: $user.username)
-                    .textFieldStyle(.roundedBorder).padding()
+                    .padding()
+                     .background(Color(uiColor: .secondarySystemBackground))
+                .cornerRadius(10)
                 ZStack {
                     if isSecureMode {
                         SecureField("password", text: $user.password)
-                            .textFieldStyle(.roundedBorder).padding()
+                            .padding()
+                             .background(Color(uiColor: .secondarySystemBackground))
+                        .cornerRadius(10)
                     } else {
                         TextField("password", text: $user.password)
-                            .textFieldStyle(.roundedBorder).padding()
+                            .padding()
+                             .background(Color(uiColor: .secondarySystemBackground))
+                        .cornerRadius(10)
                     }
                     HStack {
                         Spacer()
@@ -39,18 +45,25 @@ struct LoginView: View {
                             print("error")
                         }
                     }
+                   
                 } label: {
                     Text("로그인")
                         .font(.title3)
                         .fontWeight(.semibold)
-                        .frame(width: 330, height: 60)
                         .foregroundColor(.black)
+                        .multilineTextAlignment(.center)
+                        .padding(.horizontal, 155.0)
+                        .padding(.vertical, 30.0)
                         .background(Color("green 0"))
                         .cornerRadius(10)
+                    
                 }
-            }
+                .padding(.vertical)
+                .padding(.top, 20)
+            }.padding()
             Spacer()
         }
+        .onAppear (perform : UIApplication.shared.hideKeyboard)
         .padding()
     }
 }

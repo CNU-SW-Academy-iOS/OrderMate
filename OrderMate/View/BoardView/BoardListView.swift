@@ -61,9 +61,7 @@ struct RoomListView: View {
                 ZStack {
                     VStack {
                         HStack {
-                            Text("아이디, \(userIDModel.username)")
-                            Text("이름, \(userManager.userModel.name)")
-                            Text("닉네임, \(userManager.userModel.nickname)")
+                            Text("\(userIDModel.nickname) 님 오늘도 맛있는 식사하세요 😃")
                             Spacer()
                             Button {
                                 showingAlert = true
@@ -71,7 +69,7 @@ struct RoomListView: View {
                                 Image(systemName: "door.left.hand.open")
                                     .font(.system(size: 20))
                                     .padding()
-                                    .foregroundColor(Color.red)
+                                    .foregroundColor(Color("green 1"))
                             }.alert("로그아웃 하시겠습니까?", isPresented: $showingAlert) {
                                 Button("로그아웃", role: .destructive) {
                                     loginModel.logOut { status in
@@ -85,47 +83,12 @@ struct RoomListView: View {
                                 }
                             }
                         }.padding()
-                        Button {
-                            roomListreFreash()
-                        } label: {
-                            Text("방 목록 새로고침")
-                        }
+//                        Button {
+//                            roomListreFreash()
+//                        } label: {
+//                            Text("방 목록 새로고침")
+//                        }
                         ScrollView {
-                            if userManager.authorityModel.authority == false {
-                                // 나의 방생성/참가 bool이 false면
-                                Divider()
-                                // 내가 소속된 방정보를 불러와 제일 위에 보여줍니다
-                                VStack {
-                                    ForEach(recentListArray, id: \.self) { data in
-                                        NavigationLink {
-                                            BoardView(postId: data.postId!)
-                                                .toolbar(.hidden, for: .tabBar)
-                                        } label: {
-                                            HStack {
-                                                VStack(alignment: .leading) {
-                                                    Text(data.createdAt!.toStringYYMMDDHHMM())
-                                                    // "yy-MM-dd HH:mm"
-                                                    Text(data.title!)
-                                                        .font(.headline)
-                                                    Text("픽업 장소: " + data.pickupSpace!)
-                                                    Spacer()
-                                                }
-                                                Spacer()
-                                                VStack(alignment: .trailing) {
-                                                    Text(data.postStatus!)
-                                                    Text(String(data.currentPeopleNum!) + " / " + String(data.maxPeopleNum!))
-                                                    Text("postid: " + String(data.postId!))
-                                                    Spacer()
-                                                }
-                                            }
-                                        }
-                                        .buttonStyle(.bordered)
-                                        .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
-                                    }
-                                }
-                                Text("⬆️ 내가 참가중인 방")
-                                Divider()
-                            }
                             
                             ForEach(listJsonArray, id: \.self) { data in
                                 NavigationLink {
@@ -189,8 +152,7 @@ struct RoomListView: View {
                                     CreateBoardView()
                                         .toolbar(.hidden, for: .tabBar)
                                 } label: {
-                                    Image(systemName: "plus.circle.fill")
-                                        .font(.title.bold())
+                                    Image(systemName: "plus.circle.fill").font(.system(size: 50))
                                 }
                                 .padding()
                             }

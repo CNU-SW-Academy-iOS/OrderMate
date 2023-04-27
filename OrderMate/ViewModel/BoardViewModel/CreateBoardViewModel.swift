@@ -5,9 +5,11 @@ struct RoomList {
     // 외부 (ChatListViewModel)에서 RoomList의 사용할 수 있도록 싱글톤 객체 생성
     static let shared = RoomList()
     
+   
+    
     func getAllRoomList(completionHandler: @escaping (Bool, Any) -> Void) {
         print("모든 리스트 정보 가져오기")
-        if let url = URL(string: "http://localhost:8080/post") {
+        if let url = URL(string: "http://175.106.93.14:8080/post") {
             var request = URLRequest(url: url)
             request.httpMethod = "GET"
 
@@ -72,7 +74,7 @@ struct RoomList {
               return
           }
           
-          let url = URL(string: "http://localhost:8080/post/upload")
+          let url = URL(string: "http://175.106.93.14:8080/post/upload")
           
           var request = URLRequest(url: url!)
           request.httpMethod = "POST"
