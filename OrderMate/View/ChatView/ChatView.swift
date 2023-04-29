@@ -11,14 +11,23 @@ struct ChatView: View {
         VStack {
             VStack {
                 ZStack {
-                    Text(manager.board.title)
+                    Text("[ \(manager.board.title) ]").bold()
                     HStack {
                         Spacer()
                         Text("\(manager.board.currentPeopleNum)/\(manager.board.maxPeopleNum)")
                     }
                     
                 }
-                Text("함께 주문하기 링크: \(manager.board.withOrderLink ?? "")")
+                if let link = manager.board.withOrderLink {
+                    if link.contains("골라보세요. ") {
+                        if let url = URL(string: String(link.split(separator: "골라보세요. ")[1])) {
+                            Link(destination: url) {
+                                Text("배민 함께 주문하기 링크")
+                            }
+                        }
+                    }
+                }
+                //                Text("\(manager.board.withOrderLink ?? "")")
             }
             ScrollViewReader { scrollView in
                 ScrollView {
@@ -37,11 +46,13 @@ struct ChatView: View {
             HStack {
                 TextField("Message 입력", text: $sendMessage, axis: .vertical)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
-                Button("send") {
+                Button {
                     send()
+                } label: {
+                    Text("send").padding(5).foregroundColor(.white).background(Color("green 2")).cornerRadius(10)
                 }
-            }
-
+            }.padding(5)
+            
         }.padding(.horizontal)
             .onAppear(perform: {
                 ChatViewModel.shared.getChatInfo(postId: postId)
@@ -55,5 +66,5 @@ struct ChatView: View {
         ChatViewModel.shared.sendMessageInServer(postId: postId, msg: msg)
         sendMessage = ""
     }
-   
+    
 }

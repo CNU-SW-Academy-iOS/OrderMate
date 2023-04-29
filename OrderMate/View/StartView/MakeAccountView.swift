@@ -105,11 +105,13 @@ struct MakeAccountView: View {
                     }
                 } label: {
                     Text("회원 가입")
-                        .font(.title2)
                         .fontWeight(.semibold)
+                        .frame(width: 300.0, height: 30)
                         .padding()
-                        .foregroundColor(.white)
-                        .background(Color("AccentColor"))
+                        .foregroundColor(.black)
+                        .background(Color("green 0"))
+                        .font(.title2)
+                        .cornerRadius(10)
                 }.alert(isPresented: $isPresented) {
                     Alert(title: Text("경고"), message: Text("이미 존재하는 아이디입니다."), dismissButton: .default(Text("확인")))
                 }

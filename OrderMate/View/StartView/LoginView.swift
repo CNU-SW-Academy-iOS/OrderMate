@@ -5,26 +5,31 @@ struct LoginView: View {
     @State var isSecureMode: Bool = true
     @State var loginModel = LoginViewModel()
     @State var user = UserModel()
+    @State var isAlert : Bool = false
     var body: some View {
         VStack {
             Spacer()
-            Text("Table Mate").font(.title).bold()
+            Text("Order Mate").font(.title).bold()
             VStack {
                 TextField("ID space", text: $user.username)
                     .padding()
+                    .frame(width: 320, height: 60)
                      .background(Color(uiColor: .secondarySystemBackground))
                 .cornerRadius(10)
                 ZStack {
                     if isSecureMode {
                         SecureField("password", text: $user.password)
                             .padding()
+                            .frame(width: 320, height: 60)
                              .background(Color(uiColor: .secondarySystemBackground))
                         .cornerRadius(10)
                     } else {
                         TextField("password", text: $user.password)
                             .padding()
+                            .frame(width: 320, height: 60)
                              .background(Color(uiColor: .secondarySystemBackground))
-                        .cornerRadius(10)
+                             .cornerRadius(10)
+                             
                     }
                     HStack {
                         Spacer()
@@ -42,7 +47,7 @@ struct LoginView: View {
                         if success {
                             loginState = true
                         } else {
-                            print("error")
+                            isAlert = true
                         }
                     }
                    
@@ -52,11 +57,15 @@ struct LoginView: View {
                         .fontWeight(.semibold)
                         .foregroundColor(.black)
                         .multilineTextAlignment(.center)
-                        .padding(.horizontal, 155.0)
-                        .padding(.vertical, 30.0)
+                        //.frame(minWidth)
+                        .padding(.horizontal, 40.0)
+                        .frame(width: 320, height: 75)
                         .background(Color("green 0"))
+                        .frame(alignment: .center)
                         .cornerRadius(10)
                     
+                }.alert(isPresented: $isAlert) {
+                    Alert(title: Text("경고"), message: Text("해당 회원 정보가 없습니다."), dismissButton: .default(Text("확인")))
                 }
                 .padding(.vertical)
                 .padding(.top, 20)
