@@ -297,6 +297,15 @@ struct BoardView: View {
                 boardViewRefreash()
             }
         }
+        .toolbar {
+            if isHost {
+                NavigationLink {
+                    BoardEditView(postId: postId)
+                } label: {
+                    Text("글 수정")
+                }
+            }
+        }
     }
     
     var statePeopleView: some View {

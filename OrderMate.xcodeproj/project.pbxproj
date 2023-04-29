@@ -22,6 +22,7 @@
 		E41FA2D029F27D5100E2DB31 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E41FA2CE29F27D5100E2DB31 /* GoogleService-Info.plist */; };
 		E4470CF129DD5BF10078C59F /* PostStatusModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4470CF029DD5BF10078C59F /* PostStatusModel.swift */; };
 		E464802629C95352004616D2 /* CreateBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E464802529C95352004616D2 /* CreateBoardView.swift */; };
+		E46ED81E29FD49A500B24FBF /* BoardEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46ED81D29FD49A500B24FBF /* BoardEditView.swift */; };
 		E49BA76A29E9B16200EF4361 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49BA76929E9B16200EF4361 /* ProfileView.swift */; };
 		E4DAF7D429DFBC1E009015DE /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4DAF7D329DFBC1E009015DE /* UserViewModel.swift */; };
 		ED40967329BCAF5300B030A9 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED40967229BCAF5300B030A9 /* UserModel.swift */; };
@@ -56,6 +57,7 @@
 		E41FA2CE29F27D5100E2DB31 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E4470CF029DD5BF10078C59F /* PostStatusModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PostStatusModel.swift; path = OrderMate/Model/PostStatusModel.swift; sourceTree = SOURCE_ROOT; };
 		E464802529C95352004616D2 /* CreateBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateBoardView.swift; sourceTree = "<group>"; };
+		E46ED81D29FD49A500B24FBF /* BoardEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardEditView.swift; sourceTree = "<group>"; };
 		E49BA76929E9B16200EF4361 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		E4DAF7D329DFBC1E009015DE /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		ED40967229BCAF5300B030A9 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
@@ -132,6 +134,7 @@
 				BA3F37F229B5D120009BF7FE /* BoardListView.swift */,
 				BAFCF30929C1A6AB006CF5E8 /* BoardView.swift */,
 				E49BA76929E9B16200EF4361 /* ProfileView.swift */,
+				E46ED81D29FD49A500B24FBF /* BoardEditView.swift */,
 			);
 			path = BoardView;
 			sourceTree = "<group>";
@@ -334,6 +337,7 @@
 				BA3F37F329B5D120009BF7FE /* BoardListView.swift in Sources */,
 				ED7286C529E03D7C00FC9E42 /* MessageView.swift in Sources */,
 				E4470CF129DD5BF10078C59F /* PostStatusModel.swift in Sources */,
+				E46ED81E29FD49A500B24FBF /* BoardEditView.swift in Sources */,
 				BAFCF33029C875D1006CF5E8 /* BoardViewModel.swift in Sources */,
 				BAF470A429B21C0C00F242EF /* OrderMateApp.swift in Sources */,
 				E4DAF7D429DFBC1E009015DE /* UserViewModel.swift in Sources */,
