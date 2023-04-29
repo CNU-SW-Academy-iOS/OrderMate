@@ -23,10 +23,11 @@
 
 
 
-## :iphone: Skills & Tech Stack
+## ✨  Skills & Tech Stack
 Swift, SwiftUI, firebase, spring, docker, MySQL, github
 
 ## 🌲 Directory Tree
+```
 .    
 ├── OrderMate   
 │   ├── Model   
@@ -71,6 +72,8 @@ Swift, SwiftUI, firebase, spring, docker, MySQL, github
 
 
 24 directories, 40 files
+```
+
 
 ## :books: Documentation
 
