@@ -26,6 +26,52 @@
 ## :iphone: Skills & Tech Stack
 Swift, SwiftUI, firebase, spring, docker, MySQL, github
 
+## 🌲 Directory Tree
+.    
+├── OrderMate   
+│   ├── Model   
+│   │   ├── APIModel.swift   
+│   │   ├── BoardStructModel.swift   
+│   │   ├── MessageModel.swift   
+│   │   ├── PostStatusModel.swift     
+│   │   └── UserModel.swift   
+│   ├── OrderMateApp.swift   
+│   ├── Preview Content   
+│   │   └── Preview Assets.xcassets   
+│   │       └── Contents.json  
+│   ├── View  
+│   │   ├── BoardView  
+│   │   │   ├── BoardListView.swift  
+│   │   │   ├── BoardView.swift    
+│   │   │   ├── CreateBoardView.swift  
+│   │   │   ├── LocalBoardView.swift  
+│   │   │   └── ProfileView.swift  
+│   │   ├── ChatView  
+│   │   │   ├── ChatListView.swift  
+│   │   │   ├── ChatView.swift  
+│   │   │   └── MessageView.swift  
+│   │   ├── ContentsView  
+│   │   │   └── ListView.swift  
+│   │   ├── MainView.swift  
+│   │   └── StartView  
+│   │       ├── LoginView.swift  
+│   │       ├── MakeAccountView.swift  
+│   │       └── StartPageView.swift  
+│   └── ViewModel  
+│       ├── BoardViewModel  
+│       │   ├── BoardViewModel.swift  
+│       │   └── CreateBoardViewModel.swift  
+│       ├── ChatViewModel  
+│       │   └── ChatViewModel.swift    
+│       ├── RoomDataManager.swift  
+│       ├── Setting.swift  
+│       └── UserViewModel  
+│           ├── LoginViewModel.swift  
+│           └── UserViewModel.swift  
+
+
+24 directories, 40 files
+
 ## :books: Documentation
 
 [🏡 노션 페이지](https://www.notion.so/Project-Order-Mate-a88a7a8686ff4d6ea803d4144c2a6beb?pvs=4)
@@ -43,3 +89,5 @@ Swift, SwiftUI, firebase, spring, docker, MySQL, github
 |:---|:---|
 |**Feat**|새로운 기능 추가|
 |**Fix**|버그 수정|
+
+
