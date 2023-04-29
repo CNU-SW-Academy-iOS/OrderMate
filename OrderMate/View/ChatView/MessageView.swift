@@ -10,7 +10,6 @@ import SwiftUI
 struct MessageView: View {
     
     var currentMessage: Message
-    //let userID = UserDefaults.standard.string(forKey: "username")
     let userID = userIDModel.username
     var body: some View {
         VStack {
@@ -24,8 +23,7 @@ struct MessageView: View {
                 HStack {
                     Spacer()
                     Text(currentMessage.text)
-                        .frame(minWidth: 80, maxWidth: 200)
-                        .padding()
+                        .padding(5)
                         .background(isCurrentUser ?
                                     Color("green 2")
                                     : Color(uiColor: UIColor(red: 240/255, green: 240/255, blue: 240/255, alpha: 1.0)))
@@ -46,8 +44,7 @@ struct MessageView: View {
                 }
                 HStack {
                     Text(currentMessage.text)
-                        .frame(minWidth: 80, maxWidth: 200)
-                        .padding()
+                        .padding(5)
                         .background(isCurrentUser ?
                                     Color("green 2")
                                     : Color(uiColor: UIColor(red: 240/255, green: 240/255, blue: 240/255, alpha: 1.0)))
@@ -63,7 +60,7 @@ struct MessageView: View {
                     Spacer()
                 }
             }
-        }.padding()
+        }.padding(5)
         
     }
 }

@@ -2,63 +2,62 @@ import SwiftUI
 
 
 struct ChatListView: View {
-    
+    @EnvironmentObject var userManager: UserViewModel // user Info 받아오기
     @State var chatList : [RoomInfoPreview] = []
-    @State var currentChat : RoomInfoPreview
+    @State var currentChat : RoomInfoPreview?
     @State var roomList = RoomList()
     
     // 내가 속한 방 & 속했던 방 list
     func chatListRefresh() {
         // ChatListView 새로고침
+        chatList = []
+        currentChat = nil
+        userManager.getMyInfo()
+        userManager.getAuthority()
         DispatchQueue.main.async {
             roomList.getParticipatedBoard { success, data in
-                if let list = data as? [RoomInfoPreview] {
-                    currentChat = list[0]
-                    chatList = Array(list[1...])
+                if var list = data as? [RoomInfoPreview] {
+                    list = list.reversed()
+                    if list.count > 0 {
+                        if list[0].postStatus != "END_OF_ROOM" {
+                            currentChat = list[0]
+                            chatList = Array(list[1...])
+                        } else {
+                            chatList = list
+                        }
+                        
+                    } else {
+                        chatList = []
+                        currentChat = nil
+                    }
+                    
+               
                 }
             }
         }
     }
-//    func roomInfoPreviewToBoardStructModel(room: RoomInfoPreview) -> BoardStructModel {
-//        return BoardStructModel(loginUsername: nil,
-//                                ownerName: room.ownerName,
-//                                title: room.title ?? "",
-//                                createdAt: room.createdAt,
-//                                postStatus: PostStatusEnum(rawValue: room.postStatus ?? "END_OF_ROOM"),
-//                                maxPeopleNum: room.maxPeopleNum ?? 0,
-//                                currentPeopleNum: room.currentPeopleNum ?? 0,
-//                                isAnonymous: room.isAnonymous ?? false,
-//                                content: room.content ?? "",
-//                                withOrderLink: room.withOrderLink ?? "",
-//                                pickupSpace: room.pickupSpace ?? "",
-//                                spaceType: room.spaceType ?? "",
-//                                accountNum: room.accountNum ?? "",
-//                                estimatedOrderTime: room.estimatedOrderTime ?? Date(),
-//                                participationList: nil,
-//                                commentList: nil)
-//
-//    }
     var body: some View {
         NavigationView {
             ZStack {
-                Color("grren 2")
                 List {
                     VStack {
                         Section(header: Text("현재 진행중인 주문").bold() ) {
                             NavigationLink {
-                                if let id = currentChat.postId {
+                                if let id = currentChat?.postId {
                                     ChatView(postId: id)
                                 }
                             } label: {
-                                VStack (alignment: .leading) {
-                                    HStack {
-                                        Text(currentChat.createdAt?.toStringYYMMDD() ?? "").foregroundColor(.gray)
-                                        Text("|").foregroundColor(.gray)
-                                        Text(currentChat.postStatus ?? "").foregroundColor(.gray)
-                                        Spacer()
+                                if let currentChat = currentChat {
+                                    VStack (alignment: .leading) {
+                                        HStack {
+                                            Text(currentChat.createdAt?.toStringYYMMDD() ?? "").foregroundColor(.gray)
+                                            Text("|").foregroundColor(.gray)
+                                            Text(currentChat.postStatus ?? "").foregroundColor(.gray)
+                                            Spacer()
+                                        }
+                                        Text(currentChat.title ?? "").font(.title).foregroundColor(.black).bold()
+                                        Text(currentChat.pickupSpace ?? "").bold()
                                     }
-                                    Text(currentChat.title ?? "").font(.title).foregroundColor(.black).bold()
-                                    Text(currentChat.pickupSpace ?? "").bold()
                                 }
                             }.padding().background(Color("green 0")).cornerRadius(15)
                             
@@ -76,13 +75,13 @@ struct ChatListView: View {
                                 } label: {
                                     VStack (alignment: .leading) {
                                         HStack {
-                                            Text(currentChat.createdAt?.toStringYYMMDD() ?? "").foregroundColor(.gray)
+                                            Text(list.createdAt?.toStringYYMMDD() ?? "").foregroundColor(.gray)
                                             Text("|").foregroundColor(.gray)
-                                            Text(currentChat.postStatus ?? "").foregroundColor(.gray)
+                                            Text(list.postStatus ?? "").foregroundColor(.gray)
                                             Spacer()
                                         }
-                                        Text(currentChat.title ?? "").font(.title).foregroundColor(.black).bold()
-                                        Text(currentChat.pickupSpace ?? "").bold()
+                                        Text(list.title ?? "").font(.title).foregroundColor(.black).bold()
+                                        Text(list.pickupSpace ?? "").bold()
                                     }
                                 }.padding().background(Color("green 0")).cornerRadius(15)
                             }

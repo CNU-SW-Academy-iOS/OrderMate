@@ -1,10 +1,3 @@
-//
-//  PostStatusModel.swift
-//  OrderMate
-//
-//  Created by yook on 2023/04/05.
-//
-
 import Foundation
 
 struct PostStatusModel: Codable {

@@ -37,7 +37,11 @@ struct BoardView: View {
                     ScrollView {
                         // 게시글 작성 날짜 추가
                         HStack {
-                            Text("안녕하세요, \(userManager.userModel.name)")
+                            if let postStatus = board.postStatus?.rawValue {
+                                Text("\(postStatus)")
+                                    .font(.system(size: 10))
+                                    .foregroundColor(.black)
+                            }
                             Spacer()
                             if let createdAt = board.createdAt {
                                 Text(createdAt.toStringYYMMDDHHMM())
@@ -45,27 +49,16 @@ struct BoardView: View {
                                     .foregroundColor(.gray)
                             }
                         }.padding()
-                        
                         HStack {
                             VStack {
                                 if let board = manager.board {
                                     Text("\(board.title)")
-                                        .font(.system(size: 20))
+                                        .font(.system(size: 25))
                                         .bold()
-                                        .frame(maxWidth: .infinity, minHeight: 30)
                                         .foregroundColor(.black)
                                 } else {
                                     Text("N/A")
                                 }
-                                
-                            }
-                            Spacer()
-                            if let postStatus = board.postStatus?.rawValue {
-                                Text("\(postStatus)")
-                                    .font(.system(size: 20))
-                                    .bold()
-                                    .frame(maxWidth: .infinity, minHeight: 30)
-                                    .foregroundColor(.black)
                             }
                         }.padding()
                         
@@ -95,10 +88,10 @@ struct BoardView: View {
                         
                         VStack {
                             Text("\(board.content)")
+                                .padding()
                                 .font(.system(size: 15))
                                 .font(.title)
                                 .frame(maxWidth: .infinity, minHeight: 30)
-                                .padding()
                                 .foregroundColor(.black)
                                 .border(Color("green 0"), width: 3)
                                 .cornerRadius(10)
@@ -221,7 +214,7 @@ struct BoardView: View {
                                     .font(.system(size: 24))
                                     .frame(maxWidth: .infinity, minHeight: 30)
                                     .padding()
-                                    .foregroundColor(.white)
+                                    .foregroundColor(.black)
                                     .fontWeight(.semibold)
                                     .background(isCompleted ? Color.orange : Color("green 0"))
                                     .cornerRadius(10)
@@ -283,7 +276,7 @@ struct BoardView: View {
                                     NavigationLink(
                                         destination: ChatView(postId: postId),
                                         label: {
-                                            Text("대화 뷰 들어가기")
+                                            Text("채팅 하러가기")
                                                 .font(.headline)
                                                 .frame(maxWidth: .infinity, minHeight: 30)
                                                 .padding()
@@ -312,7 +305,7 @@ struct BoardView: View {
                 ForEach(manager.getPeopleList(), id: \.self) { imageName in
                     Image(systemName: imageName)
                         .imageScale(.large)
-                        .foregroundColor(Color("green 0"))
+                        .foregroundColor(Color("green 2"))
                         .padding()
                 }
             }

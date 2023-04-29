@@ -39,7 +39,7 @@ struct RoomListView: View {
                                                                      ownerName: "")]
     @State private var showingAlert = false // 로그아웃 alert bool
     @State private var joinErrorFlag = false
-    
+    @State private var search: String = ""
     func roomListreFreash() {
         // user Info 받아오기
         userManager.getMyInfo()
@@ -47,10 +47,14 @@ struct RoomListView: View {
         // BoardListview 새로고침
         DispatchQueue.main.async {
             roomList.getAllRoomList { success, data in
-                listJsonArray = data as! [RoomInfoPreview]
+                if let list = data as? [RoomInfoPreview] {
+                    listJsonArray = list.reversed()
+                }
             }
             roomList.getParticipatedBoard { success, data in
-                recentListArray = data as! [RoomInfoPreview]
+                if let list = data as? [RoomInfoPreview] {
+                    recentListArray = list.reversed()
+                }
             }
         }
     }
@@ -67,9 +71,9 @@ struct RoomListView: View {
                                 showingAlert = true
                             } label: {
                                 Image(systemName: "door.left.hand.open")
-                                    .font(.system(size: 20))
-                                    .padding()
-                                    .foregroundColor(Color("green 1"))
+                                    .font(.system(size: 25))
+                                    .padding(5)
+                                    .foregroundColor(Color("green 2"))
                             }.alert("로그아웃 하시겠습니까?", isPresented: $showingAlert) {
                                 Button("로그아웃", role: .destructive) {
                                     loginModel.logOut { status in
@@ -82,14 +86,19 @@ struct RoomListView: View {
                                     showingAlert = false
                                 }
                             }
-                        }.padding()
-//                        Button {
-//                            roomListreFreash()
-//                        } label: {
-//                            Text("방 목록 새로고침")
-//                        }
+                        }
+                        HStack {
+                            TextField("검색어 입력하세요", text: $search).padding(5)
+                            Spacer()
+                            Button {
+                            } label: {
+                                Image(systemName: "magnifyingglass")
+                                    .font(.system(size: 20))
+                                    .padding()
+                                    .foregroundColor(Color("green 2"))
+                            }
+                        }.cornerRadius(10)
                         ScrollView {
-                            
                             ForEach(listJsonArray, id: \.self) { data in
                                 NavigationLink {
                                     if let data = data.postId {
@@ -99,17 +108,21 @@ struct RoomListView: View {
                                 } label: {
                                     HStack {
                                         VStack(alignment: .leading) {
-                                            if let createdAt = data.createdAt {
-                                                Text(createdAt.toStringYYMMDDHHMM()) // "yy-MM-dd HH:mm"
+                                            HStack {
+                                                if let createdAt = data.createdAt {
+                                                    Text(createdAt.toStringYYMMDDHHMM()).foregroundColor(.gray) // "yy-MM-dd HH:mm"
+                                                }
+                                                Spacer()
                                             }
                                             if let title = data.title {
                                                 Text(title)
-                                                    .font(.headline)
+                                                    .foregroundColor(.black)
+                                                    .font(.title)
+                                                    .bold()
                                             }
                                             if let pickupSpace = data.pickupSpace {
-                                                Text("픽업 장소: " + pickupSpace)
+                                                Text("픽업 장소: " + pickupSpace).foregroundColor(.black)
                                             }
-                                            Spacer()
                                         }
                                         Spacer()
                                         VStack(alignment: .trailing) {
@@ -117,22 +130,20 @@ struct RoomListView: View {
                                                let currentPeopleNum = data.currentPeopleNum,
                                                let maxPeopleNum = data.maxPeopleNum,
                                                let postId = data.postId {
-                                                Text(postStatus)
-                                                Text(String(currentPeopleNum) + " / " + String(maxPeopleNum))
-                                                Text("postid: " + String(postId))
+                                                Text(postStatus).foregroundColor(.gray)
+                                                Text(String(currentPeopleNum) + " / " + String(maxPeopleNum)).foregroundColor(.black)
+                                                Text("postid: " + String(postId)).foregroundColor(.black)
                                             }
-                                            Spacer()
                                         }
                                     }
+                                }.padding(10).background(Color("green 0")).cornerRadius(10)
+                            }.scrollContentBackground(.hidden).padding()
+                                .onAppear {
+                                    roomListreFreash()
                                 }
-                                .buttonStyle(.bordered)
-                                .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
-                            }
                         }
-                    }
-                    .onAppear {
-                        roomListreFreash()
-                    }
+                    }.padding()
+                    
                     VStack {
                         Spacer()
                         HStack {
@@ -141,12 +152,10 @@ struct RoomListView: View {
                                 Button {
                                     joinErrorFlag = true
                                 }  label: {
-                                    Image(systemName: "plus.circle.fill")
-                                        .font(.title.bold())
+                                    Image(systemName: "plus.circle.fill").font(.system(size: 50))
                                 }.alert(isPresented: $joinErrorFlag) {
                                     Alert(title: Text("경고"), message: Text("이미 다른 방에 소속중입니다"), dismissButton: .default(Text("확인")))
                                 }
-                                .padding()
                             } else {
                                 NavigationLink {
                                     CreateBoardView()
@@ -154,20 +163,17 @@ struct RoomListView: View {
                                 } label: {
                                     Image(systemName: "plus.circle.fill").font(.system(size: 50))
                                 }
-                                .padding()
                             }
-                            
                         }.padding()
-                    }
-                }
-                
+                    }}
             }
             
-            .refreshable {
-                roomListreFreash()
-            }
         }
         
+        .refreshable {
+            roomListreFreash()
+        }
+        .onAppear (perform : UIApplication.shared.hideKeyboard)
     }
 }
 
