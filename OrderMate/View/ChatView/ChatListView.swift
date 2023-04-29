@@ -1,10 +1,9 @@
 import SwiftUI
 
-
 struct ChatListView: View {
     @EnvironmentObject var userManager: UserViewModel // user Info 받아오기
-    @State var chatList : [RoomInfoPreview] = []
-    @State var currentChat : RoomInfoPreview?
+    @State var chatList: [RoomInfoPreview] = []
+    @State var currentChat: RoomInfoPreview?
     @State var roomList = RoomList()
     
     // 내가 속한 방 & 속했던 방 list
@@ -16,22 +15,24 @@ struct ChatListView: View {
         userManager.getAuthority()
         DispatchQueue.main.async {
             roomList.getParticipatedBoard { success, data in
-                if var list = data as? [RoomInfoPreview] {
-                    list = list.reversed()
-                    if list.count > 0 {
-                        if list[0].postStatus != "END_OF_ROOM" {
-                            currentChat = list[0]
-                            chatList = Array(list[1...])
+                if success {
+                    if var list = data as? [RoomInfoPreview] {
+                        list = list.reversed()
+                        if list.count > 0 {
+                            if list.contains(where: { $0.postStatus != "END_OF_ROOM" }) {
+                                if let idx = list.firstIndex(where: { $0.postStatus != "END_OF_ROOM" }) {
+                                    currentChat = list[idx]
+                                    chatList = list.filter {$0.postStatus == "END_OF_ROOM" }
+                                }
+                            } else {
+                                chatList = list
+                            }
                         } else {
-                            chatList = list
+                            chatList = []
+                            currentChat = nil
                         }
                         
-                    } else {
-                        chatList = []
-                        currentChat = nil
                     }
-                    
-               
                 }
             }
         }
@@ -48,19 +49,18 @@ struct ChatListView: View {
                                 }
                             } label: {
                                 if let currentChat = currentChat {
-                                    VStack (alignment: .leading) {
+                                    VStack(alignment: .leading) {
                                         HStack {
                                             Text(currentChat.createdAt?.toStringYYMMDD() ?? "").foregroundColor(.gray)
                                             Text("|").foregroundColor(.gray)
                                             Text(currentChat.postStatus ?? "").foregroundColor(.gray)
                                             Spacer()
                                         }
-                                        Text(currentChat.title ?? "").font(.title).foregroundColor(.black).bold()
+                                        Text(currentChat.title ?? "").foregroundColor(.black).bold().font(.system(size: 20))
                                         Text(currentChat.pickupSpace ?? "").bold()
                                     }
                                 }
                             }.padding().background(Color("green 0")).cornerRadius(15)
-                            
                             
                         }
                     }
@@ -73,14 +73,14 @@ struct ChatListView: View {
                                         ChatView(postId: id)
                                     }
                                 } label: {
-                                    VStack (alignment: .leading) {
+                                    VStack(alignment: .leading) {
                                         HStack {
                                             Text(list.createdAt?.toStringYYMMDD() ?? "").foregroundColor(.gray)
                                             Text("|").foregroundColor(.gray)
                                             Text(list.postStatus ?? "").foregroundColor(.gray)
                                             Spacer()
                                         }
-                                        Text(list.title ?? "").font(.title).foregroundColor(.black).bold()
+                                        Text(list.title ?? "").foregroundColor(.black).bold().font(.system(size: 20))
                                         Text(list.pickupSpace ?? "").bold()
                                     }
                                 }.padding().background(Color("green 0")).cornerRadius(15)
@@ -89,8 +89,8 @@ struct ChatListView: View {
                     }
                 }
                 .cornerRadius(20)
-                    .listSectionSeparator(.hidden, edges: .bottom)
-                    .scrollContentBackground(.hidden)
+                .listSectionSeparator(.hidden, edges: .bottom)
+                .scrollContentBackground(.hidden)
                 
             }
         }.refreshable {
@@ -103,7 +103,7 @@ struct ChatListView: View {
 }
 
 struct ChatListView_Previews: PreviewProvider {
-    var chatList : [RoomInfoPreview]
+    var chatList: [RoomInfoPreview]
     static var previews: some View {
         ChatListView(chatList: [RoomInfoPreview(postId: 5,
                                                 title: "교촌치킨 같이 시켜먹어요",

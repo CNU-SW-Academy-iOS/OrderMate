@@ -16,7 +16,6 @@ struct ChatView: View {
                         Spacer()
                         Text("\(manager.board.currentPeopleNum)/\(manager.board.maxPeopleNum)")
                     }
-                    
                 }
                 if let link = manager.board.withOrderLink {
                     if link.contains("골라보세요. ") {
