@@ -27,7 +27,6 @@ struct ChatView: View {
                         }
                     }
                 }
-                //                Text("\(manager.board.withOrderLink ?? "")")
             }
             ScrollViewReader { scrollView in
                 ScrollView {

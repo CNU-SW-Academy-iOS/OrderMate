@@ -17,11 +17,6 @@ class BoardViewModel: ObservableObject {
         totalPeople += Array(repeating: "person", count: self.board!.maxPeopleNum - self.board!.currentPeopleNum)
         return totalPeople
     }
-    
-//    func getBoardInfo(postId: Int, completion: @escaping (Bool) -> (BoardStructModel) {
-//        let url = URL(string: urlString + APIModel.post.rawValue) + "/" + String(postId))
-//
-//    }
     func getBoard(postId: Int, completion: @escaping (Bool, BoardStructModel?) -> Void) {
         // 방잠금으로 새로 고침
         let url = URL(string: urlString + APIModel.post.rawValue + "/" + String(postId))
