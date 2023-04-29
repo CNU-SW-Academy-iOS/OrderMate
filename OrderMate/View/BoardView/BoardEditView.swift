@@ -9,6 +9,7 @@ import SwiftUI
 
 struct BoardEditView: View {
     var postId: Int
+    @State var boardList = RoomList()
     var formattedDateBinding: Binding<Date>?
     @StateObject var manager: BoardViewModel = BoardViewModel.shared
     @State var boardInfo = BoardStructModel(ownerName: UUID().uuidString,
@@ -28,23 +29,30 @@ struct BoardEditView: View {
     let numbers = Array(1...10)
     
     init(postId: Int) {
-              self.postId = postId
-              let board = manager.board
-              // 기존 board의 값을 사용하여 boardInfo를 초기화합니다.
-              _boardInfo = State(initialValue: board ?? BoardStructModel(ownerName: UUID().uuidString,
-                                                                         title: "",
-                                                                         createdAt: Date(),
-                                                                         postStatus: .recruiting,
-                                                                         maxPeopleNum: 5,
-                                                                         currentPeopleNum: 1,
-                                                                         isAnonymous: false,
-                                                                         content: "내용 입력",
-                                                                         withOrderLink: "",
-                                                                         pickupSpace: "",
-                                                                         spaceType: "DORMITORY",
-                                                                         accountNum: "",
-                                                                         estimatedOrderTime: Date()))
-          }
+        self.postId = postId
+        let board = manager.board
+        // 기존 board의 값을 사용하여 boardInfo를 초기화합니다.
+        _boardInfo = State(initialValue: board ?? BoardStructModel(ownerName: UUID().uuidString,
+                                                                   title: "",
+                                                                   createdAt: Date(),
+                                                                   postStatus: .recruiting,
+                                                                   maxPeopleNum: 5,
+                                                                   currentPeopleNum: 1,
+                                                                   isAnonymous: false,
+                                                                   content: "내용 입력",
+                                                                   withOrderLink: "",
+                                                                   pickupSpace: "",
+                                                                   spaceType: "DORMITORY",
+                                                                   accountNum: "",
+                                                                   estimatedOrderTime: Date()))
+    }
+    // String 옵셔널을 String으로 바꾸기 위한 함수
+    func convertBinding(_ optionalBinding: Binding<String?>) -> Binding<String> {
+        return Binding<String>(
+            get: { optionalBinding.wrappedValue ?? "" },
+            set: { optionalBinding.wrappedValue = $0 }
+        )
+    }
     func convertKeyToName(_ spaces: String) -> String {
         if spaces == "DORMITORY" {
             return "기숙사"
@@ -87,6 +95,66 @@ struct BoardEditView: View {
                         .background(Color("green 0"))
                         .cornerRadius(10)
                         .padding()
+                    HStack {
+                        Text("모집 인원을 선택하세요")
+                            .foregroundColor(Color("green 2"))
+                        Spacer()
+                        Picker("모집 인원을 선택하세요", selection: $boardInfo.maxPeopleNum) {
+                            ForEach(numbers, id: \.self) { number in
+                                Text("\(number)").tag(number)
+                            }
+                        }
+                        .background(Color("green 0"))
+                        .cornerRadius(10)
+                    }
+                    .padding()
+                    
+                    TextEditor(text: $boardInfo.content)
+                        .scrollContentBackground(.hidden)
+                        .frame(height: 200)
+                        .font(.body)
+                        .background(Color("green 0"))
+                        .cornerRadius(10)
+                        .onTapGesture { _ in
+                            if boardInfo.content == "내용 입력" {
+                                boardInfo.content = ""
+                            }
+                        }
+                        .padding()
+                    
+                    TextField("배달의 민족 함께하기 주소를 입력해주세요.", text: convertBinding($boardInfo.withOrderLink))
+                        .frame(height: 50)
+                        .background(Color("green 0"))
+                        .cornerRadius(10)
+                        .padding()
+                    
+                    TextField("정산받을 계좌번호를 입력해주세요.", text: $boardInfo.accountNum)
+                        .frame(height: 50)
+                        .background(Color("green 0"))
+                        .cornerRadius(10)
+                        .padding()
+                    HStack {
+                        Text("")
+                        Spacer()
+                        Button {
+                            boardList.editData(post: boardInfo, postId: postId) { success in
+                                if success {
+                                    print("방 편집 완료")
+                                } else {
+                                    print("오류 발생으로 방 편집 실패")
+                                }
+                            }
+                            print(boardInfo)
+                        } label: {
+                            Text("방 편집")
+                                .padding()
+                                .frame(width: 200)
+                                .background(Color("green 0"))
+                                .cornerRadius(10)
+                                .padding()
+                        }
+                        Spacer()
+                    }
                 }
             }
         }
