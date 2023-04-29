@@ -1,9 +1,5 @@
-![image](https://user-images.githubusercontent.com/110437548/235303181-19537ab2-f28a-4388-92f1-497272e235bf.png)
-
-
 # :🏍: OrderMate
-
-최소 주문 금액 & 배달비의 증가 & 주거 지역 밀집성의 특징을 이용한 교내 배달 음식 공동 주문 어플
+**최소 주문 금액 & 배달비의 증가 & 주거 지역 밀집성의 특징을 이용한 교내 배달 음식 공동 주문 어플**
 
 ## :pushpin: Features
 - 로그인/회원가입 기능
@@ -19,7 +15,7 @@
 |iOS|iOS|iOS|Backend|Backend|
 
 
-## :fireworks: Screenshots
+## :iphone: Screenshots
 
 |<img src="https://user-images.githubusercontent.com/110437548/235303890-8f7b841e-f48a-4b63-9b58-6218da989f32.png" width = "200">|<img src="https://user-images.githubusercontent.com/110437548/235303930-bfc86e7f-87be-496e-89dd-e4609c68a2a3.png" width="200">|<img src= "https://user-images.githubusercontent.com/110437548/235304526-9a1d1235-3001-4044-a4f6-f3ad83156197.png" width="200">|
 |:-:|:-:|:-:|
