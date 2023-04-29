@@ -47,14 +47,20 @@ struct RoomListView: View {
         // BoardListview 새로고침
         DispatchQueue.main.async {
             roomList.getAllRoomList { success, data in
-                if let list = data as? [RoomInfoPreview] {
-                    listJsonArray = list.reversed()
+                if success {
+                    if let list = data as? [RoomInfoPreview] {
+                        listJsonArray = list.reversed()
+                    }
                 }
+                
             }
             roomList.getParticipatedBoard { success, data in
-                if let list = data as? [RoomInfoPreview] {
-                    recentListArray = list.reversed()
+                if success {
+                    if let list = data as? [RoomInfoPreview] {
+                        recentListArray = list.reversed()
+                    }
                 }
+                
             }
         }
     }
@@ -116,8 +122,8 @@ struct RoomListView: View {
                                             }
                                             if let title = data.title {
                                                 Text(title)
+                                                    .font(.system(size: 20))
                                                     .foregroundColor(.black)
-                                                    .font(.title)
                                                     .bold()
                                             }
                                             if let pickupSpace = data.pickupSpace {

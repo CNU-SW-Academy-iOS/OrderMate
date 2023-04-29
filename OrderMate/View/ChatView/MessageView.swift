@@ -23,7 +23,7 @@ struct MessageView: View {
                 HStack {
                     Spacer()
                     Text(currentMessage.text)
-                        .padding(5)
+                        .padding(10)
                         .background(isCurrentUser ?
                                     Color("green 2")
                                     : Color(uiColor: UIColor(red: 240/255, green: 240/255, blue: 240/255, alpha: 1.0)))
@@ -44,13 +44,14 @@ struct MessageView: View {
                 }
                 HStack {
                     Text(currentMessage.text)
-                        .padding(5)
+                        .padding(10)
                         .background(isCurrentUser ?
                                     Color("green 2")
                                     : Color(uiColor: UIColor(red: 240/255, green: 240/255, blue: 240/255, alpha: 1.0)))
                         .foregroundColor(isCurrentUser ? .white : .black)
                         .cornerRadius(10)
                         .bold()
+                        
                     Spacer()
                 }
                 HStack {
@@ -60,13 +61,13 @@ struct MessageView: View {
                     Spacer()
                 }
             }
-        }.padding(5)
+        }.padding(.horizontal)
         
     }
 }
 
 struct MessageView_Previews: PreviewProvider {
     static var previews: some View {
-        MessageView(currentMessage: Message(id: "11", text: "11", timestamp: Date(), userId: "11", userNickName: "11"))
+        MessageView(currentMessage: Message(id: "11", text: "1dsfdsfdsfdssfds1", timestamp: Date(), userId: "11", userNickName: "11"))
     }
 }

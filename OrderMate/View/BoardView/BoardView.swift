@@ -273,18 +273,18 @@ struct BoardView: View {
                             ForEach(list, id: \.self) { dict in
                                 if dict["username"] == userIDModel.username {
                                     // 대화뷰 들어가기 버튼
-                                    NavigationLink(
-                                        destination: ChatView(postId: postId),
-                                        label: {
-                                            Text("채팅 하러가기")
-                                                .font(.headline)
-                                                .frame(maxWidth: .infinity, minHeight: 30)
-                                                .padding()
-                                                .foregroundColor(.black)
-                                                .fontWeight(.semibold)
-                                                .background(Color("green 0"))
-                                                .cornerRadius(10)
-                                        }) .padding()
+                                    NavigationLink {
+                                        ChatView(postId: postId)
+                                    } label: {
+                                        Text("채팅 하러가기")
+                                            .font(.headline)
+                                            .frame(maxWidth: .infinity, minHeight: 30)
+                                            .padding()
+                                            .foregroundColor(.black)
+                                            .fontWeight(.semibold)
+                                            .background(Color("green 0"))
+                                            .cornerRadius(10)
+                                    }.padding()
                                 }
                             }
                         }
