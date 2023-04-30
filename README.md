@@ -11,7 +11,7 @@
 
 |<img src="https://user-images.githubusercontent.com/110437548/235303233-8d14d639-5c5e-4a4b-8702-2beca90085c8.png" width = "150">|<img src="">|<img src="">|<img src="">|<img src="">|
 |:-:|:-:|:-:|:-:|:-:|
-|[이수민](https://github.com/sumin305)|[문영균](https://github.com/)|[육현준](https://github.com/)|[김유겸](https://github.com/)|[안원용](https://github.com/)|
+|[이수민](https://github.com/sumin305)|[문영균](https://github.com/)|[육현준](https://github.com/cyberman0306)|[김유겸](https://github.com/)|[안원용](https://github.com/)|
 |iOS|iOS|iOS|Backend|Backend|
 
 
