@@ -24,6 +24,7 @@
 		E464802629C95352004616D2 /* CreateBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E464802529C95352004616D2 /* CreateBoardView.swift */; };
 		E46ED81E29FD49A500B24FBF /* BoardEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46ED81D29FD49A500B24FBF /* BoardEditView.swift */; };
 		E49BA76A29E9B16200EF4361 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49BA76929E9B16200EF4361 /* ProfileView.swift */; };
+		E4A8C8DD2A02CB6500CB28C1 /* FiraSansCompressed-Heavy.otf in Resources */ = {isa = PBXBuildFile; fileRef = E4A8C8DC2A02CB6500CB28C1 /* FiraSansCompressed-Heavy.otf */; };
 		E4DAF7D429DFBC1E009015DE /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4DAF7D329DFBC1E009015DE /* UserViewModel.swift */; };
 		ED40967329BCAF5300B030A9 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED40967229BCAF5300B030A9 /* UserModel.swift */; };
 		ED60199329F153820053693D /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = ED60199229F153820053693D /* FirebaseAnalytics */; };
@@ -59,6 +60,7 @@
 		E464802529C95352004616D2 /* CreateBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateBoardView.swift; sourceTree = "<group>"; };
 		E46ED81D29FD49A500B24FBF /* BoardEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardEditView.swift; sourceTree = "<group>"; };
 		E49BA76929E9B16200EF4361 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		E4A8C8DC2A02CB6500CB28C1 /* FiraSansCompressed-Heavy.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FiraSansCompressed-Heavy.otf"; sourceTree = "<group>"; };
 		E4DAF7D329DFBC1E009015DE /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		ED40967229BCAF5300B030A9 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		ED7286B529E038EF00FC9E42 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 				EDD4F7AA29CC86D900E578AF /* View */,
 				EDD4F7AB29CC86DD00E578AF /* ViewModel */,
 				BAF470A729B21C0D00F242EF /* Assets.xcassets */,
+				E4A8C8DC2A02CB6500CB28C1 /* FiraSansCompressed-Heavy.otf */,
 				BAF470A929B21C0D00F242EF /* Preview Content */,
 			);
 			path = OrderMate;
@@ -289,6 +292,7 @@
 				BABBA82929CAA63300C61F54 /* .swiftlint.yml in Resources */,
 				BAF470AB29B21C0D00F242EF /* Preview Assets.xcassets in Resources */,
 				BAF470A829B21C0D00F242EF /* Assets.xcassets in Resources */,
+				E4A8C8DD2A02CB6500CB28C1 /* FiraSansCompressed-Heavy.otf in Resources */,
 				E41FA2D029F27D5100E2DB31 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -473,10 +477,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"OrderMate/Preview Content\"";
-				DEVELOPMENT_TEAM = F7THTSRVL7;
+				DEVELOPMENT_TEAM = 33DNUM53Q8;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = OrderMate/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.social-networking";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -487,11 +492,14 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.OrderMate.App;
+				PRODUCT_BUNDLE_IDENTIFIER = com.CNUOrderMate.App;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -503,10 +511,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"OrderMate/Preview Content\"";
-				DEVELOPMENT_TEAM = F7THTSRVL7;
+				DEVELOPMENT_TEAM = 33DNUM53Q8;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = OrderMate/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.social-networking";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -517,11 +526,14 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.OrderMate.App;
+				PRODUCT_BUNDLE_IDENTIFIER = com.CNUOrderMate.App;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
