@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct BoardEditView: View {
+    @Environment(\.presentationMode) var presentationMode
+    
     var postId: Int
     @State var boardList = RoomList()
     var formattedDateBinding: Binding<Date>?
@@ -118,7 +120,7 @@ struct BoardEditView: View {
                         .cornerRadius(10)
                     }
                     .padding()
-                    
+                    // 본문
                     TextEditor(text: $boardInfo.content)
                         .scrollContentBackground(.hidden)
                         .frame(height: 200)
@@ -155,6 +157,7 @@ struct BoardEditView: View {
                                 }
                             }
                             print(boardInfo)
+                            self.presentationMode.wrappedValue.dismiss()
                         } label: {
                             Text("방 편집")
                                 .padding()
