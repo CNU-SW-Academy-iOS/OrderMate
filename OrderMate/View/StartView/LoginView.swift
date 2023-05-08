@@ -9,7 +9,9 @@ struct LoginView: View {
     var body: some View {
         VStack {
             Spacer()
-            Text("Order Mate").font(.title).bold()
+            Text("Order Mate")
+                .foregroundColor(Color("green 2"))
+                .font(Font.custom("FiraSansCompressed-Heavy", size: 50))
             VStack {
                 TextField("ID space", text: $user.username)
                     .padding()

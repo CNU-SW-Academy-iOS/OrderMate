@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct BoardEditView: View {
+    @Environment(\.presentationMode) var presentationMode
+    
     var postId: Int
     @State var boardList = RoomList()
     var formattedDateBinding: Binding<Date>?
@@ -70,13 +72,14 @@ struct BoardEditView: View {
         if let board = manager.board {
             ScrollView {
                 VStack(alignment: .leading) {
+                    // 제목
                     TextField(board.title, text: $boardInfo.title)
                         .frame(height: 50)
                         .background(Color("green 0"))
                         .cornerRadius(10)
                         .padding()
-                    
                     HStack {
+                        // 장소 구분
                         Text("당신의 위치는?")
                             .foregroundColor(Color("green 2"))
                         Spacer()
@@ -90,11 +93,20 @@ struct BoardEditView: View {
                         .cornerRadius(10)
                     }
                     .padding()
+                    // 픽업 장소
                     TextField(board.pickupSpace, text: $boardInfo.pickupSpace)
                         .frame(height: 50)
                         .background(Color("green 0"))
                         .cornerRadius(10)
                         .padding()
+                    // 주문 예정 시각
+                    /*
+                    DatePicker("주문 시각을 선택해주세요.", selection: )
+                          .frame(height: 50)
+                          .foregroundColor(Color.green)
+                          .cornerRadius(10)
+                          .padding()
+                     */
                     HStack {
                         Text("모집 인원을 선택하세요")
                             .foregroundColor(Color("green 2"))
@@ -108,7 +120,7 @@ struct BoardEditView: View {
                         .cornerRadius(10)
                     }
                     .padding()
-                    
+                    // 본문
                     TextEditor(text: $boardInfo.content)
                         .scrollContentBackground(.hidden)
                         .frame(height: 200)
@@ -145,6 +157,7 @@ struct BoardEditView: View {
                                 }
                             }
                             print(boardInfo)
+                            self.presentationMode.wrappedValue.dismiss()
                         } label: {
                             Text("방 편집")
                                 .padding()

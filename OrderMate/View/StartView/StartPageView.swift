@@ -8,8 +8,8 @@ struct StartPageView: View {
             VStack {
                 Spacer()
                 Text("Order Mate")
-                    .font(.system(size: 50))
-                    .fontWeight(.bold)
+                    .font(Font.custom("FiraSansCompressed-Heavy", size: 70))
+                    .foregroundColor(Color("green 2"))
                 Text("Table Mate와 함께 식사해요!")
                     .foregroundColor(Color("green 2"))
                     .bold()

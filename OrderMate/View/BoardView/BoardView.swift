@@ -117,7 +117,6 @@ struct BoardView: View {
                                                 Text("모집하기")
                                                     .font(.title2)
                                                     .fontWeight(.semibold)
-                                                
                                             }.padding()
                                         }.alert(isPresented: $isShowUnlockAlert) {
                                             Alert(title: Text("모집하시겠습니까?"),
@@ -239,55 +238,59 @@ struct BoardView: View {
                         } else {
                             // 참가후
                             // 방 참가자만 볼수있는 방나기기 버튼
-                            Button {
-                                isLeaveAlert = true
-                            } label: {
-                                Text("방 나가기")
-                                    .font(.headline)
-                                    .frame(maxWidth: .infinity, minHeight: 30)
-                                    .padding()
-                                    .foregroundColor(.black)
-                                    .fontWeight(.semibold)
-                                    .background(isCompleted ? Color.orange : Color("green 0"))
-                                    .cornerRadius(10)
-                            }
-                            .padding()
-                            .alert("방을 나가시겠습니까?", isPresented: $isLeaveAlert) {
-                                Button("방 나가기", role: .destructive) {
-                                    manager.leave(postId: postId) { status in
-                                        if status {
-                                            boardViewRefreash()
-                                            DispatchQueue.main.async {
-                                                self.presentationMode.wrappedValue.dismiss()
+                            HStack {
+                                Button {
+                                    isLeaveAlert = true
+                                } label: {
+                                    Text("방 나가기")
+                                        .font(.headline)
+                                        .frame(maxWidth: .infinity, minHeight: 30)
+                                        .padding()
+                                        .foregroundColor(.black)
+                                        .fontWeight(.semibold)
+                                        .background(isCompleted ? Color.orange : Color("green 0"))
+                                        .cornerRadius(10)
+                                }
+                                .padding()
+                                .alert("방을 나가시겠습니까?", isPresented: $isLeaveAlert) {
+                                    Button("방 나가기", role: .destructive) {
+                                        manager.leave(postId: postId) { status in
+                                            if status {
+                                                boardViewRefreash()
+                                                DispatchQueue.main.async {
+                                                    self.presentationMode.wrappedValue.dismiss()
+                                                }
                                             }
                                         }
                                     }
+                                    Button("취소", role: .cancel) {
+                                        isLeaveAlert = false
+                                    }
                                 }
-                                Button("취소", role: .cancel) {
-                                    isLeaveAlert = false
+                                // 목록중에 내가 있다면
+                                if let list = board.participationList {
+                                    ForEach(list, id: \.self) { dict in
+                                        if dict["username"] == userIDModel.username {
+                                            // 대화뷰 들어가기 버튼
+                                            NavigationLink {
+                                                ChatView(postId: postId)
+                                            } label: {
+                                                Text("채팅 하러가기")
+                                                    .font(.headline)
+                                                    .frame(maxWidth: .infinity, minHeight: 30)
+                                                    .padding()
+                                                    .foregroundColor(.black)
+                                                    .fontWeight(.semibold)
+                                                    .background(Color("green 0"))
+                                                    .cornerRadius(10)
+                                            }.padding()
+                                        }
+                                    }
                                 }
                             }
+                            
                         }
-                        // 목록중에 내가 있다면
-                        if let list = board.participationList {
-                            ForEach(list, id: \.self) { dict in
-                                if dict["username"] == userIDModel.username {
-                                    // 대화뷰 들어가기 버튼
-                                    NavigationLink {
-                                        ChatView(postId: postId)
-                                    } label: {
-                                        Text("채팅 하러가기")
-                                            .font(.headline)
-                                            .frame(maxWidth: .infinity, minHeight: 30)
-                                            .padding()
-                                            .foregroundColor(.black)
-                                            .fontWeight(.semibold)
-                                            .background(Color("green 0"))
-                                            .cornerRadius(10)
-                                    }.padding()
-                                }
-                            }
-                        }
+                        
                     }.refreshable {
                         boardViewRefreash()
                     }
@@ -311,14 +314,14 @@ struct BoardView: View {
     var statePeopleView: some View {
         ScrollView(.horizontal) {
             HStack {
+                Text(" ")
                 ForEach(manager.getPeopleList(), id: \.self) { imageName in
                     Image(systemName: imageName)
                         .imageScale(.large)
                         .foregroundColor(Color("green 2"))
-                        .padding()
                 }
             }
-        }.padding()
+        }
     }
 }
 
