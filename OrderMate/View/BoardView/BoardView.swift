@@ -321,7 +321,7 @@ struct BoardView: View {
                         .foregroundColor(Color("green 2"))
                 }
             }
-        }
+        }.padding()
     }
 }
 

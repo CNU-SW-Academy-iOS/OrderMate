@@ -9,7 +9,7 @@ import SwiftUI
 
 struct BoardEditView: View {
     @Environment(\.presentationMode) var presentationMode
-    
+    @EnvironmentObject var userManager: UserViewModel
     var postId: Int
     @State var boardList = RoomList()
     var formattedDateBinding: Binding<Date>?
@@ -27,6 +27,21 @@ struct BoardEditView: View {
                                             spaceType: "DORMITORY",
                                             accountNum: "",
                                             estimatedOrderTime: Date())
+    @State var boardInfo2 = RoomInfoPreview(postId: 0,
+                                            title: "",
+                                            createdAt: Date(),
+                                            postStatus: PostStatusEnum.endOfRoom.rawValue,
+                                            maxPeopleNum: 5,
+                                            currentPeopleNum: 5,
+                                            isAnonymous: false,
+                                            content: "",
+                                            withOrderLink: "",
+                                            pickupSpace: "",
+                                            spaceType: "",
+                                            accountNum: "",
+                                            estimatedOrderTime: Date(),
+                                            ownerId: 0,
+                                            ownerName: "")
     let spaces = ["DORMITORY", "STUDIO_APARTMENT", "ALL"]
     let numbers = Array(1...10)
     
@@ -47,6 +62,9 @@ struct BoardEditView: View {
                                                                    spaceType: "DORMITORY",
                                                                    accountNum: "",
                                                                    estimatedOrderTime: Date()))
+       
+        print(boardInfo2.postId)
+        
     }
     // String 옵셔널을 String으로 바꾸기 위한 함수
     func convertBinding(_ optionalBinding: Binding<String?>) -> Binding<String> {
@@ -152,6 +170,26 @@ struct BoardEditView: View {
                             boardList.editData(post: boardInfo, postId: postId) { success in
                                 if success {
                                     print("방 편집 완료")
+                                    self.boardInfo2 = RoomInfoPreview(postId: postId,
+                                                                 title: self.boardInfo.title,
+                                                                 createdAt: self.boardInfo.createdAt,
+                                                                 postStatus: self.boardInfo.postStatus?.rawValue,
+                                                                 maxPeopleNum: self.boardInfo.maxPeopleNum,
+                                                                 currentPeopleNum: self.boardInfo.currentPeopleNum,
+                                                                 isAnonymous: self.boardInfo.isAnonymous,
+                                                                 content: self.boardInfo.content,
+                                                                 withOrderLink: self.boardInfo.withOrderLink,
+                                                                 pickupSpace: self.boardInfo.pickupSpace,
+                                                                 spaceType: self.boardInfo.spaceType,
+                                                                 accountNum: self.boardInfo.accountNum,
+                                                                 estimatedOrderTime: self.boardInfo.estimatedOrderTime,
+                                                                 ownerId: 0,
+                                                                 ownerName: self.boardInfo.ownerName)
+                                    ChatViewModel.shared.createChat(board: boardInfo2) { success in
+                                        if success {
+                                            print("파이어베이스 편집 성공")
+                                        }
+                                    }
                                 } else {
                                     print("오류 발생으로 방 편집 실패")
                                 }
