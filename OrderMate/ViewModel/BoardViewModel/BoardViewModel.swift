@@ -1,6 +1,6 @@
 import Foundation
 
-class BoardViewModel: ObservableObject {
+final class BoardViewModel: ObservableObject {
     static let shared = BoardViewModel()
     @Published var board: BoardStructModel?
     

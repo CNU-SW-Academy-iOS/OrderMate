@@ -15,19 +15,21 @@ struct ChatListView: View {
         userManager.getAuthority()
         DispatchQueue.main.async {
             roomList.getParticipatedBoard { success, data in
+                // room list data 받아오기 성공
                 if success {
+                    // data를 [RoomInfoPreview] 타입으로 변경
                     if var list = data as? [RoomInfoPreview] {
                         list = list.reversed()
                         if list.count > 0 {
-                            if list.contains(where: { $0.postStatus != "END_OF_ROOM" }) {
-                                if let idx = list.firstIndex(where: { $0.postStatus != "END_OF_ROOM" }) {
-                                    currentChat = list[idx]
-                                    chatList = list.filter {$0.postStatus == "END_OF_ROOM" }
-                                }
+                            if list[0].postStatus != "END_OF_ROOM" {
+                                currentChat = list[0]
+                                chatList = Array(list[1...])
                             } else {
                                 chatList = list
                             }
-                        } else {
+                        }
+                        // 속해있거나 속했던 방이 없을 경우
+                        else {
                             chatList = []
                             currentChat = nil
                         }

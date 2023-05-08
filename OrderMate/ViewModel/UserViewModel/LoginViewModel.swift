@@ -1,6 +1,6 @@
 import Foundation
 
-class LoginViewModel: ObservableObject {
+final class LoginViewModel: ObservableObject {
 
     func postNewUserInfo(user: UserModel, completion: @escaping (Bool) -> Void) {
         guard let uploadData = try? JSONEncoder().encode(user)

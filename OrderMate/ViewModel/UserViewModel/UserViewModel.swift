@@ -1,6 +1,6 @@
 import Foundation
 
-class UserViewModel: ObservableObject {
+final class UserViewModel: ObservableObject {
     static let shared = UserViewModel()
     @Published var userModel = UserInfoModel()
     @Published var authorityModel = Authority(authority: false)

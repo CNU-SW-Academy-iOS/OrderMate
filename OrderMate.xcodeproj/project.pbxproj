@@ -19,7 +19,6 @@
 		E40FB24029B625E400A1A4C2 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E40FB23F29B625E400A1A4C2 /* MainView.swift */; };
 		E40FB24229B625F200A1A4C2 /* StartPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E40FB24129B625F200A1A4C2 /* StartPageView.swift */; };
 		E40FB24429B6260200A1A4C2 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E40FB24329B6260200A1A4C2 /* LoginView.swift */; };
-		E41FA2D029F27D5100E2DB31 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E41FA2CE29F27D5100E2DB31 /* GoogleService-Info.plist */; };
 		E4470CF129DD5BF10078C59F /* PostStatusModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4470CF029DD5BF10078C59F /* PostStatusModel.swift */; };
 		E464802629C95352004616D2 /* CreateBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E464802529C95352004616D2 /* CreateBoardView.swift */; };
 		E46ED81E29FD49A500B24FBF /* BoardEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46ED81D29FD49A500B24FBF /* BoardEditView.swift */; };
@@ -38,6 +37,7 @@
 		EDD4F7AD29CC87A600E578AF /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD4F7AC29CC87A600E578AF /* LoginViewModel.swift */; };
 		EDD4F7AF29CC87C700E578AF /* APIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD4F7AE29CC87C700E578AF /* APIModel.swift */; };
 		EDF682BF29EF921900F2F37E /* ChatListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF682BE29EF921900F2F37E /* ChatListView.swift */; };
+		EDF9B6982A09332900BBECD9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EDF9B6972A09332900BBECD9 /* GoogleService-Info.plist */; };
 		F37C7D0029B98489004B011C /* MakeAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37C7CFF29B98489004B011C /* MakeAccountView.swift */; };
 /* End PBXBuildFile section */
 
@@ -55,7 +55,6 @@
 		E40FB23F29B625E400A1A4C2 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		E40FB24129B625F200A1A4C2 /* StartPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartPageView.swift; sourceTree = "<group>"; };
 		E40FB24329B6260200A1A4C2 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
-		E41FA2CE29F27D5100E2DB31 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E4470CF029DD5BF10078C59F /* PostStatusModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PostStatusModel.swift; path = OrderMate/Model/PostStatusModel.swift; sourceTree = SOURCE_ROOT; };
 		E464802529C95352004616D2 /* CreateBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateBoardView.swift; sourceTree = "<group>"; };
 		E46ED81D29FD49A500B24FBF /* BoardEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardEditView.swift; sourceTree = "<group>"; };
@@ -63,7 +62,6 @@
 		E4A8C8DC2A02CB6500CB28C1 /* FiraSansCompressed-Heavy.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FiraSansCompressed-Heavy.otf"; sourceTree = "<group>"; };
 		E4DAF7D329DFBC1E009015DE /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		ED40967229BCAF5300B030A9 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
-		ED7286B529E038EF00FC9E42 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ED7286B729E0392E00FC9E42 /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
 		ED7286BC29E03B1800FC9E42 /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
 		ED7286BE29E03B3900FC9E42 /* MessageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageModel.swift; sourceTree = "<group>"; };
@@ -71,6 +69,8 @@
 		EDD4F7AC29CC87A600E578AF /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		EDD4F7AE29CC87C700E578AF /* APIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIModel.swift; sourceTree = "<group>"; };
 		EDF682BE29EF921900F2F37E /* ChatListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListView.swift; sourceTree = "<group>"; };
+		EDF9B6952A0932BE00BBECD9 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EDF9B6972A09332900BBECD9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F37C7CFF29B98489004B011C /* MakeAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeAccountView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -109,8 +109,8 @@
 		BAF470A229B21C0C00F242EF /* OrderMate */ = {
 			isa = PBXGroup;
 			children = (
-				E41FA2CE29F27D5100E2DB31 /* GoogleService-Info.plist */,
-				ED7286B529E038EF00FC9E42 /* Info.plist */,
+				EDF9B6972A09332900BBECD9 /* GoogleService-Info.plist */,
+				EDF9B6952A0932BE00BBECD9 /* Info.plist */,
 				BAF470A329B21C0C00F242EF /* OrderMateApp.swift */,
 				EDD4F7A929CC86D000E578AF /* Model */,
 				EDD4F7AA29CC86D900E578AF /* View */,
@@ -293,7 +293,7 @@
 				BAF470AB29B21C0D00F242EF /* Preview Assets.xcassets in Resources */,
 				BAF470A829B21C0D00F242EF /* Assets.xcassets in Resources */,
 				E4A8C8DD2A02CB6500CB28C1 /* FiraSansCompressed-Heavy.otf in Resources */,
-				E41FA2D029F27D5100E2DB31 /* GoogleService-Info.plist in Resources */,
+				EDF9B6982A09332900BBECD9 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -477,7 +477,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"OrderMate/Preview Content\"";
-				DEVELOPMENT_TEAM = 33DNUM53Q8;
+				DEVELOPMENT_TEAM = F7THTSRVL7;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = OrderMate/Info.plist;
@@ -492,7 +492,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.CNUOrderMate.App;
+				PRODUCT_BUNDLE_IDENTIFIER = com.OrderMate.App;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -511,7 +511,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"OrderMate/Preview Content\"";
-				DEVELOPMENT_TEAM = 33DNUM53Q8;
+				DEVELOPMENT_TEAM = F7THTSRVL7;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = OrderMate/Info.plist;
@@ -526,7 +526,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.CNUOrderMate.App;
+				PRODUCT_BUNDLE_IDENTIFIER = com.OrderMate.App;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
