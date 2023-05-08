@@ -159,7 +159,7 @@ struct BoardEditView: View {
                             print(boardInfo)
                             self.presentationMode.wrappedValue.dismiss()
                         } label: {
-                            Text("방 편집")
+                            Text("편집 하기")
                                 .padding()
                                 .frame(width: 200)
                                 .background(Color("green 0"))

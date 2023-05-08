@@ -3,7 +3,7 @@ import FirebaseFirestore
 import FirebaseFirestoreSwift
 
 // firebase를 이용한 채팅 뷰, 채팅 리스트 구현 View Model
-class ChatViewModel: ObservableObject {
+final class ChatViewModel: ObservableObject {
     static let shared = ChatViewModel()
     @Published var msgList: [Message] = []
     @Published var chatList: [BoardStructModel] = []
@@ -13,11 +13,6 @@ class ChatViewModel: ObservableObject {
     let roomManager = RoomList.shared
     
     let db = Firestore.firestore()
-    
-    init() {
-    }
-    
-    var listIDArray: [Int] = [] // 내가 속한 boardID들
 
     
     // postid 입력시 firebase의 board 정보 반환
@@ -40,7 +35,7 @@ class ChatViewModel: ObservableObject {
             return
         }
     }
-    
+
     // 방 생성 시 채팅방 생성
     func createChat(board: RoomInfoPreview, completion: @escaping (Bool) -> Void) {
         

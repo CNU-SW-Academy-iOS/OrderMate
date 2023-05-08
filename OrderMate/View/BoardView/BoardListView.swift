@@ -179,6 +179,9 @@ struct RoomListView: View {
         .refreshable {
             roomListreFreash()
         }
+        .onAppear {
+            roomListreFreash()
+        }
         .onAppear (perform : UIApplication.shared.hideKeyboard)
     }
 }
